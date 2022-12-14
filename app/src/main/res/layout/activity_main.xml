@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/reg_emailTF"
+                android:id="@+id/login_emailTF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
-                android:id="@+id/reg_confirmPswdTF"
+                android:id="@+id/login_PswdTF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
@@ -84,7 +84,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reg_emailTF" />
+                app:layout_constraintTop_toBottomOf="@+id/login_emailTF" />
 
             <TextView
                 android:id="@+id/login_forgotPswd"
@@ -94,8 +94,8 @@
                 android:text="Forgot Password?"
                 android:textColor="#f2fdff"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/reg_confirmPswdTF"
-                app:layout_constraintTop_toBottomOf="@+id/reg_confirmPswdTF" />
+                app:layout_constraintEnd_toEndOf="@+id/login_PswdTF"
+                app:layout_constraintTop_toBottomOf="@+id/login_PswdTF" />
 
             <Button
                 android:id="@+id/login_btn"
@@ -106,7 +106,7 @@
                 android:text="Log In"
                 android:textColor="#784794"
                 app:layout_constraintEnd_toEndOf="@+id/login_forgotPswd"
-                app:layout_constraintStart_toStartOf="@+id/reg_confirmPswdTF"
+                app:layout_constraintStart_toStartOf="@+id/login_PswdTF"
                 app:layout_constraintTop_toBottomOf="@+id/login_forgotPswd" />
 
             <TextView
