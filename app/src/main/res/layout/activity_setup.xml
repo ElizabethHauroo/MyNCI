@@ -39,7 +39,7 @@
             android:layout_marginTop="34dp"
             android:layout_marginEnd="-73dp"
             android:background="@drawable/input_bg"
-            android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"
+            android:drawableLeft="@drawable/person_icon"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="First Name"

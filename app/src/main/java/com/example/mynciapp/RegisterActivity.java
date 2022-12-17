@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         progressDialog.dismiss();
-                        sendHomeActivity();
+                        sendSetupActivity();
                         Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                     }else{
                         progressDialog.dismiss();
@@ -110,9 +110,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    private void sendSetupActivity() {
+        Intent intent=new Intent(RegisterActivity.this,SetupActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    /*
     private void sendHomeActivity() {
         Intent intent=new Intent(RegisterActivity.this,HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+    */
+
 }
