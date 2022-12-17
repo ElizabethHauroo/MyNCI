@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,12 +31,16 @@ public class HomeActivity extends AppCompatActivity {
 
     private CardView map, schedule, nci, course;
 
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        mAuth=FirebaseAuth.getInstance();
 
         mToolbar = (Toolbar)findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -140,10 +146,15 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "This is Settings", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
-                Toast.makeText(this, "This is Logout", Toast.LENGTH_SHORT).show();
+                mAuth.signOut();
+                SendUserToLogin();
                 break;
 
 
         }
+    }
+
+    private void SendUserToLogin() {
+        startActivity(new Intent(HomeActivity.this, MainActivity.class));
     }
 }
