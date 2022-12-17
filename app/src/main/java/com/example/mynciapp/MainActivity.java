@@ -64,7 +64,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    } //override
+    } //OnCreate override
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser !=null){
+            sendHomeActivity();
+        }
+    }
+
 
     private void performLogin() {
         String email=emailTF.getText().toString();
