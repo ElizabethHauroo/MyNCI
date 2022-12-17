@@ -15,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 //import android.widget.Toolbar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar mToolbar;
+    BottomNavigationView nav;
 
     private CardView map, schedule, nci, course;
 
@@ -45,10 +48,15 @@ public class HomeActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View navView =navigationView.inflateHeaderView(R.layout.navigation_header); //adding the header to the sidebar
 
+        nav=findViewById(R.id.bottom_navigation);
+
         map=findViewById(R.id.map_tile);
         schedule=findViewById(R.id.book_tile);
         nci=findViewById(R.id.nci_tile);
         course=findViewById(R.id.course_tile);
+
+
+        // All Tiles Click Listeners
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, MapActivity.class));
             }
         });
-
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +83,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Navigation Side + Bottom
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -83,7 +91,29 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                switch (item.getItemId()){
+                    case R.id.home_bottomnav:
+                        Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.add_bottomnav:
+                        Toast.makeText(HomeActivity.this, "Add", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.profile_bottomnav:
+                        Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_LONG).show();
+                        break;
+
+                    default:
+                }
+
+
+
+                return true;
+            }
+        });
 
 
 
