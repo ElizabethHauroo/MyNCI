@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blurbg1"
+    tools:context=".SetupActivity">
+
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#8F000000" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photo_setup"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="105dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="106dp"
+            android:src="@drawable/defaultprofile" />
+
+        <EditText
+            android:id="@+id/firstnameTF_setup"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photo_setup"
+            android:layout_alignStart="@+id/photo_setup"
+            android:layout_alignEnd="@+id/photo_setup"
+            android:layout_marginStart="-66dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="-73dp"
+            android:background="@drawable/input_bg"
+            android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="First Name"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:paddingTop="13dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="13dp"
+            android:textColor="#f2fdff"
+            android:textColorHint="#f2fdff" />
+
+        <EditText
+            android:id="@+id/lastnameTF_setup"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstnameTF_setup"
+            android:layout_alignStart="@+id/photo_setup"
+            android:layout_alignEnd="@+id/photo_setup"
+            android:layout_marginStart="-66dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="-73dp"
+            android:background="@drawable/input_bg"
+            android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Last Name"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:paddingTop="13dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="13dp"
+            android:textColor="#f2fdff"
+            android:textColorHint="#f2fdff" />
+
+
+        <EditText
+            android:id="@+id/usernameTF_setup"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lastnameTF_setup"
+            android:layout_alignStart="@+id/photo_setup"
+            android:layout_alignEnd="@+id/photo_setup"
+            android:layout_marginStart="-64dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="-73dp"
+            android:background="@drawable/input_bg"
+            android:drawableLeft="@drawable/at_sign"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Username"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:paddingTop="13dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="13dp"
+            android:textColor="#f2fdff"
+            android:textColorHint="#f2fdff" />
+
+        <EditText
+            android:id="@+id/coursenameTF_setup"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/usernameTF_setup"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/input_bg"
+            android:drawableLeft="@drawable/code_icon"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Course Code"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:paddingLeft="20dp"
+            android:paddingTop="13dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="13dp"
+            android:textColor="#f2fdff"
+            android:textColorHint="#f2fdff" />
+        <Button
+            android:id="@+id/setup_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/coursenameTF_setup"
+            android:layout_alignStart="@+id/coursenameTF_setup"
+            android:layout_alignEnd="@+id/coursenameTF_setup"
+            android:layout_marginStart="-1dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="2dp"
+            android:background="#f2fdff"
+            android:text="Save info"
+            android:textColor="#784794" />
+
+
+
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
