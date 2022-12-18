@@ -6,19 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MAP"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <RelativeLayout
+        android:id="@+id/container_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="672dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="45dp">
+
+                <!-- Search bar here -->
+
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </SearchView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_marginTop="100dp"
+                >
+
+                <Button
+                    android:id="@+id/first_floor_map"
+                    android:layout_width="80dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:background="#928779"
+                    android:text="1st"/>
+                <Button
+                    android:id="@+id/second_floor_map"
+                    android:layout_width="80dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:background="#928779"
+                    android:text="2nd"/>
+                <Button
+                    android:id="@+id/third_floor_map"
+                    android:layout_width="80dp"
+                    android:layout_marginRight="5dp"
+                android:layout_height="wrap_content"
+                    android:background="#928779"
+                android:text="3rd"/>
+
+                <Button
+                    android:id="@+id/forth_floor_map"
+                    android:layout_width="80dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:background="#928779"
+                    android:text="4th" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/map_mainview"
+                android:layout_width="332dp"
+                android:layout_height="455dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="158dp"
+                android:layout_marginEnd="0dp"
+                app:srcCompat="@drawable/course" />
+
+        </RelativeLayout>
+
+
+
+
+
+
+        <!-- Bottom Naviation Bar-->
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_map"
@@ -30,6 +101,10 @@
             app:labelVisibilityMode="unlabeled"
             android:background="@drawable/bottom_nav_shape"
             android:layout_height="wrap_content"/>
+
+
+
+
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

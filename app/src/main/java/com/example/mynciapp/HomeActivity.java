@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.home_bottomnav:
-                        Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                         break;
                     case R.id.add_bottomnav:
                         Toast.makeText(HomeActivity.this, "Add", Toast.LENGTH_LONG).show();
