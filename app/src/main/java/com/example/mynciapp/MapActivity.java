@@ -36,26 +36,26 @@ public class MapActivity extends AppCompatActivity {
         first.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.heart);
+                imageBox.setImageResource(R.drawable.sample1);
             }
         });
 
         second.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.home);
+                imageBox.setImageResource(R.drawable.sample2);
             }
         });
         third.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.application);
+                imageBox.setImageResource(R.drawable.sample3);
             }
         });
         forth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.logout);
+                imageBox.setImageResource(R.drawable.sample4);
             }
         });
         //BOTTOM NAVIGATION
