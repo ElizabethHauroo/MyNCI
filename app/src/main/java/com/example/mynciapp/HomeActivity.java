@@ -20,6 +20,11 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -32,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     private CardView map, schedule, nci, course;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference UsersRef;
 
 
     @Override
@@ -41,6 +47,8 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mAuth=FirebaseAuth.getInstance();
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users"); // creating the users node, where we will be sotring all the user's information - unique uid
+
 
         mToolbar = (Toolbar)findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -126,6 +134,48 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }//onCreate
+
+    /*
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser ==null){
+            SendUserToLogin();
+        }else{
+            CheckUSerExistence();
+        }
+    }
+
+
+    private void CheckUSerExistence() {
+        final String current_user_id = mAuth.getCurrentUser().getUid();
+
+        UsersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.hasChild(current_user_id)){
+                    //if this does not exist, then we need to add it to database. So we have to send them to setup
+                    SendUserToSetup();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void SendUserToSetup() {
+        Intent intent=new Intent(HomeActivity.this,SetupActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    
+     */
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
