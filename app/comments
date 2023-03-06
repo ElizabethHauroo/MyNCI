@@ -1,0 +1,12 @@
+----------------------COME BACK TO FIX--------------------------------
+- Button Colours on Schedule page
+----------------------BOOKINGS NOTES----------------------------------
+Because there are 4 steps in our booking selection:
+1. Choose Room
+2. Choose Reason for Booking
+3. Choose Time
+4. Confirm
+We need 4 fragments.
+
+We are having an issue with the Fragment package.
+A discrepancy between androidx and com.android

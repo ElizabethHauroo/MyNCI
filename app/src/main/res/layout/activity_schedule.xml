@@ -6,15 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".ScheduleActivity">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+    <com.shuhart.stepview.StepView
+        android:id="@+id/step_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SCHEDULE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="16dp"
+        app:sv_animationType="Circle"
+        app:sv_stepPadding="12dp"
+
+        app:sv_selectedCircleColor="@color/white"
+        app:sv_selectedStepNumberColor="@color/black"
+        app:sv_selectedTextColor="@color/black"
+
+        app:sv_doneCircleColor="#10a37f"
+        app:sv_doneStepLineColor="@color/car_ui_color_accent"
+        app:sv_doneTextColor="@color/car_ui_color_accent"
+        app:sv_doneStepMarkColor="@color/white"
+
+        app:sv_typeface="@font/biryani_extralight"/>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_below="@+id/step_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/layout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="@+id/view_pager"
+        app:layout_constraintTop_toBottomOf="@+id/step_view">
+
+        <Button
+            android:id="@+id/booking_previous_btn"
+            android:enabled="false"
+            android:text="Previous"
+            android:layout_marginRight="4dp"
+            android:background="#D9CAD6"
+            android:textColor="@color/black"
+            android:fontFamily="@font/biryani_extralight"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/txt_skip"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/booking_next_btn"
+            android:enabled="false"
+            android:text="Next"
+            android:layout_marginLeft="4dp"
+            android:background="#D9CAD6"
+            android:textColor="@color/black"
+            android:fontFamily="@font/biryani_extralight"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/txt_skip"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
