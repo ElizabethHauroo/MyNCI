@@ -10,3 +10,6 @@ We need 4 fragments.
 
 We are having an issue with the Fragment package.
 A discrepancy between androidx and com.android
+-> Fixed by migrating to AndroidX - Refactor Performed. 
+
+https://www.youtube.com/watch?v=DS5MHUrSjuw&list=PLaoF-xhnnrRUzve8vBXbPAhONMgTqHQ8i&index=6&t=986s
