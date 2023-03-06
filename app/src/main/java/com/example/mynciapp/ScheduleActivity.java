@@ -41,6 +41,29 @@ public class ScheduleActivity extends AppCompatActivity {
 
         //View
         viewpager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                if (position ==0) {
+                    previousBTN.setEnabled(false);
+                }
+                else{
+                    previousBTN.setEnabled(true);
+                }
+                setColourButton();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 

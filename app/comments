@@ -1,5 +1,11 @@
 ----------------------COME BACK TO FIX--------------------------------
 - Button Colours on Schedule page
+- Add Navigation to Icons
+- Change Icons to square
+- Remove Home BG image/transparency
+- Register/Login TextFields should be white with black lettering
+- Round ^ those buttons
+
 ----------------------BOOKINGS NOTES----------------------------------
 Because there are 4 steps in our booking selection:
 1. Choose Room
@@ -10,6 +16,14 @@ We need 4 fragments.
 
 We are having an issue with the Fragment package.
 A discrepancy between androidx and com.android
--> Fixed by migrating to AndroidX - Refactor Performed. 
+-> Fixed by migrating to AndroidX - Refactor Performed.
 
+Try to test Booking activity
+-Added XML Fragments for booking
+-Added the matching inflater in the fragment.java classes
+-Tested, fragments work
+    - can slide between 1,2,3,4
+    - with previous button disabled on step 1 (WAD)
+
+stopped at 19m14
 https://www.youtube.com/watch?v=DS5MHUrSjuw&list=PLaoF-xhnnrRUzve8vBXbPAhONMgTqHQ8i&index=6&t=986s
