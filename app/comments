@@ -18,6 +18,10 @@ We are having an issue with the Fragment package.
 A discrepancy between androidx and com.android
 -> Fixed by migrating to AndroidX - Refactor Performed.
 
+Had a lot of issue trying to get the Dialog box to work, had to use an alternative in the end.
+
+
+
 Try to test Booking activity
 -Added XML Fragments for booking
 -Added the matching inflater in the fragment.java classes
@@ -25,5 +29,5 @@ Try to test Booking activity
     - can slide between 1,2,3,4
     - with previous button disabled on step 1 (WAD)
 
-stopped at 19m14
-https://www.youtube.com/watch?v=DS5MHUrSjuw&list=PLaoF-xhnnrRUzve8vBXbPAhONMgTqHQ8i&index=6&t=986s
+Part 4 complete. Might not need part 5, and straight onto part 6
+https://youtu.be/G6z1uLPqRDY

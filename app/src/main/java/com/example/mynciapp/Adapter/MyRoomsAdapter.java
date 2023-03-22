@@ -35,7 +35,8 @@ public class MyRoomsAdapter extends RecyclerView.Adapter<MyRoomsAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txt_floor.setText(sizeList.get(position).getFloor());
-        holder.txt_roomNum.setText(sizeList.get(position).getRoomNum());
+        //holder.txt_roomNum.setText(sizeList.get(position).getRoomNum());
+        holder.txt_roomNum.setText(sizeList.get(position).getRoom_num());
     }
 
     @Override

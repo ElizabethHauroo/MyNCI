@@ -3,22 +3,24 @@ package com.example.mynciapp.Model;
 public class RoomSize {
 
     //here the names should match exactly what is in the database
-    private String roomNum, floor;
+    private String room_num, floor;
 
     public RoomSize() {
     }
 
     public RoomSize(String roomNum, String floor) {
-        this.roomNum = roomNum;
+        this.room_num = roomNum;
         this.floor = floor;
     }
 
-    public String getRoomNum() {
-        return roomNum;
+
+
+    public String getRoom_num() {
+        return room_num;
     }
 
-    public void setRoomNum(String roomNum) {
-        this.roomNum = roomNum;
+    public void setRoom_num(String room_num) {
+        this.room_num = room_num;
     }
 
     public String getFloor() {

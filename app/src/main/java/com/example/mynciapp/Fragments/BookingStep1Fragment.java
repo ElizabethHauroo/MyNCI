@@ -109,7 +109,7 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
                     List<String> list = new ArrayList<>();
-                    list.add("Please select a Room Size (all?-Frag1) ");
+                    list.add("Please select a Room Size (Frag1) ");
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult())
                         list.add(documentSnapshot.getId());
                     iAllRoomsLoadListener.onAllRoomsLoadSuccess(list);
@@ -131,6 +131,9 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 if(position > 0){
                     loadRoomsofSelectedSize(item.toString());
+                }
+                else{
+                    recycler_rooms.setVisibility(View.GONE);
                 }
             }
         });
@@ -169,6 +172,7 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
     public void onRoomSizeLoadSuccess(List<RoomSize> sizeList) {
         MyRoomsAdapter adapter = new MyRoomsAdapter(getActivity(), sizeList);
         recycler_rooms.setAdapter(adapter);
+        recycler_rooms.setVisibility(View.VISIBLE);
         dialog.dismiss();
 
     }
