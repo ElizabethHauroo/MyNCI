@@ -2,6 +2,7 @@ package com.example.mynciapp.Model;
 
 public class RoomSize {
 
+    //here the names should match exactly what is in the database
     private String roomNum, floor;
 
     public RoomSize() {

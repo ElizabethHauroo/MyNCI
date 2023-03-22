@@ -10,8 +10,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mynciapp.Adapter.MyRoomsAdapter;
+import com.example.mynciapp.Common.SpacesItemDecoration;
 import com.example.mynciapp.Interface.IAllRoomsLoadListener;
 import com.example.mynciapp.Interface.IRoomSizeLoadListener;
 import com.example.mynciapp.Model.RoomSize;
@@ -32,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dmax.dialog.SpotsDialog;
+//import dmax.dialog.SpotsDialog.Builder;
 
 
 
@@ -40,7 +44,7 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
 
     //variable
     CollectionReference allRoomsRef;
-    CollectionReference branchRef;
+    CollectionReference bysizeRef;
 
     IAllRoomsLoadListener iAllRoomsLoadListener;
     IRoomSizeLoadListener iRoomSizeLoadListener;
@@ -70,7 +74,10 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
         iAllRoomsLoadListener = this;
         iRoomSizeLoadListener = this;
 
-        dialog = new SpotsDialog.Builder().setContext(getActivity()).build();
+       //dialog = new SpotsDialog.Builder().setContext(getActivity()).build();
+       dialog = new SpotsDialog(getActivity(), "Loading...");
+
+        //dialog = new AlertDialog.Builder().setC
 
     }//OnCreate
 
@@ -83,10 +90,18 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
 
         View itemView = inflater.inflate(R.layout.fragment_booking_step1, container, false);
         unbinder = ButterKnife.bind(this, itemView);
+
+        initView();
         loadAllRooms();
         return itemView;
 
     }//onCreateView
+
+    private void initView() {
+        recycler_rooms.setHasFixedSize(true);
+        recycler_rooms.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recycler_rooms.addItemDecoration(new SpacesItemDecoration(4));
+    }
 
     private void loadAllRooms() {
         allRoomsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -123,6 +138,25 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
     }
 
     private void loadRoomsofSelectedSize(String selectedSize) {
+        dialog.show();
+
+        bysizeRef = FirebaseFirestore.getInstance().collection("AllRooms").document(selectedSize).collection("Rooms");
+        bysizeRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                List<RoomSize> list = new ArrayList<>();
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot:task.getResult())
+                        list.add(documentSnapshot.toObject(RoomSize.class));
+                    iRoomSizeLoadListener.onRoomSizeLoadSuccess(list);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                iRoomSizeLoadListener.onRoomSizeLoadFailed(e.getMessage());
+            }
+        });
 
     }
 
@@ -133,11 +167,15 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
 
     @Override
     public void onRoomSizeLoadSuccess(List<RoomSize> sizeList) {
+        MyRoomsAdapter adapter = new MyRoomsAdapter(getActivity(), sizeList);
+        recycler_rooms.setAdapter(adapter);
+        dialog.dismiss();
 
     }
 
     @Override
     public void onRoomSizeLoadFailed(String message) {
-
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        dialog.dismiss();
     }
 }
