@@ -8,11 +8,14 @@
 
 ----------------------BOOKINGS NOTES----------------------------------
 Because there are 4 steps in our booking selection:
-1. Choose Room
-2. Choose Reason for Booking
-3. Choose Time
-4. Confirm
+1. Choose Room Size (Large/Small)
+2. Choose Room (1.03, 2.03 ... )
+3. Choose Reason for Booking (Formal, Study)
+4. Time + Confirm (Time Slots available)
 We need 4 fragments.
+
+part 5 enabled buttons and added collection for purpose, paused : 17min42
+https://youtu.be/G6z1uLPqRDY
 
 We are having an issue with the Fragment package.
 A discrepancy between androidx and com.android

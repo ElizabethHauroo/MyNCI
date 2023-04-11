@@ -149,8 +149,14 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 List<RoomSize> list = new ArrayList<>();
                 if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot documentSnapshot:task.getResult())
-                        list.add(documentSnapshot.toObject(RoomSize.class));
+                    for (QueryDocumentSnapshot documentSnapshot:task.getResult()){
+
+                        RoomSize roomSize = documentSnapshot.toObject(RoomSize.class);
+                        roomSize.setRoomId(documentSnapshot.getId());
+                        list.add(roomSize);
+                        //list.add(documentSnapshot.toObject(RoomSize.class)); removed so that we can add room id
+                    }
+
                     iRoomSizeLoadListener.onRoomSizeLoadSuccess(list);
                 }
             }
