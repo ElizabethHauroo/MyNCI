@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.mynciapp.Adapter.MyViewPagerAdapter;
 import com.example.mynciapp.Common.Common;
+import com.example.mynciapp.Common.NonSwipeViewPager;
 import com.shuhart.stepview.StepView;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     //@BindView(R.id.step_view)
     private StepView stepview;
-    private ViewPager viewpager;
+    private NonSwipeViewPager viewpager;
     private Button previousBTN, nextBTN;
 
     //Event
@@ -64,7 +65,7 @@ public class ScheduleActivity extends AppCompatActivity {
         localBroadcastManager.registerReceiver(buttonNextReceiver, new IntentFilter(Common.KEY_ENABLE_BUTTON_NEXT));
 
         stepview = (StepView) findViewById(R.id.step_view);
-        viewpager = (ViewPager) findViewById(R.id.view_pager);
+        viewpager = (NonSwipeViewPager) findViewById(R.id.view_pager);
 
         //Buttons
         previousBTN = (Button) findViewById(R.id.booking_previous_btn);

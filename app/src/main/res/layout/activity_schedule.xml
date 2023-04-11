@@ -26,7 +26,7 @@
         app:sv_typeface="@font/biryani_extralight"/>
 
 
-    <androidx.viewpager.widget.ViewPager
+    <com.example.mynciapp.Common.NonSwipeViewPager
         android:id="@+id/view_pager"
         android:layout_below="@+id/step_view"
         android:layout_width="match_parent"
