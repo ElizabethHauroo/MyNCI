@@ -34,9 +34,28 @@ public class ScheduleActivity extends AppCompatActivity {
     private Button previousBTN, nextBTN;
 
     //Event
+    @OnClick(R.id.booking_previous_btn)
+    void previousStep(){
+        if(Common.step ==3 || Common.step > 0 ){
+            Common.step--;
+            viewpager.setCurrentItem(Common.step);
+        }
+    }
     @OnClick(R.id.booking_next_btn)
     void nextClick(){
-        Toast.makeText(this,"Clicked"+Common.currentRoom.getRoomId(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Clicked"+Common.currentRoom.getRoomId(), Toast.LENGTH_SHORT).show();
+        if(Common.step < 3 || Common.step == 0){
+            Common.step++; //increase by one if the next button is clicked (as we move through the booking steps.
+            if(Common.step == 1 ){ // after room number, chose purpose for booking (step 2)
+                if(Common.currentRoom !=null){
+                    loadPurposeByRoom(Common.currentRoom.getRoomId());
+                }
+            }
+            viewpager.setCurrentItem(Common.step);
+        }
+    }
+
+    private void loadPurposeByRoom(String roomId) {
     }
 
     //Broadcast Receiver
@@ -77,6 +96,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         //View
         viewpager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
+        viewpager.setOffscreenPageLimit(4); //because we have fours fragments (steps in booking)
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
