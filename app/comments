@@ -14,8 +14,9 @@ Because there are 4 steps in our booking selection:
 4. Time + Confirm (Time Slots available)
 We need 4 fragments.
 
-part 5 enabled buttons and added collection for purpose, paused : 17min42
-https://youtu.be/G6z1uLPqRDY
+on to part6! https://www.youtube.com/watch?v=JBsoLYhv3nQ&t=205s
+
+--------------------------------
 
 We are having an issue with the Fragment package.
 A discrepancy between androidx and com.android
@@ -33,4 +34,7 @@ Try to test Booking activity
     - with previous button disabled on step 1 (WAD)
 
 Part 4 complete. Might not need part 5, and straight onto part 6
+https://youtu.be/G6z1uLPqRDY
+
+part 5 complete
 https://youtu.be/G6z1uLPqRDY
