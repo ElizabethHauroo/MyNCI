@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mynciapp.Adapter.MyRoomsAdapter;
+import com.example.mynciapp.Common.Common;
 import com.example.mynciapp.Common.SpacesItemDecoration;
 import com.example.mynciapp.Interface.IAllRoomsLoadListener;
 import com.example.mynciapp.Interface.IRoomSizeLoadListener;
@@ -142,6 +143,8 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
 
     private void loadRoomsofSelectedSize(String selectedSize) {
         dialog.show();
+
+        Common.size = selectedSize;
 
         bysizeRef = FirebaseFirestore.getInstance().collection("AllRooms").document(selectedSize).collection("Rooms");
         bysizeRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager.widget.ViewPager;
@@ -16,6 +19,14 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.mynciapp.Adapter.MyViewPagerAdapter;
 import com.example.mynciapp.Common.Common;
 import com.example.mynciapp.Common.NonSwipeViewPager;
+import com.example.mynciapp.Model.Purpose;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.shuhart.stepview.StepView;
 
 import java.util.ArrayList;
@@ -23,10 +34,13 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 
 public class ScheduleActivity extends AppCompatActivity {
 
     LocalBroadcastManager localBroadcastManager;
+    SpotsDialog dialog;
+    CollectionReference purposeRef;
 
     //@BindView(R.id.step_view)
     private StepView stepview;
@@ -56,6 +70,42 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void loadPurposeByRoom(String roomId) {
+        dialog.show();
+
+        // lets select all purposes of Room
+        //    /AllRooms/Large/Rooms/BprMx0J4PcNJBS5TnZKb/Purpose
+        if(!TextUtils.isEmpty(Common.size)){
+            purposeRef = FirebaseFirestore.getInstance()
+                    .collection("AllRooms")
+                    .document(Common.size)
+                    .collection("Rooms")
+                    .document(roomId)
+                    .collection("Purpose");
+
+            purposeRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    ArrayList<Purpose> purposes = new ArrayList<>();
+                    for (QueryDocumentSnapshot purposeSnapshot:task.getResult()){
+                        Purpose purpose = purposeSnapshot.toObject(Purpose.class);
+                        purpose.setPurposeId(purposeSnapshot.getId()); //getting the id of that "purpose" (reason for booking) for that room
+
+                        purposes.add(purpose);
+                    }
+                    //send broadcast to step 2 (frag2)
+                    Intent intent = new Intent(Common.KEY_PURPOSE_LOAD_DONE);
+                    intent.putParcelableArrayListExtra(Common.KEY_PURPOSE_LOAD_DONE, purposes);
+                    localBroadcastManager.sendBroadcast(intent);
+
+                    dialog.dismiss();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    dialog.dismiss();
+                }
+            });
+        }
     }
 
     //Broadcast Receiver
@@ -79,6 +129,12 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
         ButterKnife.bind(ScheduleActivity.this);
+
+        //dialog = new SpotsDialog.Builder().setContext(this).build();
+        //dialog = new SpotsDialog(this).build();
+        dialog = new SpotsDialog(this);
+
+
 
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         localBroadcastManager.registerReceiver(buttonNextReceiver, new IntentFilter(Common.KEY_ENABLE_BUTTON_NEXT));
@@ -106,6 +162,8 @@ public class ScheduleActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
 
+                //Show Steps
+                stepview.go(position, true);
                 if (position ==0) {
                     previousBTN.setEnabled(false);
                 }
@@ -141,8 +199,8 @@ public class ScheduleActivity extends AppCompatActivity {
     private void setupStepView() {
         List<String> stepList = new ArrayList<>();
         stepList.add("Room");
-        stepList.add("Time");
         stepList.add("Purpose");
+        stepList.add("Time");
         stepList.add("Confirm");
         stepview.setSteps(stepList);
     }
