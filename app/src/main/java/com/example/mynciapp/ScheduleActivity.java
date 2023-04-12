@@ -133,7 +133,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 Common.currentRoom = intent.getParcelableExtra(Common.KEY_SIZE_STORE);
             }
             else if(step ==2){
-                Common.currentRoom = intent.getParcelableExtra(Common.KEY_PURPOSE_SELECTED);
+                Common.currentPurpose = intent.getParcelableExtra(Common.KEY_PURPOSE_SELECTED);
             }
 
             nextBTN.setEnabled(true);
