@@ -1,5 +1,7 @@
 package com.example.mynciapp;
 
+import static com.example.mynciapp.Common.Common.currentPurpose;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -65,8 +67,20 @@ public class ScheduleActivity extends AppCompatActivity {
                     loadPurposeByRoom(Common.currentRoom.getRoomId());
                 }
             }
+            else if(Common.step == 2){ //select timeslot
+                if(currentPurpose !=null){
+                    loadTimeslotofPurpose(Common.currentPurpose.getPurposeId());
+                }
+            }
             viewpager.setCurrentItem(Common.step);
         }
+    }
+
+    private void loadTimeslotofPurpose(String purposeId) {
+        // send broadcast to frag3 (step3)
+        Intent intent = new Intent(Common.KEY_DISPLAY_TIME_SLOT);
+        localBroadcastManager.sendBroadcast(intent);
+
     }
 
     private void loadPurposeByRoom(String roomId) {
@@ -112,7 +126,16 @@ public class ScheduleActivity extends AppCompatActivity {
     private BroadcastReceiver buttonNextReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Common.currentRoom = intent.getParcelableExtra(Common.KEY_SIZE_STORE);
+
+            int step = intent.getIntExtra(Common.KEY_STEP, 0);
+
+            if(step ==1){
+                Common.currentRoom = intent.getParcelableExtra(Common.KEY_SIZE_STORE);
+            }
+            else if(step ==2){
+                Common.currentRoom = intent.getParcelableExtra(Common.KEY_PURPOSE_SELECTED);
+            }
+
             nextBTN.setEnabled(true);
             setColourButton();
         }
@@ -170,6 +193,8 @@ public class ScheduleActivity extends AppCompatActivity {
                 else{
                     previousBTN.setEnabled(true);
                 }
+                //set disable Next button
+                nextBTN.setEnabled(false);
                 setColourButton();
             }
 

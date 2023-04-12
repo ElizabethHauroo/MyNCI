@@ -66,6 +66,7 @@ public class MyRoomsAdapter extends RecyclerView.Adapter<MyRoomsAdapter.MyViewHo
                 //use the broadcast manager to tell ScheduleActivity to enable the "Next" Button
                 Intent intent = new Intent(Common.KEY_ENABLE_BUTTON_NEXT);
                 intent.putExtra(Common.KEY_SIZE_STORE,sizeList.get(pos));
+                intent.putExtra(Common.KEY_STEP, 1);
                 localBroadcastManager.sendBroadcast(intent);
             }
         });

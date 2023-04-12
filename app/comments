@@ -16,6 +16,10 @@ We need 4 fragments.
 
 on to part6! https://www.youtube.com/watch?v=JBsoLYhv3nQ&t=205s
 
+Because I use common.currentPurpose  to check purpose, I should assign a value to it.
+This should be done on the listener broadcast received on frag2
+^ BROADCAST RECEIVER IN SCHEDULE ACTIVITY
+
 --------------------------------
 
 We are having an issue with the Fragment package.
