@@ -12,8 +12,11 @@
     <color name="imperial_red">#fb3640</color>
     <color name="hookers_green">#5f7367</color>
     <color name="lime_green">#85cb33</color>
+    <color name="soft_green">#CEEBAD</color>
     <color name="mikado_yellow">#fec601</color>
     <color name="orange_pumpkin">#ea7317</color>
+    <color name="platinum_grey">#E0E0E1</color>
+
 
 
 </resources>

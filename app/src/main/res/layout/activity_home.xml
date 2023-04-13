@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blurbg1"
+    android:background="@drawable/white_faded_bg"
     tools:context=".HomeActivity">
 <!--
     <View
@@ -37,7 +37,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/blurbg1"
+
                 android:orientation="vertical"
                 android:weightSum="15">
 
@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2">
-
+<!--
                     <TextView
                         android:id="@+id/textGrid"
                         android:layout_width="wrap_content"
@@ -60,6 +60,7 @@
                         android:textSize="34sp">
 
                     </TextView>
+                    -->
 
 
                 </RelativeLayout>
@@ -84,8 +85,8 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
-                        app:cardBackgroundColor="#E2DBCBD8"
-                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
 
                         <LinearLayout
@@ -124,8 +125,8 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
-                        app:cardBackgroundColor="#E2DBCBD8"
-                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
 
                         <LinearLayout
@@ -164,8 +165,8 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
-                        app:cardBackgroundColor="#E2DBCBD8"
-                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
 
                         <LinearLayout
@@ -204,8 +205,8 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
-                        app:cardBackgroundColor="#E2DBCBD8"
-                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
 
                         <LinearLayout

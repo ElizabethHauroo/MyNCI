@@ -10,21 +10,22 @@
         android:id="@+id/step_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:padding="16dp"
-        app:sv_animationType="Circle"
-        app:sv_stepPadding="12dp"
 
-        app:sv_selectedCircleColor="@color/white"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sv_animationType="Circle"
+
+        app:sv_doneCircleColor="@color/royal_purple"
+        app:sv_doneStepLineColor="@color/royal_purple"
+        app:sv_doneStepMarkColor="@color/white"
+
+        app:sv_doneTextColor="@color/royal_purple"
+        app:sv_selectedCircleColor="@color/platinum_grey"
         app:sv_selectedStepNumberColor="@color/black"
         app:sv_selectedTextColor="@color/black"
 
-        app:sv_doneCircleColor="#10a37f"
-        app:sv_doneStepLineColor="@color/car_ui_color_accent"
-        app:sv_doneTextColor="@color/car_ui_color_accent"
-        app:sv_doneStepMarkColor="@color/white"
-
-        app:sv_typeface="@font/biryani_extralight"/>
+        app:sv_stepPadding="12dp"
+        app:sv_typeface="@font/biryani_extralight" />
 
 
     <com.example.mynciapp.Common.NonSwipeViewPager

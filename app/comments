@@ -1,10 +1,16 @@
 ----------------------COME BACK TO FIX--------------------------------
 - Button Colours on Schedule page
-- Add Navigation to Icons
+- Add Navigation to Icons - bottom navbar
 - Change Icons to square
 - Remove Home BG image/transparency
 - Register/Login TextFields should be white with black lettering
 - Round ^ those buttons
+- step 3 no stepview visible
+-when timeslot not available I want the box to be a different color
+-fix size of cardview on home page - not square atm
+
+
+
 
 ----------------------BOOKINGS NOTES----------------------------------
 Because there are 4 steps in our booking selection:
@@ -14,7 +20,17 @@ Because there are 4 steps in our booking selection:
 4. Time + Confirm (Time Slots available)
 We need 4 fragments.
 
+must set key of timeslot as slot index to avoid duplicates, the slots is referring to our switch stement in Common, eg 3 would be 12:00-13:00
+the number in our collection must match the variable in the timeslot model! variable type included!
+Slot value should be the same as the key
+
 on to part6! https://www.youtube.com/watch?v=JBsoLYhv3nQ&t=205s
+-----------------------
+Blocked:
+calenderView dependency issue.
+----------------------
+
+27m03 calendar mismatch -4 suggestions
 
 Because I use common.currentPurpose  to check purpose, I should assign a value to it.
 This should be done on the listener broadcast received on frag2
@@ -28,7 +44,16 @@ A discrepancy between androidx and com.android
 
 Had a lot of issue trying to get the Dialog box to work, had to use an alternative in the end.
 
-
+---------------------UNUSED LIBRARIES --------------------------
+   //implementation 'com.prolificinteractive:material-calendarview:2.0.1'
+   // implementation 'com.github.shrikanth7698:HorizontalCalendarView:1.0'
+   //implementation 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.2'
+   // implementation 'com.github.Mulham-Raee:Horizontal-Calendar:v1.3.4'
+   // implementation 'com.github.mulham-raee:Horizontal-Calendar:1.5.7'
+   // implementation 'com.android.support:design:26.1.0'
+   // implementation 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4'
+   //implementation 'com.mulham.horizontalcalendar:horizontalcalendar:1.3.0' ideally I need to use this library
+-----------------------------------------------
 
 Try to test Booking activity
 -Added XML Fragments for booking
@@ -42,3 +67,25 @@ https://youtu.be/G6z1uLPqRDY
 
 part 5 complete
 https://youtu.be/G6z1uLPqRDY
+
+
+-----------------------unused booking code ------------------------
+
+ /* frag3
+        MaterialCalendarView materialCalendarView = new MaterialCalendar.Builder(itemView,R.id.calendarView)
+                .range(startDate,endDate)
+                .datesNumberOnScreen(1)
+                .mode(MaterialCalendar.Mode.DAYS)
+                .defaultSelectedDate(startDate)
+                .build();
+
+
+
+        calendarView.state().edit()
+                .setCalendarDisplayMode(CalendarMode.WEEKS)
+                .setCalendarConstraints(new CalendarConstraints.Builder()
+                        .setValidator(DateValidatorWeekdays.getInstance())
+                        .setStart(MaterialDatePicker.todayInUtcMilliseconds())
+                        .build())
+                .commit();
+*/
