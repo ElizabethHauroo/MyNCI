@@ -55,6 +55,11 @@ public class ScheduleActivity extends AppCompatActivity {
         if(Common.step ==3 || Common.step > 0 ){
             Common.step--;
             viewpager.setCurrentItem(Common.step);
+
+            if(Common.step < 3){
+                nextBTN.setEnabled(true);
+                setColourButton();
+            }
         }
     }
     @OnClick(R.id.booking_next_btn)
@@ -68,12 +73,23 @@ public class ScheduleActivity extends AppCompatActivity {
                 }
             }
             else if(Common.step == 2){ //select timeslot
-                if(currentPurpose !=null){
+                if(Common.currentPurpose !=null){
                     loadTimeslotofPurpose(Common.currentPurpose.getPurposeId());
+                }
+            }
+            else if(Common.step == 3){ //Confirm Step
+                if(Common.currentTimeSlot != -1){
+                    confirmBooking();
                 }
             }
             viewpager.setCurrentItem(Common.step);
         }
+    }
+
+    private void confirmBooking() {
+        //send broadcast to frag4
+        Intent intent = new Intent(Common.KEY_CONFIRM_BOOKING);
+        localBroadcastManager.sendBroadcast(intent);
     }
 
     private void loadTimeslotofPurpose(String purposeId) {
@@ -134,6 +150,9 @@ public class ScheduleActivity extends AppCompatActivity {
             }
             else if(step ==2){
                 Common.currentPurpose = intent.getParcelableExtra(Common.KEY_PURPOSE_SELECTED);
+            }
+            else if(step ==3){
+                Common.currentTimeSlot = intent.getIntExtra(Common.KEY_TIME_SLOT,-1);
             }
 
             nextBTN.setEnabled(true);

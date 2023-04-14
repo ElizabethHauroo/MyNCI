@@ -7,7 +7,12 @@
 - Round ^ those buttons
 - step 3 no stepview visible
 -when timeslot not available I want the box to be a different color
--fix size of cardview on home page - not square atm
+
+Bug Report:
+Frag4 UI is underneath the stepview
+Frag 3 Step View is not visible
+Can book an unavailable spot..
+Color of dates are inconsistent.
 
 
 
@@ -24,7 +29,14 @@ must set key of timeslot as slot index to avoid duplicates, the slots is referri
 the number in our collection must match the variable in the timeslot model! variable type included!
 Slot value should be the same as the key
 
-on to part6! https://www.youtube.com/watch?v=JBsoLYhv3nQ&t=205s
+on to part7! https://www.youtube.com/watch?v=t_vfDNy4HKQ
+Part 7 mostly done.
+Bug Report:
+Frag4 UI is underneath the stepview
+Frag 3 Step View is not visible
+Can book an unavailable spot..
+Color of dates are inconsistent.
+
 -----------------------
 Blocked:
 calenderView dependency issue.

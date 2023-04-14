@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 //import android.widget.Toolbar;
 
+import com.example.mynciapp.Common.Common;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -25,6 +26,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -207,4 +210,5 @@ public class HomeActivity extends AppCompatActivity {
     private void SendUserToLogin() {
         startActivity(new Intent(HomeActivity.this, MainActivity.class));
     }
+
 }
