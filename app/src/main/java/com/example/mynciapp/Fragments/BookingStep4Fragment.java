@@ -1,5 +1,6 @@
 package com.example.mynciapp.Fragments;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -22,8 +23,11 @@ import android.widget.Toast;
 import com.example.mynciapp.Common.Common;
 import com.example.mynciapp.Model.BookingInformation;
 import com.example.mynciapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,6 +47,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import dmax.dialog.SpotsDialog;
 
 public class BookingStep4Fragment extends Fragment {
 
@@ -54,12 +60,13 @@ public class BookingStep4Fragment extends Fragment {
     TextView txt_booking_time_text;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    AlertDialog dialog;
+
 
     @OnClick(R.id.btn_confirm)
     void confirmBooking(){
+        dialog.show();
         getUserInfo();
-
-
     }
 
     private void resetStaticData() {
@@ -68,12 +75,8 @@ public class BookingStep4Fragment extends Fragment {
         Common.currentTimeSlot = -1;
         Common.currentRoom = null;
         Common.currentPurpose = null;
-        Common.currentDate.add(Calendar.DATE,0); //current reset
+        Common.bookingDate.add(Calendar.DATE,0); //current reset
     }
-
-
-
-
 
     /*
         private void getUserInfo() {
@@ -112,21 +115,35 @@ public class BookingStep4Fragment extends Fragment {
             }
         }
     */
-private void getUserInfo() {
+    private void getUserInfo() {
     if (user != null) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    String firstName = snapshot.child("firstname").getValue(String.class);
-                    String lastName = snapshot.child("lastname").getValue(String.class);
-                    String course = snapshot.child("course").getValue(String.class);
+                    final String firstName = snapshot.child("firstname").getValue(String.class);
+                    final String lastName = snapshot.child("lastname").getValue(String.class);
+                    final String course = snapshot.child("course").getValue(String.class);
 
-                    //create booking information
+                        //Process Timestamp, to sort and filter only future bookings of user
+                    String startTime = Common.convertTimeSlotToString(Common.currentTimeSlot);
+                    String[] convertTime = startTime.split("-");
+                    String[] startTimeConvert = convertTime[0].split(":");
+                    int startingHourInt = Integer.parseInt(startTimeConvert[0].trim());
 
+                    Calendar bookingDateforRoom = Calendar.getInstance(); //
+                    bookingDateforRoom.setTimeInMillis(Common.bookingDate.getTimeInMillis());
+                    bookingDateforRoom.set(Calendar.HOUR_OF_DAY,startingHourInt);
+                    bookingDateforRoom.set(Calendar.MINUTE,00);
+
+                    Timestamp timestamp = new Timestamp(bookingDateforRoom.getTime());
+
+                        //create booking information
                         BookingInformation bookingInformation = new BookingInformation();
 
+                        bookingInformation.setDone(false);
+                        bookingInformation.setTimestamp(timestamp);
                         bookingInformation.setPurposeId(Common.currentPurpose.getPurposeId());
                         bookingInformation.setReason(Common.currentPurpose.getReason());
                         bookingInformation.setFirstname(firstName);
@@ -134,7 +151,7 @@ private void getUserInfo() {
                         bookingInformation.setCourse(course);
                         bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                                 .append(" on ")
-                                .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
+                                .append(simpleDateFormat.format(bookingDateforRoom.getTime())).toString());
                         bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
 
 
@@ -146,7 +163,7 @@ private void getUserInfo() {
                             .document(Common.currentRoom.getRoomId())
                             .collection("Purpose")
                             .document(Common.currentPurpose.getPurposeId())
-                            .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
+                            .collection(Common.simpleDateFormat.format(Common.bookingDate.getTime()))
                             .document(String.valueOf(Common.currentTimeSlot));  //date simple format = dd_MM_yyyy must be the same in firebase!
 
                     //confirmBooking()
@@ -154,9 +171,14 @@ private void getUserInfo() {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
+                                    //run check if there is already a booking for slot selected, prevent booking
+
+                                    addToUserBooking(bookingInformation);
+                                    /*
                                     resetStaticData();
                                     getActivity().finish();
                                     Toast.makeText(getContext(), "Booking Complete!", Toast.LENGTH_SHORT).show();
+                                    */
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -177,6 +199,56 @@ private void getUserInfo() {
     }
 }
 
+    private void addToUserBooking(BookingInformation bookingInformation) {
+
+
+        // create new collection
+        CollectionReference userBooking = FirebaseFirestore.getInstance()
+                .collection("Users")
+                .document(bookingInformation.getLastname())
+                .collection("Booking");
+
+        //Check if there is already a doc in this collection
+        userBooking.whereEqualTo("done", false).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.getResult().isEmpty()){
+                            userBooking.document().set(bookingInformation)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            if(dialog.isShowing()){
+                                                dialog.dismiss();
+                                            }
+                                            resetStaticData();
+                                            getActivity().finish();
+                                            Toast.makeText(getContext(), "Booking Complete!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            if(dialog.isShowing()){
+                                                dialog.dismiss();
+                                            }
+                                            Toast.makeText(getContext(), "Failed : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                        else{
+                            if(dialog.isShowing()){
+                                dialog.dismiss();
+                            }
+                            resetStaticData();
+                            getActivity().finish();
+                            Toast.makeText(getContext(), "Booking Complete!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
     BroadcastReceiver confirmBookingReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -188,7 +260,7 @@ private void getUserInfo() {
         txt_booking_purpose_text.setText(Common.currentPurpose.getReason());
         txt_booking_time_text.setText(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                 .append(" on ")
-                .append(simpleDateFormat.format(Common.currentDate.getTime())));
+                .append(simpleDateFormat.format(Common.bookingDate.getTime())));
     }
 
     static BookingStep4Fragment instance;
@@ -209,6 +281,7 @@ private void getUserInfo() {
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         localBroadcastManager.registerReceiver(confirmBookingReceiver,new IntentFilter(Common.KEY_CONFIRM_BOOKING));
 
+        dialog = new SpotsDialog(getActivity(), "Loading...");
 
     }
 

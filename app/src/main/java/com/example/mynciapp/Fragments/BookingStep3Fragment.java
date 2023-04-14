@@ -205,9 +205,9 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
                 Calendar selectedCalendar = Calendar.getInstance();
                 selectedCalendar.set(date.getYear(), date.getMonth(), date.getDay());
 
-                if (Common.currentDate.getTimeInMillis() != selectedCalendar.getTimeInMillis()) {
+                if (Common.bookingDate.getTimeInMillis() != selectedCalendar.getTimeInMillis()) {
 
-                    Common.currentDate = selectedCalendar;
+                    Common.bookingDate = selectedCalendar;
                     loadAvailableTimeSlotofPurpose(Common.currentPurpose.getPurposeId(),
                             simpleDateFormat.format(selectedCalendar.getTime()));
                 }
