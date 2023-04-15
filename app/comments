@@ -7,12 +7,14 @@
 - Round ^ those buttons
 - step 3 no stepview visible
 -when timeslot not available I want the box to be a different color
+- booking fragments, change disabled button to platinum grey and royal purple for next enabled.
 
 Bug Report:
 Frag4 UI is underneath the stepview
 Frag 3 Step View is not visible
 Can book an unavailable spot..
 Color of dates are inconsistent.
+picking large 1.03 study room crashes the app.
 
 
 

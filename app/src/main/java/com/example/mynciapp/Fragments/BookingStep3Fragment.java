@@ -193,6 +193,12 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
         int calendarDayHeight = (int) getResources().getDimension(R.dimen.calendar_day_height);
         int calendarHeight = calendarDayHeight * 7; // Show one week only
 
+        // Set the calendar view to today's date
+        Calendar calendar = Calendar.getInstance();
+        calendarView.setSelectedDate(calendar);
+
+
+
         calendarView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, calendarHeight));
 
         calendarView.state().edit()

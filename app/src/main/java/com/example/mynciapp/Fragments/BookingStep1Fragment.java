@@ -142,7 +142,7 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
     }
 
     private void loadRoomsofSelectedSize(String selectedSize) {
-        dialog.show();
+        //dialog.show();
 
         Common.size = selectedSize;
 

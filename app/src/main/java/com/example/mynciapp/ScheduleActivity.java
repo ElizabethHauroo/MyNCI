@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -100,9 +101,9 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void loadPurposeByRoom(String roomId) {
-        dialog.show();
+       // dialog.show();
 
-        // lets select all purposes of Room
+        // select all purposes of Room
         //    /AllRooms/Large/Rooms/BprMx0J4PcNJBS5TnZKb/Purpose
         if(!TextUtils.isEmpty(Common.size)){
             purposeRef = FirebaseFirestore.getInstance()
@@ -227,16 +228,20 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void setColourButton() {
         if(nextBTN.isEnabled()){
-            nextBTN.setBackgroundResource(R.color.lime_green);
+            nextBTN.setBackgroundResource(R.color.royal_purple);
+            nextBTN.setTextColor(ContextCompat.getColor(this, R.color.white));
         }
         else{
-            nextBTN.setBackgroundResource(R.color.battleship_grey);
+            nextBTN.setBackgroundResource(R.color.platinum_grey);
+            nextBTN.setTextColor(ContextCompat.getColor(this, R.color.battleship_grey));
         }
         if(previousBTN.isEnabled()){
-            previousBTN.setBackgroundResource(R.color.lime_green);
+            previousBTN.setBackgroundResource(R.color.royal_purple);
+            previousBTN.setTextColor(ContextCompat.getColor(this, R.color.white));
         }
         else{
-            previousBTN.setBackgroundResource(R.color.battleship_grey);
+            previousBTN.setBackgroundResource(R.color.platinum_grey);
+            previousBTN.setTextColor(ContextCompat.getColor(this, R.color.battleship_grey));
         }
     }
 
