@@ -57,7 +57,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
             holder.txt_timeslot_description.setText("Available");
             holder.txt_timeslot_description.setTextColor(context.getResources().getColor(R.color.lime_green));
             holder.txt_time_slot.setTextColor(context.getResources().getColor(R.color.black_olive));
-            holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(R.color.soft_green));
+            holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(R.color.white));
 
         }
         else{ //if  slot is not available show :

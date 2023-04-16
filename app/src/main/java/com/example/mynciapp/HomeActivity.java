@@ -115,12 +115,15 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home_bottomnav:
                         startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.add_bottomnav:
-                        Toast.makeText(HomeActivity.this, "Add", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(HomeActivity.this, AddActivity.class));
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:
-                        Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+                        overridePendingTransition(0, 0);
                         break;
 
                     default:

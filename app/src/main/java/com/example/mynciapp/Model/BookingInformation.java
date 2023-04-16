@@ -2,8 +2,11 @@ package com.example.mynciapp.Model;
 
 import com.google.firebase.Timestamp;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 public class BookingInformation {
-    private String firstname, lastname, course, time, purposeId, reason, roomId, room_num;
+    private String firstname, lastname, course, time, purposeId, date, reason, roomId, room_num, userID, size,  bookingID;
     private Long slot;
     private Timestamp timestamp;
     private boolean done;
@@ -11,16 +14,22 @@ public class BookingInformation {
     public BookingInformation() {
     }
 
-    public BookingInformation(String firstname, String lastname, String course, String time, String purposeId, String reason, String roomId, String room_num, Long slot) {
+    public BookingInformation(String firstname, String lastname, String course, String time, String purposeId, String date, String reason, String roomId, String room_num, String userID, String size, String bookingID, Long slot, Timestamp timestamp, boolean done) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.course = course;
         this.time = time;
         this.purposeId = purposeId;
+        this.date = date;
         this.reason = reason;
         this.roomId = roomId;
         this.room_num = room_num;
+        this.userID = userID;
+        this.size = size;
+        this.bookingID = bookingID;
         this.slot = slot;
+        this.timestamp = timestamp;
+        this.done = done;
     }
 
     public String getFirstname() {
@@ -109,5 +118,37 @@ public class BookingInformation {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public void setBookingID(String bookingID) {
+        this.bookingID = bookingID;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

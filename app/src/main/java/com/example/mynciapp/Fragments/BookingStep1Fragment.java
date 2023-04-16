@@ -2,6 +2,7 @@ package com.example.mynciapp.Fragments;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,6 +144,8 @@ public class BookingStep1Fragment extends Fragment implements IAllRoomsLoadListe
 
     private void loadRoomsofSelectedSize(String selectedSize) {
         //dialog.show();
+        Log.d("DEBUG", "Accessing Firebase collection");
+        Log.d("DEBUG", "Collection path: AllRooms > " + selectedSize + " > Rooms");
 
         Common.size = selectedSize;
 

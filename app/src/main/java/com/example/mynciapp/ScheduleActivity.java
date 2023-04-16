@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -26,6 +27,9 @@ import com.example.mynciapp.Model.Purpose;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -44,6 +48,9 @@ public class ScheduleActivity extends AppCompatActivity {
     LocalBroadcastManager localBroadcastManager;
     SpotsDialog dialog;
     CollectionReference purposeRef;
+
+
+    BottomNavigationView nav;
 
     //@BindView(R.id.step_view)
     private StepView stepview;
@@ -176,6 +183,31 @@ public class ScheduleActivity extends AppCompatActivity {
         //dialog = new SpotsDialog.Builder().setContext(this).build();
         //dialog = new SpotsDialog(this).build();
         dialog = new SpotsDialog(this);
+
+        nav=findViewById(R.id.bottom_navigation_schedule);
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home_bottomnav:
+                        startActivity(new Intent(ScheduleActivity.this, HomeActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.add_bottomnav:
+                        startActivity(new Intent(ScheduleActivity.this, AddActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.profile_bottomnav:
+                        startActivity(new Intent(ScheduleActivity.this, ProfileActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+
+                    default:
+                }
+
+                return true;
+            }
+        });
 
 
 

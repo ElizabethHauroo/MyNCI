@@ -59,6 +59,7 @@ public class BookingStep4Fragment extends Fragment {
     @BindView(R.id.txt_booking_time_text)
     TextView txt_booking_time_text;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userId = user.getUid();
 
     AlertDialog dialog;
 
@@ -78,43 +79,7 @@ public class BookingStep4Fragment extends Fragment {
         Common.bookingDate.add(Calendar.DATE,0); //current reset
     }
 
-    /*
-        private void getUserInfo() {
-            if(user != null){
-                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
-                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            String firstName = snapshot.child("firstname").getValue(String.class);
-                            String lastName = snapshot.child("lastname").getValue(String.class);
-                            String course = snapshot.child("course").getValue(String.class);
-    
-                            //create booking information
-                            BookingInformation bookingInformation = new BookingInformation();
-    
-                            bookingInformation.setPurposeId(Common.currentPurpose.getPurposeId());
-                            bookingInformation.setReason(Common.currentPurpose.getReason());
-                            bookingInformation.setFirstname(firstName + " " + lastName);
-                            bookingInformation.setCourse(course);
-                            bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
-                                    .append(" on ")
-                                    .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
-                            bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
-    
-                            //back to confirmBooking()
-                        }
-                    }
-    
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("BookingStep4Fragment", "Error reading user data from database: " + error.getMessage());
-                        Toast.makeText(getContext(), "Error reading user data from database", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }
-    */
+
     private void getUserInfo() {
     if (user != null) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
@@ -139,32 +104,63 @@ public class BookingStep4Fragment extends Fragment {
 
                     Timestamp timestamp = new Timestamp(bookingDateforRoom.getTime());
 
-                        //create booking information
+                        //-------------------------create booking information-----------------------------------------------
                         BookingInformation bookingInformation = new BookingInformation();
 
                         bookingInformation.setDone(false);
                         bookingInformation.setTimestamp(timestamp);
                         bookingInformation.setPurposeId(Common.currentPurpose.getPurposeId());
                         bookingInformation.setReason(Common.currentPurpose.getReason());
+                        bookingInformation.setRoom_num(Common.currentRoom.getRoom_num());
+                        bookingInformation.setSize(Common.size);
+                        bookingInformation.setUserID(user.getUid());
                         bookingInformation.setFirstname(firstName);
                         bookingInformation.setLastname(lastName);
                         bookingInformation.setCourse(course);
+                        bookingInformation.setTime(Common.convertTimeSlotToString(Common.currentTimeSlot));
+                        bookingInformation.setDate(simpleDateFormat.format(bookingDateforRoom.getTime()));
+                        /*
                         bookingInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                                 .append(" on ")
-                                .append(simpleDateFormat.format(bookingDateforRoom.getTime())).toString());
+                                .append(simpleDateFormat.format(bookingDateforRoom.getTime())).toString());*/
                         bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
+                        // ----------------------------------------------------------------------------------------------
 
-
-                    //write data in FireBase
+                    //write data of booking in FireBase
                     DocumentReference bookingDate = FirebaseFirestore.getInstance()
                             .collection("AllRooms")
                             .document(Common.size)
                             .collection("Rooms")
-                            .document(Common.currentRoom.getRoomId())
+                            .document(Common.currentRoom.getRoom_num())
                             .collection("Purpose")
-                            .document(Common.currentPurpose.getPurposeId())
+                            .document(Common.currentPurpose.getReason())
                             .collection(Common.simpleDateFormat.format(Common.bookingDate.getTime()))
                             .document(String.valueOf(Common.currentTimeSlot));  //date simple format = dd_MM_yyyy must be the same in firebase!
+
+                    //making new collection for MyBookings
+                    CollectionReference userBookingsRef = FirebaseFirestore.getInstance()
+                            .collection("Users")
+                            .document(userId)
+                            .collection("MyBookings");
+
+
+
+                    String bookingId = userBookingsRef.document().getId();
+                    userBookingsRef.document(bookingId)
+                                    .set(bookingInformation)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d("UserBookings", "Booking added to the user's bookings");
+
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e("UserBookings", "Error adding booking to the user's bookings: " + e.getMessage());
+                                }
+                            });
+
 
                     //confirmBooking()
                     bookingDate.set(bookingInformation)
@@ -205,8 +201,10 @@ public class BookingStep4Fragment extends Fragment {
         // create new collection
         CollectionReference userBooking = FirebaseFirestore.getInstance()
                 .collection("Users")
-                .document(bookingInformation.getLastname())
-                .collection("Booking");
+                .document(userId)
+                .collection("MyBookings");
+
+        String bookingId = userBooking.document().getId();
 
         //Check if there is already a doc in this collection
         userBooking.whereEqualTo("done", false).get()
@@ -214,7 +212,8 @@ public class BookingStep4Fragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.getResult().isEmpty()){
-                            userBooking.document().set(bookingInformation)
+                            userBooking.document(bookingId)
+                                    .set(bookingInformation)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
@@ -261,6 +260,7 @@ public class BookingStep4Fragment extends Fragment {
         txt_booking_time_text.setText(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                 .append(" on ")
                 .append(simpleDateFormat.format(Common.bookingDate.getTime())));
+
     }
 
     static BookingStep4Fragment instance;

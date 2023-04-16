@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rel_bookingInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:id="@+id/heading_popup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Booking Info"
+                android:textSize="24sp"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_room_popup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/heading_popup">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="Room:"/>
+
+
+                <TextView
+                    android:id="@+id/roomNum_popup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="7.4"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_date_popup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/layout_room_popup">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Date:"/>
+
+
+            <TextView
+                android:id="@+id/date_popup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="12/12/12"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_time_popup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/layout_date_popup">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Time:"/>
+
+
+            <TextView
+                android:id="@+id/time_popup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="09:00 - 10:00"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_purpose_popup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/layout_time_popup">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Reason:"/>
+
+
+            <TextView
+                android:id="@+id/purpose_popup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Meeting "/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/layout_purpose_popup"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/popup_close_btn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:background="@color/platinum_grey"
+                android:fontFamily="@font/biryani_extralight"
+                android:text="CLOSE"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/popup_delete_btn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@color/imperial_red"
+                android:fontFamily="@font/biryani_extralight"
+                android:text="CANCEL"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

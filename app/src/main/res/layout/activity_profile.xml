@@ -44,7 +44,60 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingTop="18dp">
+
+                <LinearLayout
+                    android:id="@+id/Linear_p_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/fullname_txt_profile_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Full Name"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/biryani_extralight"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/Linear_p_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/username_txt_profile_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="_username_"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/biryani_extralight"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/Linear_p_course"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/course_txt_profile_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="#Course"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/biryani_extralight"/>
+
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -75,6 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
