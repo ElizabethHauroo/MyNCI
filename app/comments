@@ -1,20 +1,22 @@
-----------------------COME BACK TO FIX--------------------------------
 //remove transition animation
 overridePendingTransition(0, 0);
 ----------------------------------------------------------------------
+
+----------------------COME BACK TO FIX--------------------------------
+
 - Button Colours on Schedule page
-- Add Navigation to Icons - bottom navbar
-- Change Icons to square
-- Remove Home BG image/transparency
+-   DONE    - Add Navigation to Icons - bottom navbar
+-   DONE    - Change Icons to square
+-   DONE    - Remove Home BG image/transparency
 - Register/Login TextFields should be white with black lettering
 - Round ^ those buttons
-- step 3 no stepview visible
--when timeslot not available I want the box to be a different color
-- booking fragments, change disabled button to platinum grey and royal purple for next enabled.
+-   DONE    - step 3 no stepview visible
+-   DONE    - when timeslot not available I want the box to be a different color
+-   DONE    - booking fragments, change disabled button to platinum grey and royal purple for next enabled.
 
 Bug Report:
-Frag4 UI is underneath the stepview
-Frag 3 Step View is not visible
+-  DONE    - Frag4 UI is underneath the stepview
+-  DONE    - Frag 3 Step View is not visible
 Can book an unavailable spot..
 Color of dates are inconsistent.
 
@@ -44,7 +46,7 @@ must set key of timeslot as slot index to avoid duplicates, the slots is referri
 the number in our collection must match the variable in the timeslot model! variable type included!
 Slot value should be the same as the key
 
-on to part7! https://www.youtube.com/watch?v=t_vfDNy4HKQ
+on to part9! DELETE Booking : https://www.youtube.com/watch?v=D6Cx35ckiRw
 Part 7 mostly done.
 Bug Report:
 Frag4 UI is underneath the stepview
