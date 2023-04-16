@@ -2,14 +2,24 @@
 overridePendingTransition(0, 0);
 ----------------------------------------------------------------------
 
-----------------------COME BACK TO FIX--------------------------------
+----------------------COME BACK TO FIX------------------------------------
+
+
+
+--------------------------MAPPING TILE------------------------------------
+
+
+
+
+---------------------- COME BACK TO FIX BOOKING ROOMS --------------------
 
 - Button Colours on Schedule page
+
+- Register/Login TextFields should be white with black lettering
+- Round ^ those
 -   DONE    - Add Navigation to Icons - bottom navbar
 -   DONE    - Change Icons to square
 -   DONE    - Remove Home BG image/transparency
-- Register/Login TextFields should be white with black lettering
-- Round ^ those buttons
 -   DONE    - step 3 no stepview visible
 -   DONE    - when timeslot not available I want the box to be a different color
 -   DONE    - booking fragments, change disabled button to platinum grey and royal purple for next enabled.

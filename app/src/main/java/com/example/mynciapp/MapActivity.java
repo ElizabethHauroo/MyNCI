@@ -66,12 +66,15 @@ public class MapActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home_bottomnav:
                         startActivity(new Intent(MapActivity.this, HomeActivity.class));
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.add_bottomnav:
-                        Toast.makeText(MapActivity.this, "Add", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MapActivity.this, AddActivity.class));
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:
-                        Toast.makeText(MapActivity.this, "Profile", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MapActivity.this, ProfileActivity.class));
+                        overridePendingTransition(0, 0);
                         break;
 
                     default:

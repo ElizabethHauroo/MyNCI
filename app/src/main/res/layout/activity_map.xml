@@ -6,87 +6,128 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity">
 
+
+
     <RelativeLayout
         android:id="@+id/container_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <RelativeLayout
+        <!--TOP BAR -->
+        <include
+            android:id="@+id/profile_page_toolbar"
+            layout="@layout/app_bar_layout" />
+        <!--DROPDOWN LINEAR-->
+        <LinearLayout
+            android:id="@+id/spinner_layout"
             android:layout_width="match_parent"
-            android:layout_height="672dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="45dp">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_page_toolbar"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-                <!-- Search bar here -->
-
-                <SearchView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </SearchView>
-            </LinearLayout>
-
-            <LinearLayout
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/AllRooms_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:layout_marginTop="100dp"
+                android:hint="Select a room"
+                android:textColorHint="@color/battleship_grey"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+        <!--SEARCH LINEAR-->
+        <LinearLayout
+            android:id="@+id/linear_search"
+            android:layout_below="@id/spinner_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <!-- Search bar here -->
+
+            <SearchView
+                android:id="@+id/AllRooms_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search for a room"
                 >
 
-                <Button
-                    android:id="@+id/first_floor_map"
-                    android:layout_width="80dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_height="wrap_content"
-                    android:background="#928779"
-                    android:text="1st"/>
-                <Button
-                    android:id="@+id/second_floor_map"
-                    android:layout_width="80dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_height="wrap_content"
-                    android:background="#928779"
-                    android:text="2nd"/>
-                <Button
-                    android:id="@+id/third_floor_map"
-                    android:layout_width="80dp"
-                    android:layout_marginRight="5dp"
+            </SearchView>
+
+        </LinearLayout>
+        <!--BUTTONS LINEAR-->
+        <LinearLayout
+            android:id="@+id/linear_buttons"
+            android:layout_below="@id/linear_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/first_floor_map"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                    android:background="#928779"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:background="@color/royal_purple"
+                android:textColor="@color/white"
+                android:text="1st"/>
+
+            <Button
+                android:id="@+id/second_floor_map"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:background="@color/royal_purple"
+                android:textColor="@color/white"
+                android:text="2nd"/>
+
+            <Button
+                android:id="@+id/third_floor_map"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:background="@color/royal_purple"
+                android:textColor="@color/white"
                 android:text="3rd"/>
 
-                <Button
-                    android:id="@+id/forth_floor_map"
-                    android:layout_width="80dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_height="wrap_content"
-                    android:background="#928779"
-                    android:text="4th" />
+            <Button
+                android:id="@+id/forth_floor_map"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:background="@color/royal_purple"
+                android:textColor="@color/white"
+                android:text="4th"/>
 
+        </LinearLayout>
 
-            </LinearLayout>
+        <!--IMAGE LINEAR-->
+        <LinearLayout
+            android:id="@+id/linear_image"
+            android:orientation="vertical"
+            android:layout_below="@id/linear_buttons"
+            android:layout_above="@id/bottom_navigation_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
             <ImageView
                 android:id="@+id/map_mainview"
-                android:layout_width="332dp"
-                android:layout_height="455dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="37dp"
-                android:layout_marginTop="158dp"
-                android:layout_marginEnd="0dp"
-                app:srcCompat="@drawable/course" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="15dp"
+                />
 
-        </RelativeLayout>
-
-
-
+        </LinearLayout>
 
 
 
@@ -102,10 +143,6 @@
             app:labelVisibilityMode="unlabeled"
             android:background="@drawable/bottom_nav_shape"
             android:layout_height="wrap_content"/>
-
-
-
-
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
