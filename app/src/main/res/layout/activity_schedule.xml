@@ -1,35 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScheduleActivity">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rel_stepview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SCHEDULE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="20dp">
+
+        <com.shuhart.stepview.StepView
+            android:id="@+id/step_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:sv_animationType="Circle"
+
+            app:sv_doneCircleColor="@color/royal_purple"
+            app:sv_doneStepLineColor="@color/royal_purple"
+            app:sv_doneStepMarkColor="@color/white"
+
+            app:sv_doneTextColor="@color/royal_purple"
+            app:sv_selectedCircleColor="@color/platinum_grey"
+            app:sv_selectedStepNumberColor="@color/black"
+            app:sv_selectedTextColor="@color/black"
+
+            app:sv_stepPadding="12dp"
+            app:sv_typeface="@font/biryani_extralight" />
+    </RelativeLayout>
+
+
 
     <RelativeLayout
+        android:id="@+id/for_fragments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_stepview"
+        android:layout_above="@+id/layout_button">
+
+        <com.example.mynciapp.Common.NonSwipeViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation_schedule"
+        android:layout_marginBottom="150dp"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/booking_previous_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txt_skip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:background="#D9CAD6"
+            android:enabled="false"
+            android:fontFamily="@font/biryani_extralight"
+            android:text="Previous"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/booking_next_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txt_skip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="#D9CAD6"
+            android:enabled="false"
+            android:fontFamily="@font/biryani_extralight"
+            android:text="Next"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_schedule"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:menu="@menu/bottom_menu"
-            app:itemTextColor="@drawable/selector_bottom_nav"
-            app:itemIconTint="@drawable/selector_bottom_nav"
-            app:labelVisibilityMode="unlabeled"
             android:background="@drawable/bottom_nav_shape"
-            android:layout_height="wrap_content"/>
+            app:itemIconTint="@drawable/selector_bottom_nav"
+            app:itemTextColor="@drawable/selector_bottom_nav"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_menu" />
 
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

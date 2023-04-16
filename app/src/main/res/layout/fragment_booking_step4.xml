@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_below="@+id/step_view"
+
+    android:padding="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp">
+        <!--icon before text-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/biryani_extralight"
+                android:text="Booking Confirmation"
+                android:textAlignment="center"
+                android:textSize="28sp" />
+
+        </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/platinum_grey"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="20dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="bottom"
+                android:src="@drawable/calendar" />
+
+            <TextView
+                android:id="@+id/txt_booking_time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00 on 14/04/23"
+                android:layout_marginLeft="15dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="bottom"
+                android:src="@drawable/meeting" />
+
+            <TextView
+                android:id="@+id/txt_booking_purpose_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study"
+                android:layout_marginLeft="15dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/platinum_grey"/>
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_above="@+id/txt_skip"
+        android:text="C O N F I R M   B O O K I N G"
+        android:textSize="18sp"
+        android:fontFamily="@font/biryani_extralight"
+        android:background="@color/mikado_yellow"/>
+
+
+
+
+</LinearLayout>

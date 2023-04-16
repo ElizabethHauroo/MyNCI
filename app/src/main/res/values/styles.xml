@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SpotsDialog_Cancel" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Customize your dialog here -->
+        <item name="colorAccent">@color/battleship_grey</item>
+    </style>
+    <style name="SearchViewHintStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/battleship_grey</item>
+        <item name="android:fontFamily">@font/biryani_extralight</item>
+    </style>
+
+</resources>

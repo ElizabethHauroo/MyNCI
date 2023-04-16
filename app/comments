@@ -1,0 +1,130 @@
+//remove transition animation
+overridePendingTransition(0, 0);
+----------------------------------------------------------------------
+
+----------------------COME BACK TO FIX------------------------------------
+
+
+
+--------------------------MAPPING TILE------------------------------------
+
+
+
+
+---------------------- COME BACK TO FIX BOOKING ROOMS --------------------
+
+- Button Colours on Schedule page
+
+- Register/Login TextFields should be white with black lettering
+- Round ^ those
+-   DONE    - Add Navigation to Icons - bottom navbar
+-   DONE    - Change Icons to square
+-   DONE    - Remove Home BG image/transparency
+-   DONE    - step 3 no stepview visible
+-   DONE    - when timeslot not available I want the box to be a different color
+-   DONE    - booking fragments, change disabled button to platinum grey and royal purple for next enabled.
+
+Bug Report:
+-  DONE    - Frag4 UI is underneath the stepview
+-  DONE    - Frag 3 Step View is not visible
+Can book an unavailable spot..
+Color of dates are inconsistent.
+
+** picking large 1.03 study room crashes the app.
+^ might be to do with the new collections in FB nonID strings
+** now all large rooms are crashing the app : FIXED all were missing Purpose with the proper headings
+
+If(slot==8){
+String time: 17:00
+}
+- FIXED: On profile, last name doesn't appear? : font was too big
+
+
+
+
+
+
+----------------------BOOKINGS NOTES----------------------------------
+Because there are 4 steps in our booking selection:
+1. Choose Room Size (Large/Small)
+2. Choose Room (1.03, 2.03 ... )
+3. Choose Reason for Booking (Formal, Study)
+4. Time + Confirm (Time Slots available)
+We need 4 fragments.
+
+must set key of timeslot as slot index to avoid duplicates, the slots is referring to our switch stement in Common, eg 3 would be 12:00-13:00
+the number in our collection must match the variable in the timeslot model! variable type included!
+Slot value should be the same as the key
+
+on to part9! DELETE Booking : https://www.youtube.com/watch?v=D6Cx35ckiRw
+Part 7 mostly done.
+Bug Report:
+Frag4 UI is underneath the stepview
+Frag 3 Step View is not visible
+Can book an unavailable spot..
+Color of dates are inconsistent.
+
+-----------------------
+Blocked:
+calenderView dependency issue.
+----------------------
+
+27m03 calendar mismatch -4 suggestions
+
+Because I use common.currentPurpose  to check purpose, I should assign a value to it.
+This should be done on the listener broadcast received on frag2
+^ BROADCAST RECEIVER IN SCHEDULE ACTIVITY
+
+--------------------------------
+
+We are having an issue with the Fragment package.
+A discrepancy between androidx and com.android
+-> Fixed by migrating to AndroidX - Refactor Performed.
+
+Had a lot of issue trying to get the Dialog box to work, had to use an alternative in the end.
+
+---------------------UNUSED LIBRARIES --------------------------
+   //implementation 'com.prolificinteractive:material-calendarview:2.0.1'
+   // implementation 'com.github.shrikanth7698:HorizontalCalendarView:1.0'
+   //implementation 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.2'
+   // implementation 'com.github.Mulham-Raee:Horizontal-Calendar:v1.3.4'
+   // implementation 'com.github.mulham-raee:Horizontal-Calendar:1.5.7'
+   // implementation 'com.android.support:design:26.1.0'
+   // implementation 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4'
+   //implementation 'com.mulham.horizontalcalendar:horizontalcalendar:1.3.0' ideally I need to use this library
+-----------------------------------------------
+
+Try to test Booking activity
+-Added XML Fragments for booking
+-Added the matching inflater in the fragment.java classes
+-Tested, fragments work
+    - can slide between 1,2,3,4
+    - with previous button disabled on step 1 (WAD)
+
+Part 4 complete. Might not need part 5, and straight onto part 6
+https://youtu.be/G6z1uLPqRDY
+
+part 5 complete
+https://youtu.be/G6z1uLPqRDY
+
+
+-----------------------unused booking code ------------------------
+
+ /* frag3
+        MaterialCalendarView materialCalendarView = new MaterialCalendar.Builder(itemView,R.id.calendarView)
+                .range(startDate,endDate)
+                .datesNumberOnScreen(1)
+                .mode(MaterialCalendar.Mode.DAYS)
+                .defaultSelectedDate(startDate)
+                .build();
+
+
+
+        calendarView.state().edit()
+                .setCalendarDisplayMode(CalendarMode.WEEKS)
+                .setCalendarConstraints(new CalendarConstraints.Builder()
+                        .setValidator(DateValidatorWeekdays.getInstance())
+                        .setStart(MaterialDatePicker.todayInUtcMilliseconds())
+                        .build())
+                .commit();
+*/

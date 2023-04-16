@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="royal_purple">#784794</color>
+    <color name="myBlack">#07020d</color>
+    <color name="black_olive">#343633</color>
+    <color name="dark_brown">#2f2504</color>
+    <color name="azure">#f2fdff</color>
+    <color name="battleship_grey">#928779</color>
+    <color name="pale_lavender">#dbcbd8</color>
+    <color name="blue_ncs">#2589bd</color>
+    <color name="blue_cerulean">#187795</color>
+    <color name="imperial_red">#fb3640</color>
+    <color name="hookers_green">#5f7367</color>
+    <color name="lime_green">#85cb33</color>
+    <color name="soft_green">#CEEBAD</color>
+    <color name="mikado_yellow">#fec601</color>
+    <color name="orange_pumpkin">#ea7317</color>
+    <color name="platinum_grey">#E0E0E1</color>
+
+
+
+</resources>
