@@ -43,7 +43,7 @@
             android:layout_height="50dp"
             android:orientation="vertical">
 
-            <!-- Search bar here -->
+            <!-- Search bar here
 
             <SearchView
                 android:id="@+id/AllRooms_search"
@@ -54,7 +54,13 @@
                 >
 
             </SearchView>
-
+            -->
+            <AutoCompleteTextView
+                android:id="@+id/search_autoCompleteTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Search for a room"
+                />
         </LinearLayout>
         <!--BUTTONS LINEAR-->
         <LinearLayout

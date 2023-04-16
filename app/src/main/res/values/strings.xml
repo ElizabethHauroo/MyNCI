@@ -3,4 +3,22 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
 
+    <string-array name="map_room_names_for_search">
+        <item>1.01</item>
+        <item>1.02</item>
+        <item>1.03</item>
+        <item>1.04</item>
+        <item>1.05</item>
+        <item>1.06</item>
+    </string-array>
+
+    <string-array name="map_images">
+        <item>map_room_101</item>
+        <item>map_room_102</item>
+        <item>map_room_103</item>
+        <item>map_room_104</item>
+        <item>map_room_105</item>
+        <item>map_room_106</item>
+    </string-array>
+
 </resources>
