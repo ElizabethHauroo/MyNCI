@@ -8,22 +8,22 @@ public class Post {
     private String post_courseCode;
     private String post_content;
     private long post_timestamp;
-    private Boolean post_forEveryone, post_forCourse;
+    public Boolean isCourse, isGeneral;
     private int post_upvote_Count;
     private int post_downvote_Count;
 
     public Post() {
     }
 
-    public Post(String post_id, String post_authorId, String post_authorName, String post_courseCode, String post_content, long post_timestamp, Boolean post_forEveryone, Boolean post_forCourse, int post_upvote_Count, int post_downvote_Count) {
+    public Post(String post_id, String post_authorId, String post_authorName, String post_courseCode, String post_content, long post_timestamp, Boolean isCourse, Boolean isGeneral, int post_upvote_Count, int post_downvote_Count) {
         this.post_id = post_id;
         this.post_authorId = post_authorId;
         this.post_authorName = post_authorName;
         this.post_courseCode = post_courseCode;
         this.post_content = post_content;
         this.post_timestamp = post_timestamp;
-        this.post_forEveryone = post_forEveryone;
-        this.post_forCourse = post_forCourse;
+        this.isCourse = isCourse;
+        this.isGeneral = isGeneral;
         this.post_upvote_Count = post_upvote_Count;
         this.post_downvote_Count = post_downvote_Count;
     }
@@ -76,20 +76,20 @@ public class Post {
         this.post_timestamp = post_timestamp;
     }
 
-    public Boolean getPost_forEveryone() {
-        return post_forEveryone;
+    public Boolean getCourse() {
+        return isCourse;
     }
 
-    public void setPost_forEveryone(Boolean post_forEveryone) {
-        this.post_forEveryone = post_forEveryone;
+    public void setCourse(Boolean course) {
+        isCourse = course;
     }
 
-    public Boolean getPost_forCourse() {
-        return post_forCourse;
+    public Boolean getGeneral() {
+        return isGeneral;
     }
 
-    public void setPost_forCourse(Boolean post_forCourse) {
-        this.post_forCourse = post_forCourse;
+    public void setGeneral(Boolean general) {
+        isGeneral = general;
     }
 
     public int getPost_upvote_Count() {

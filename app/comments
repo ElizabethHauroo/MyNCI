@@ -3,10 +3,13 @@ overridePendingTransition(0, 0);
 ----------------------------------------------------------------------
 
 ----------------------COME BACK TO FIX------------------------------------
+We need to figure out how to get the current user name to save to the post
+like we did for booking information
+
+CourseActivity  private void createNewPost()
 
 
-
---------------------------MAPPING TILE------------------------------------
+--------------------------CRUD POSTS ------------------------------------
 
 
 
