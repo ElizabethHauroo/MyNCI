@@ -148,19 +148,16 @@ public class CourseActivity extends AppCompatActivity {
     }
 
 
-
     private void loadFilteredPosts() {
-        // Get Current User details: UserID and Course to be able to filter list
         mAuth = FirebaseAuth.getInstance();
         String currentUserID = mAuth.getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUserID);
-        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final String courseCode = dataSnapshot.child("course").getValue(String.class);
 
+                DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
                 postsRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -169,11 +166,11 @@ public class CourseActivity extends AppCompatActivity {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Post post = postSnapshot.getValue(Post.class);
 
-                            if (post.getCourse() && post.getPost_courseCode().equals(courseCode) || (post.getGeneral() && post.getPost_authorId().equals(currentUserID))) {
+                            if ((post.getCourse() && post.getPost_courseCode().equals(courseCode)) ||
+                                    (post.getCourse() && post.getGeneral() && post.getPost_courseCode().equals(courseCode))) {
                                 postList.add(post);
                             }
                         }
-
                         // Sort the posts by time that they were posted (newest to oldest)
                         Collections.sort(postList, new Comparator<Post>() {
                             @Override
@@ -200,10 +197,12 @@ public class CourseActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
     }
+
+
+
 
 }
