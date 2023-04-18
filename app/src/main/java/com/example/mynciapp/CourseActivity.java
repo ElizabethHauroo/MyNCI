@@ -27,12 +27,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.text.ParseException;
+
 
 public class CourseActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userId = user.getUid();
 
     private RecyclerView rvMyCoursePosts;
     private FloatingActionButton floatingCreatePostButton;
@@ -92,58 +100,110 @@ public class CourseActivity extends AppCompatActivity {
     }
 
     private void createNewPost(String content, boolean isGeneral, boolean isCourse) {
+        if (user != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        final String firstName = snapshot.child("firstname").getValue(String.class);
+                        final String lastName = snapshot.child("lastname").getValue(String.class);
+                        final String course = snapshot.child("course").getValue(String.class);
+                        final String fullName = firstName + " "+ lastName;
 
-        mAuth = FirebaseAuth.getInstance();
-        String currentUserID = mAuth.getCurrentUser().getUid();
+                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm  |  dd MMM yyyy");
+                        String currentDateandTime = sdf.format(new Date());
+
+                        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
+                        String postId = postsRef.push().getKey();
+
+                        Post createdPost = new Post(postId, userId, fullName, course, content, currentDateandTime, isCourse, isGeneral, 0, 0);
 
 
-        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-        String postId = postsRef.push().getKey(); //giving each post a postID
+                        postsRef.child(postId).setValue(createdPost).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(CourseActivity.this, "Post created successfully!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(CourseActivity.this, "Failed to create the post. Please try again.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String authorId = currentUser.getUid();
-        String authorName = currentUser.getDisplayName(); // retrieve author name from currentUser
-        String courseCode = ""; // retrieve course code from currentUser
 
-        Post post = new Post(postId, authorId, authorName, courseCode, content, System.currentTimeMillis(), isGeneral, isCourse, 0, 0);
-        postsRef.child(postId).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(CourseActivity.this, "Post created successfully!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(CourseActivity.this, "Failed to create the post. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        } //if logged in
+
+
+
     }
 
-    private void loadFilteredPosts() {
 
+
+    private void loadFilteredPosts() {
         // Get Current User details: UserID and Course to be able to filter list
         mAuth = FirebaseAuth.getInstance();
         String currentUserID = mAuth.getCurrentUser().getUid();
-        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("posts");
-        postsRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUserID);
+        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
                 final String courseCode = dataSnapshot.child("course").getValue(String.class);
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Post post = postSnapshot.getValue(Post.class);
+                postsRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        postList.clear();
 
-                    if (post.getCourse() && post.getPost_courseCode().equals(courseCode) || (post.getGeneral() && post.getPost_authorId().equals(currentUserID))) {
-                        postList.add(post);
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            Post post = postSnapshot.getValue(Post.class);
+
+                            if (post.getCourse() && post.getPost_courseCode().equals(courseCode) || (post.getGeneral() && post.getPost_authorId().equals(currentUserID))) {
+                                postList.add(post);
+                            }
+                        }
+
+                        // Sort the posts by time that they were posted (newest to oldest)
+                        Collections.sort(postList, new Comparator<Post>() {
+                            @Override
+                            public int compare(Post post1, Post post2) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm  |  dd MMM yyyy");
+                                try {
+                                    Date date1 = sdf.parse(post1.getPost_timestamp());
+                                    Date date2 = sdf.parse(post2.getPost_timestamp());
+                                    return date2.compareTo(date1);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                    return 0;
+                                }
+                            }
+                        });
+                        postAdapter.notifyDataSetChanged();
                     }
-                }
-                postAdapter.notifyDataSetChanged();
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(CourseActivity.this, "Failed to load posts. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(CourseActivity.this, "Failed to load posts. Please try again.", Toast.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
+
 }

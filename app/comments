@@ -4,14 +4,19 @@ overridePendingTransition(0, 0);
 
 ----------------------COME BACK TO FIX------------------------------------
 We need to figure out how to get the current user name to save to the post
-like we did for booking information
+like we did for booking information frag4 create booking info line 107
 
 CourseActivity  private void createNewPost()
 
 
 --------------------------CRUD POSTS ------------------------------------
 
-
+Add a close button for the pop create post
+post is created successfully
+- duplicate booleans.
+- change the like/dislike buttons (transparent?)
+- smaller font for timestamp
+- carview background colour, and rounded with shadows.
 
 
 ---------------------- COME BACK TO FIX BOOKING ROOMS --------------------
@@ -110,6 +115,42 @@ https://youtu.be/G6z1uLPqRDY
 part 5 complete
 https://youtu.be/G6z1uLPqRDY
 
+-----------------------unused create post ------------------------
+
+/*createdPost.setPost_courseCode(course);
+                        createdPost.setPost_authorName(fullName);
+                        createdPost.setPost_authorId(userId);
+                        createdPost.setPost_id(postId);
+                        createdPost.setPost_content(content);
+                        createdPost.setPost_timestamp(System.currentTimeMillis());*/
+
+                        //----------------------
+
+                        // Get Current User details: UserID and Course to be able to filter list
+                                mAuth = FirebaseAuth.getInstance();
+                                String currentUserID = mAuth.getCurrentUser().getUid();
+                                DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("posts");
+                                postsRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        postList.clear();
+                                        final String courseCode = dataSnapshot.child("course").getValue(String.class);
+
+                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                            Post post = postSnapshot.getValue(Post.class);
+
+                                            if (post.getCourse() && post.getPost_courseCode().equals(courseCode) || (post.getGeneral() && post.getPost_authorId().equals(currentUserID))) {
+                                                postList.add(post);
+                                            }
+                                        }
+                                        postAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        Toast.makeText(CourseActivity.this, "Failed to load posts. Please try again.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
 -----------------------unused booking code ------------------------
 

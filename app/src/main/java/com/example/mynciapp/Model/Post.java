@@ -7,7 +7,7 @@ public class Post {
     private String post_authorName;
     private String post_courseCode;
     private String post_content;
-    private long post_timestamp;
+    private String post_timestamp;
     public Boolean isCourse, isGeneral;
     private int post_upvote_Count;
     private int post_downvote_Count;
@@ -15,7 +15,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String post_id, String post_authorId, String post_authorName, String post_courseCode, String post_content, long post_timestamp, Boolean isCourse, Boolean isGeneral, int post_upvote_Count, int post_downvote_Count) {
+    public Post(String post_id, String post_authorId, String post_authorName, String post_courseCode, String post_content, String post_timestamp, Boolean isCourse, Boolean isGeneral, int post_upvote_Count, int post_downvote_Count) {
         this.post_id = post_id;
         this.post_authorId = post_authorId;
         this.post_authorName = post_authorName;
@@ -68,11 +68,11 @@ public class Post {
         this.post_content = post_content;
     }
 
-    public long getPost_timestamp() {
+    public String getPost_timestamp() {
         return post_timestamp;
     }
 
-    public void setPost_timestamp(long post_timestamp) {
+    public void setPost_timestamp(String post_timestamp) {
         this.post_timestamp = post_timestamp;
     }
 

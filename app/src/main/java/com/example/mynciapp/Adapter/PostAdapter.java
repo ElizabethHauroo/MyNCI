@@ -40,7 +40,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.post_author_name_textView.setText(post.getPost_authorName());
         holder.post_course_textView.setText(post.getPost_courseCode());
         holder.post_content_textView.setText(post.getPost_content());
-       // holder.post_date_time_textView.setText(/* format the timestamp into a readable date and time */);
+        holder.post_date_time_textView.setText(post.getPost_timestamp());
 
     }
 
