@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@color/platinum_grey">
+    android:background="@color/white"
+    android:elevation="10dp"
+    >
 
     <LinearLayout
         android:id="@+id/rel_post_header"
@@ -19,7 +21,7 @@
             android:textColor="@color/royal_purple"
             android:fontFamily="@font/biryani_extralight"
             android:paddingTop="8dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="5dp"
             android:text=" Valerie Chunnee"/>
 
@@ -65,12 +67,19 @@
             android:id="@+id/post_like_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/post_like"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/post_like"
+            android:background="@android:color/transparent" />
+
         <ImageButton
             android:id="@+id/post_dislike_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/post_dislike"/>
+            android:src="@drawable/post_dislike"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -80,11 +89,38 @@
                 android:id="@+id/post_date_time_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="18sp"
+                android:gravity="right"
+                android:textSize="14sp"
                 android:fontFamily="@font/biryani_extralight"
-                android:text=" 22:59  |  16/04/2023"/>
+                android:text=" 22:59  | 18 Apr 2023"/>
 
         </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_likes"
+        android:layout_below="@id/rel_post_sub"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:text="3"/>
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:text="1"/>
 
     </LinearLayout>
 

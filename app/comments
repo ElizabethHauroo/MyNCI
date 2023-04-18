@@ -14,9 +14,8 @@ CourseActivity  private void createNewPost()
 Add a close button for the pop create post
 post is created successfully
 - duplicate booleans.
-- change the like/dislike buttons (transparent?)
-- smaller font for timestamp
-- carview background colour, and rounded with shadows.
+- change the like/dislike buttons disbaled colour to grey  (transparent?) without the circle, maybe arrows?
+
 
 
 ---------------------- COME BACK TO FIX BOOKING ROOMS --------------------

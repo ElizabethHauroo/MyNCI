@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,7 +20,9 @@ import com.example.mynciapp.Adapter.PostAdapter;
 import com.example.mynciapp.Model.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +42,8 @@ import java.text.ParseException;
 
 public class CourseActivity extends AppCompatActivity {
 
+    BottomNavigationView nav;
+
     private FirebaseAuth mAuth;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userId = user.getUid();
@@ -51,6 +57,8 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+        nav=findViewById(R.id.bottom_navigation_course);
 
         rvMyCoursePosts = findViewById(R.id.rv_myCourse_posts);
         floatingCreatePostButton = findViewById(R.id.floating_create_post_button);
@@ -67,6 +75,34 @@ public class CourseActivity extends AppCompatActivity {
                 showCreatePostDialog();
             }
         });
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.home_bottomnav:
+                        startActivity(new Intent(CourseActivity.this, HomeActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.add_bottomnav:
+                        startActivity(new Intent(CourseActivity.this, AddActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.profile_bottomnav:
+                        startActivity(new Intent(CourseActivity.this, ProfileActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+
+                    default:
+                }
+
+
+
+                return true;
+            }
+        });
+
     }  // ---------------- ON CREATE -----------------------------
 
     private void showCreatePostDialog() {
@@ -146,7 +182,6 @@ public class CourseActivity extends AppCompatActivity {
 
 
     }
-
 
     private void loadFilteredPosts() {
         mAuth = FirebaseAuth.getInstance();

@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,7 +20,9 @@ import com.example.mynciapp.Adapter.PostAdapter;
 import com.example.mynciapp.Model.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +41,8 @@ public class NCIActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userId = user.getUid();
 
+    BottomNavigationView nav;
+
     private RecyclerView rvNciPosts;
     private PostAdapter postAdapter;
     private List<Post> postList;
@@ -47,6 +53,8 @@ public class NCIActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nciactivity);
+
+        nav=findViewById(R.id.bottom_navigation_nci);
 
         rvNciPosts = findViewById(R.id.rv_nci_posts);
         rvNciPosts.setLayoutManager(new LinearLayoutManager(this));
@@ -62,6 +70,33 @@ public class NCIActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showCreatePostDialog(); //same method as CourseActivity
+            }
+        });
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.home_bottomnav:
+                        startActivity(new Intent(NCIActivity.this, HomeActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.add_bottomnav:
+                        startActivity(new Intent(NCIActivity.this, AddActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.profile_bottomnav:
+                        startActivity(new Intent(NCIActivity.this, ProfileActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+
+                    default:
+                }
+
+
+
+                return true;
             }
         });
 
