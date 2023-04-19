@@ -1,20 +1,36 @@
 //remove transition animation
 overridePendingTransition(0, 0);
-----------------------------------------------------------------------
+----------------------------OVERALL TO DO LIST------------------------------------------
+-Admin app?
+    - admin view all bookings
+    - admin parking notification
+-secure password
+    -confirm password?
+    -ncirl credentials only
+    -reset password (admin important!)
+-add profile photo on setup
+-edit account details (setup)
+- fix booking issues
+    -duplicates
+    -deletes
+
 
 ----------------------COME BACK TO FIX------------------------------------
-We need to figure out how to get the current user name to save to the post
-like we did for booking information frag4 create booking info line 107
 
-CourseActivity  private void createNewPost()
-
-
---------------------------CRUD POSTS ------------------------------------
-
-Add a close button for the pop create post
-post is created successfully
 - duplicate booleans.
 - change the like/dislike buttons disbaled colour to grey  (transparent?) without the circle, maybe arrows?
+
+--------------------------CRUD POSTS TO DO------------------------------------
+
+Add a close button for the pop create post (optional)
+
+update/delete post, if it's my own.
+clickeable if it's my own
+like functionality
+
+
+- BUG : only seeing my own post for course? FIXED
+
 
 
 

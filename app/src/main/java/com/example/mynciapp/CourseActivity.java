@@ -201,8 +201,7 @@ public class CourseActivity extends AppCompatActivity {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Post post = postSnapshot.getValue(Post.class);
 
-                            if ((post.getCourse() && post.getPost_courseCode().equals(courseCode)) ||
-                                    (post.getCourse() && post.getGeneral() && post.getPost_courseCode().equals(courseCode))) {
+                            if (post.getCourse() && post.getPost_courseCode().equals(courseCode)) {
                                 postList.add(post);
                             }
                         }
@@ -236,6 +235,7 @@ public class CourseActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
 

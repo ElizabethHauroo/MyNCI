@@ -31,8 +31,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -197,6 +200,21 @@ public class NCIActivity extends AppCompatActivity {
                         postList.add(post);
                     }
                 }
+                // Sort the posts by time that they were posted (newest to oldest)
+                Collections.sort(postList, new Comparator<Post>() {
+                    @Override
+                    public int compare(Post post1, Post post2) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm  |  dd MMM yyyy");
+                        try {
+                            Date date1 = sdf.parse(post1.getPost_timestamp());
+                            Date date2 = sdf.parse(post2.getPost_timestamp());
+                            return date2.compareTo(date1);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            return 0;
+                        }
+                    }
+                });
                 postAdapter.notifyDataSetChanged();
             }
 
