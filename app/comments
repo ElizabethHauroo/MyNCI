@@ -1,12 +1,38 @@
 //remove transition animation
 overridePendingTransition(0, 0);
-----------------------------------------------------------------------
+----------------------------OVERALL TO DO LIST------------------------------------------
+-Admin app?
+    - admin view all bookings
+    - admin parking notification
+-secure password
+    -confirm password?
+    -ncirl credentials only
+    -reset password (admin important!)
+-add profile photo on setup
+-edit account details (setup)
+- fix booking issues
+    -duplicates
+    -deletes
+
 
 ----------------------COME BACK TO FIX------------------------------------
 
+- duplicate booleans.
+- change the like/dislike buttons disbaled colour to grey  (transparent?) without the circle, maybe arrows?
+
+--------------------------CRUD POSTS TO DO------------------------------------
+
+Add a close button for the pop create post (optional)
 
 
---------------------------MAPPING TILE------------------------------------
+like functionality
+round the popups and buttons.
+add close code to myCourse
+
+DONE:
+-update/delete post, if it's my own.
+-clickeable if it's my own
+- BUG : only seeing my own post for course? FIXED
 
 
 
@@ -107,6 +133,42 @@ https://youtu.be/G6z1uLPqRDY
 part 5 complete
 https://youtu.be/G6z1uLPqRDY
 
+-----------------------unused create post ------------------------
+
+/*createdPost.setPost_courseCode(course);
+                        createdPost.setPost_authorName(fullName);
+                        createdPost.setPost_authorId(userId);
+                        createdPost.setPost_id(postId);
+                        createdPost.setPost_content(content);
+                        createdPost.setPost_timestamp(System.currentTimeMillis());*/
+
+                        //----------------------
+
+                        // Get Current User details: UserID and Course to be able to filter list
+                                mAuth = FirebaseAuth.getInstance();
+                                String currentUserID = mAuth.getCurrentUser().getUid();
+                                DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("posts");
+                                postsRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        postList.clear();
+                                        final String courseCode = dataSnapshot.child("course").getValue(String.class);
+
+                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                            Post post = postSnapshot.getValue(Post.class);
+
+                                            if (post.getCourse() && post.getPost_courseCode().equals(courseCode) || (post.getGeneral() && post.getPost_authorId().equals(currentUserID))) {
+                                                postList.add(post);
+                                            }
+                                        }
+                                        postAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        Toast.makeText(CourseActivity.this, "Failed to load posts. Please try again.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
 -----------------------unused booking code ------------------------
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_create_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:id="@+id/linear_create_post_header"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Create New Post"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/biryani_extralight"
+                    android:textSize="24sp"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/create_content_edit_text"
+                android:layout_below="@id/linear_create_post_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="What would you like to say?  "
+                android:inputType="textMultiLine" />
+
+            <LinearLayout
+                android:id="@+id/linear_select_privacy"
+                android:layout_below="@id/create_content_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/create_general_feed_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="General Feed"
+                    />
+
+                <CheckBox
+                    android:id="@+id/create_course_feed_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Course Feed" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_create"
+                android:layout_below="@+id/linear_select_privacy"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/create_post_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="Create Post"
+                    android:textColor="@color/white"
+                    android:background="@color/royal_purple"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

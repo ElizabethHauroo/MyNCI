@@ -70,7 +70,8 @@ public class SetupActivity extends AppCompatActivity {
         String user_name = username.getText().toString();
         String first_name = firstname.getText().toString();
         String last_name = lastname.getText().toString();
-        String course_code = coursecode.getText().toString();
+        String course_code_raw = coursecode.getText().toString();
+        String course_code = course_code_raw.replace(" ",""); //no spaces
 
         if(TextUtils.isEmpty(user_name)){
             Toast.makeText(this, "Please add a Username", Toast.LENGTH_SHORT).show();
