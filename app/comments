@@ -24,11 +24,14 @@ overridePendingTransition(0, 0);
 
 Add a close button for the pop create post (optional)
 
-update/delete post, if it's my own.
-clickeable if it's my own
+
 like functionality
+round the popups and buttons.
+add close code to myCourse
 
-
+DONE:
+-update/delete post, if it's my own.
+-clickeable if it's my own
 - BUG : only seeing my own post for course? FIXED
 
 

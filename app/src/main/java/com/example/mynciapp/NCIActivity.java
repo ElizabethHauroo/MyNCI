@@ -242,9 +242,19 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
         TextView popup_postContent = view.findViewById(R.id.post_content_text_view);
         Button popup_updateBtn = view.findViewById(R.id.mypost_update_btn);
         Button popup_deleteBtn = view.findViewById(R.id.mypost_delete_btn);
+        Button popup_closeBtn = view.findViewById(R.id.popup_dismiss_mypost);
 
         popup_postContent.setText(post.getPost_content());
-        AlertDialog dialog;
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+        popup_closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         popup_updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +263,7 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
                 mypost_update(post.getPost_id(), post.getPost_content(), popup_postContent);
             }
         });
-        dialog = builder.create();
+        //dialog = builder.create();
         popup_deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,7 +271,7 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
                 showDeleteConfirmationPopup(post.getPost_id(), dialog);
             }
         });
-        dialog.show();
+
     }
 
     //show the edit popup
@@ -329,7 +339,6 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
         });
         builder.show();
     }
-
     //deleting the post from firebase
     private void deletePost(String postId) {
         DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
