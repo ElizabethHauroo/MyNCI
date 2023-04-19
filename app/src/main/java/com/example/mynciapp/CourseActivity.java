@@ -253,9 +253,18 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
         TextView popup_postContent = view.findViewById(R.id.post_content_text_view);
         Button popup_updateBtn = view.findViewById(R.id.mypost_update_btn);
         Button popup_deleteBtn = view.findViewById(R.id.mypost_delete_btn);
+        Button popup_closeBtn = view.findViewById(R.id.popup_dismiss_mypost);
 
         popup_postContent.setText(post.getPost_content());
-        AlertDialog dialog;
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        popup_closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         popup_updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,7 +273,7 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
                 mypost_update(post.getPost_id(), post.getPost_content(), popup_postContent);
             }
         });
-        dialog = builder.create();
+
         popup_deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
