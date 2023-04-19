@@ -248,6 +248,7 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
             @Override
             public void onClick(View v) {
                 // Handle post update
+                mypost_update(post.getPost_id(), post.getPost_content(), popup_postContent);
             }
         });
         popup_deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -257,6 +258,52 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
             }
         });
         AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    //show the edit popup
+    private void mypost_update(String postId, String currentContent, TextView postContentView) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.popup_edit_mypost_dialog, null);
+        builder.setView(view);
+        final EditText updateContentEditText = view.findViewById(R.id.edit_post_content_text_view);
+        Button savePostBtn = view.findViewById(R.id.edit_mypost_save_btn);
+        Button cancelPostBtn = view.findViewById(R.id.edit_mypost_cancel_btn);
+
+        updateContentEditText.setText(currentContent);
+        final AlertDialog dialog = builder.create();
+        cancelPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        savePostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String updatedContent = updateContentEditText.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(updatedContent)) {
+                    DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
+                    postsRef.child("post_content").setValue(updatedContent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(NCIActivity.this, "Saved successfully!", Toast.LENGTH_SHORT).show();
+                                postContentView.setText(updatedContent); // Update the content in the showPostPopupDialog
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(NCIActivity.this, "Failed to update the post. Please try again.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(NCIActivity.this, "Please enter the updated content.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         dialog.show();
     }
 
