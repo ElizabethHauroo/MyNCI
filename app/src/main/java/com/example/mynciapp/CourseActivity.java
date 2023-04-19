@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -254,6 +255,7 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
         Button popup_deleteBtn = view.findViewById(R.id.mypost_delete_btn);
 
         popup_postContent.setText(post.getPost_content());
+        AlertDialog dialog;
 
         popup_updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,15 +264,19 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
                 mypost_update(post.getPost_id(), post.getPost_content(), popup_postContent);
             }
         });
+        dialog = builder.create();
         popup_deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle post delete
+                // Start delete sequence, show the popup first
+                showDeleteConfirmationPopup(post.getPost_id(), dialog);
+
             }
         });
-        AlertDialog dialog = builder.create();
+
         dialog.show();
     }
+
 
     //show the edit popup
     private void mypost_update(String postId, String currentContent, TextView postContentView) {
@@ -318,5 +324,40 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
         dialog.show();
     }
 
+    //delete confirm popup
+    private void showDeleteConfirmationPopup(String postId, AlertDialog parentDialog) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Post");
+        builder.setMessage("Are you sure you want to delete this post?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deletePost(postId);
+                parentDialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    //deleting the post from firebase
+    private void deletePost(String postId) {
+        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
+        postsRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(CourseActivity.this, "Post deleted successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CourseActivity.this, "Failed to delete the post. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
 }
