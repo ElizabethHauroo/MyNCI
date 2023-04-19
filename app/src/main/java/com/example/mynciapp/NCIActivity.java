@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mynciapp.Adapter.PostAdapter;
@@ -39,7 +40,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class NCIActivity extends AppCompatActivity {
+public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPostClickListener {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userId = user.getUid();
@@ -62,7 +63,7 @@ public class NCIActivity extends AppCompatActivity {
         rvNciPosts = findViewById(R.id.rv_nci_posts);
         rvNciPosts.setLayoutManager(new LinearLayoutManager(this));
         postList = new ArrayList<>();
-        postAdapter = new PostAdapter(this, postList);
+        postAdapter = new PostAdapter(this, postList,this);
         rvNciPosts.setAdapter(postAdapter);
 
         floatingCreatePostButton = findViewById(R.id.floating_nci_create_post_button);
@@ -224,4 +225,39 @@ public class NCIActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onPostClick(Post post) {
+        if (userId.equals(post.getPost_authorId())) {
+            showPostPopupDialog(post);
+        }
+    }
+    //same as MyCourseActivity
+    private void showPostPopupDialog(Post post) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.popup_mypost_dialog, null);
+        builder.setView(view);
+
+        TextView popup_postContent = view.findViewById(R.id.post_content_text_view);
+        Button popup_updateBtn = view.findViewById(R.id.mypost_update_btn);
+        Button popup_deleteBtn = view.findViewById(R.id.mypost_delete_btn);
+
+        popup_postContent.setText(post.getPost_content());
+
+        popup_updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle post update
+            }
+        });
+        popup_deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle post delete
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

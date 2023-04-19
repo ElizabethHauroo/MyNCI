@@ -16,6 +16,6 @@
         android:textAlignment="center"
         android:fontFamily="@font/biryani_extralight"
         android:textSize="24sp"
-        android:text="BSCHSD4"/>
+        android:text="My Course"/>
 
 </androidx.appcompat.widget.Toolbar>

@@ -19,10 +19,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private Context context;
     private List<Post> postList;
-
+    private OnPostClickListener onPostClickListener;
+    /*
     public PostAdapter(Context context, List<Post> postList) {
         this.context = context;
         this.postList = postList;
+    }*/
+
+    public PostAdapter(Context context, List<Post> postList, OnPostClickListener onPostClickListener) {
+        this.context = context;
+        this.postList = postList;
+        this.onPostClickListener = onPostClickListener;
     }
 
     @NonNull
@@ -41,6 +48,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.post_course_textView.setText(post.getPost_courseCode());
         holder.post_content_textView.setText(post.getPost_content());
         holder.post_date_time_textView.setText(post.getPost_timestamp());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPostClickListener.onPostClick(post);
+            }
+        });
+
 
     }
 
@@ -64,4 +79,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             post_dislike_btn = itemView.findViewById(R.id.post_dislike_btn);
         }
     }
+
+    //for clicking on a post
+    public interface OnPostClickListener {
+        void onPostClick(Post post);
+    }
+
 }
