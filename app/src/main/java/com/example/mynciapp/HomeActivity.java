@@ -196,10 +196,12 @@ public class HomeActivity extends AppCompatActivity {
     private void UserMenuSelector(MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
-                Toast.makeText(this, "This is Home", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                overridePendingTransition(0, 0);
                 break;
             case R.id.nav_settings:
-                Toast.makeText(this, "This is Settings", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, SettingActivity.class));
+                overridePendingTransition(0, 0);
                 break;
             case R.id.nav_logout:
                 mAuth.signOut();

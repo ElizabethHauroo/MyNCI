@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Account Settings"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+
+        android:textColor="@color/battleship_grey"
+        android:textSize="24sp"
+        android:textAlignment="center"/>
+
+</androidx.appcompat.widget.Toolbar>
