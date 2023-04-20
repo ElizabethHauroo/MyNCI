@@ -50,7 +50,7 @@
                 <LinearLayout
                     android:id="@+id/Linear_p_name"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="38dp"
                     android:orientation="horizontal"
                     android:layout_gravity="center_horizontal">
 
