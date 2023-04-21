@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/white_faded_bg"
+
     tools:context=".HomeActivity">
 <!--
     <View
@@ -86,14 +86,28 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
                         app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
+
+                        <LinearLayout
+                            android:id="@+id/card_title_map"
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Map"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="20dp"
                             android:orientation="vertical">
 
                             <ImageView
@@ -126,19 +140,35 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
                         app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
 
                         <LinearLayout
+                            android:id="@+id/card_title_schedule"
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Book a Room"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_below="@id/card_title_schedule"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="16dp"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/schedule" />
 
@@ -166,14 +196,30 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
                         app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
 
                         <LinearLayout
+                            android:id="@+id/card_title_nci"
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="General Feed"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_below="@id/card_title_nci"
+                            android:id="@+id/linear_card_nci"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="16dp"
                             android:orientation="vertical">
 
                             <ImageView
@@ -182,16 +228,9 @@
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/nciflag" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Test"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
                         </LinearLayout>
+
+
 
                     </androidx.cardview.widget.CardView>
 
@@ -206,14 +245,28 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
                         app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="24dp"
                         app:cardElevation="8dp">
+
+                        <LinearLayout
+                            android:id="@+id/card_title_course"
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Course Feed"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal|center_vertical"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="16dp"
                             android:orientation="vertical">
 
                             <ImageView
@@ -234,6 +287,7 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
 
                 </GridLayout>
 
