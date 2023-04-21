@@ -61,6 +61,14 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:0.4'
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
+
+
+
+
+
 
 
 
