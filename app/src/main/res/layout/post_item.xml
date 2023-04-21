@@ -41,19 +41,24 @@
 
 
     </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_post_content"
-        android:layout_below="@id/rel_post_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="120dp"
-        android:layout_margin="10dp">
+        android:layout_below="@id/rel_post_header"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:maxHeight="120dp">
+
         <TextView
             android:id="@+id/post_content_textView"
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="This is a sample of the text within a post"/>
+            android:layout_margin="10dp"
+            android:text="This is a sample of the text within a post" />
 
     </androidx.cardview.widget.CardView>
 

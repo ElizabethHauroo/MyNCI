@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 //import android.widget.Toolbar;
 
@@ -30,8 +31,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -41,9 +45,13 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     BottomNavigationView nav;
 
+    private CircleImageView NavProfileImage;
+    private TextView NavProfileUserName;
+
     private CardView map, schedule, nci, course;
 
     private FirebaseAuth mAuth;
+    private String currentUserID;
     private DatabaseReference UsersRef;
 
 
@@ -55,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         mAuth=FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users"); // creating the users node, where we will be sotring all the user's information - unique uid
 
 
@@ -62,13 +71,43 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("MyNCI");
 
+
+
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(HomeActivity.this, drawerLayout, R.string.drawer_open, R.string.drawer_close); //for the hamburger menu
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View navView =navigationView.inflateHeaderView(R.layout.navigation_header); //adding the header to the sidebar
+        NavProfileImage=(CircleImageView)navView.findViewById(R.id.nav_profileImage); //we have to parse Nav View here
+        NavProfileUserName = (TextView)navView.findViewById(R.id.nav_profilename);
+
+        UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChild("firstname")&&snapshot.hasChild("lastname")){
+                    String firstname = snapshot.child("firstname").getValue().toString();
+                    String lastname = snapshot.child("lastname").getValue().toString();
+                    String fullname = firstname + " "+ lastname;
+                    NavProfileUserName.setText(fullname);
+                }
+
+                if(snapshot.hasChild("profileimage")){
+                    String image = snapshot.child("profileimage").getValue().toString();
+                    //let's display them on the navigation view
+                    Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(NavProfileImage);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         nav=findViewById(R.id.bottom_navigation);
 

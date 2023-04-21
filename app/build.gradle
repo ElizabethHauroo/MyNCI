@@ -41,6 +41,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-database:19.6.0'
     implementation 'com.google.firebase:firebase-firestore:23.0.4'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.android.car.ui:car-ui-lib:2.0.0'
@@ -59,6 +61,14 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:0.4'
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
+
+
+
+
+
 
 
 
