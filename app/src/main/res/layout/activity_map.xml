@@ -16,6 +16,7 @@
         <include
             android:id="@+id/profile_page_toolbar"
             layout="@layout/app_bar_layout" />
+
         <!--DROPDOWN LINEAR-->
         <LinearLayout
             android:id="@+id/spinner_layout"
@@ -78,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
-                android:background="@color/royal_purple"
+                android:background="@color/battleship_grey"
                 android:textColor="@color/white"
                 android:text="1st"/>
 
@@ -88,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
-                android:background="@color/royal_purple"
+                android:background="@color/battleship_grey"
                 android:textColor="@color/white"
                 android:text="2nd"/>
 
@@ -98,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
-                android:background="@color/royal_purple"
+                android:background="@color/battleship_grey"
                 android:textColor="@color/white"
                 android:text="3rd"/>
 
@@ -108,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
-                android:background="@color/royal_purple"
+                android:background="@color/battleship_grey"
                 android:textColor="@color/white"
                 android:text="4th"/>
 

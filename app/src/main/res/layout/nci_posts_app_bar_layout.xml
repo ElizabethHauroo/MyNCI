@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/nci_page_bar_toolbar"
-    android:background="@color/royal_purple"
+    android:background="@color/battleship_grey"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <TextView
@@ -14,6 +14,7 @@
         android:textAlignment="center"
         android:fontFamily="@font/biryani_extralight"
         android:textSize="24sp"
+        android:textColor="@color/white"
         android:text="NCI FEED"/>
 
 </androidx.appcompat.widget.Toolbar>

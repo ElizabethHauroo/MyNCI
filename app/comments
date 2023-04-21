@@ -25,7 +25,7 @@ overridePendingTransition(0, 0);
 
 update password
 Setup profile picture at register (set a default to avoid crash?)
-change username to student number on Setup Activity
+change username to student number on Setup Activity + GUI there
 update profile picture
 
 minimalistic gui?
