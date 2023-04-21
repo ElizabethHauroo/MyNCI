@@ -17,6 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,6 +41,11 @@ public class SettingActivity extends AppCompatActivity {
     BottomNavigationView nav;
     Button update_courseBTN, update_pictureBTN, change_passwordBTN;
     TextView settings_fullname_txt, settings_studentNumber_txt, settings_course_txt;
+
+    private CircleImageView profilePicture;
+    private StorageReference userProfileImageRef;
+
+
 
     private FirebaseAuth mAuth;
 
@@ -72,6 +82,12 @@ public class SettingActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
+        String currentUserID = mAuth.getCurrentUser().getUid();
+        profilePicture = findViewById(R.id.settings_my_profile_picture);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        userProfileImageRef = storage.getReference().child("Profile Images").child(currentUserID + ".jpg");
 
         settings_fullname_txt=findViewById(R.id.settings_fullname_txt);
         settings_studentNumber_txt=findViewById(R.id.settings_studentNumber_txt);
@@ -116,6 +132,11 @@ public class SettingActivity extends AppCompatActivity {
                 settings_course_txt.setText(course);
                 final String username = snapshot.child("username").getValue(String.class);
                 settings_studentNumber_txt.setText(username);
+
+                if (snapshot.hasChild("profileimage")) {
+                    String profileImageUrl = snapshot.child("profileimage").getValue().toString();
+                    Picasso.get().load(profileImageUrl).placeholder(R.drawable.defaultprofile).into(profilePicture);
+                }
 
             }
 

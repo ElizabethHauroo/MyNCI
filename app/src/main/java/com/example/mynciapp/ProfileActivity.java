@@ -12,6 +12,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+
 import com.example.mynciapp.Adapter.MyProfileBookingsAdapter;
 import com.example.mynciapp.Common.SpacesItemDecoration;
 import com.example.mynciapp.Model.BookingInformation;
@@ -41,6 +47,10 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private TextView mFullNameTextView, mCourseTextView, mUsernameTextView;
 
+    private CircleImageView profilePicture;
+    private StorageReference userProfileImageRef;
+
+
     private RecyclerView rvBookings;
     private MyProfileBookingsAdapter bookingAdapter;
     private List<BookingInformation> userBookings;
@@ -60,6 +70,11 @@ public class ProfileActivity extends AppCompatActivity {
         mFullNameTextView = findViewById(R.id.fullname_txt_profile_page);
         mUsernameTextView = findViewById(R.id.username_txt_profile_page);
         mCourseTextView = findViewById(R.id.course_txt_profile_page);
+
+        profilePicture = findViewById(R.id.profile_my_profile_picture);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        userProfileImageRef = storage.getReference().child("Profile Images").child(currentUserID + ".jpg");
+
 
 
         rvBookings = findViewById(R.id.rv_mybookings);
@@ -113,6 +128,11 @@ public class ProfileActivity extends AppCompatActivity {
                 final String usernameRaw = snapshot.child("username").getValue(String.class);
                 String username = "@"+usernameRaw;
                 mUsernameTextView.setText(username);
+
+                if (snapshot.hasChild("profileimage")) {
+                    String profileImageUrl = snapshot.child("profileimage").getValue().toString();
+                    Picasso.get().load(profileImageUrl).placeholder(R.drawable.defaultprofile).into(profilePicture);
+                }
 
             }
 
