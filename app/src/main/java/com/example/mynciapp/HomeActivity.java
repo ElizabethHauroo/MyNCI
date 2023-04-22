@@ -162,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.add_bottomnav:
-                        startActivity(new Intent(HomeActivity.this, AddActivity.class));
+                        startActivity(new Intent(HomeActivity.this, AdminActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:
