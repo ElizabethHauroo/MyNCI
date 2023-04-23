@@ -150,6 +150,7 @@ public class SetupActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()) {
                         Toast.makeText(SetupActivity.this, "Your information was saved sucessfully", Toast.LENGTH_LONG).show();
+                        //if statement for admin or not?
                         SendUsertoHome();
                         loadingBar.dismiss();
                     }else {

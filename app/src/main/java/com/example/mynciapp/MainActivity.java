@@ -1,11 +1,14 @@
 package com.example.mynciapp;
 
+import static androidx.constraintlayout.widget.StateSet.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,6 +21,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -101,7 +109,26 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         progressDialog.dismiss();
-                        sendHomeActivity();
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getCurrentUser().getUid());
+
+                        // Read the isAdmin field of the current user
+                        userRef.child("isAdmin").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Boolean isAdmin = dataSnapshot.getValue(Boolean.class);
+                                if (isAdmin != null && isAdmin) {
+                                    sendAdminActivity(); // If the user is an admin, send them to the AdminActivity
+                                } else {
+                                    sendHomeActivity(); // If the user is not an admin, send them to the HomeActivity
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Log any errors or handle them as needed
+                                Log.w(TAG, "Failed to read isAdmin:", databaseError.toException());
+                            }
+                        });
                         Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     }else{
                         progressDialog.dismiss();
@@ -115,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
         }// else
 
 
+    }
+
+    private void sendAdminActivity() {
+        startActivity(new Intent(MainActivity.this, AdminActivity.class));
     }
 
     private void sendHomeActivity() {

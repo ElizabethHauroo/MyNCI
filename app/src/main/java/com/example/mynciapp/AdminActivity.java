@@ -27,6 +27,13 @@ public class AdminActivity extends AppCompatActivity {
     private Button admin_logout_btn;
 
     @Override
+    public void onBackPressed() {
+        // leaving this blank to disable the back button
+        // this means that once admin is logged in, the only page they will ever see is AdminActivity
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
