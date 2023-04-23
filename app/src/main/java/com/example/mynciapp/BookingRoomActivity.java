@@ -45,6 +45,13 @@ public class BookingRoomActivity extends AppCompatActivity {
         Fragment2Booking fragment2 = new Fragment2Booking();
         Fragment3Booking fragment3 = new Fragment3Booking();
 
+        fragment2.setOnTimeslotSelectedListener(new Fragment2Booking.OnTimeslotSelectedListener() {
+            @Override
+            public void onTimeslotSelected(TimeslotBooking selectedTimeslot, BookingReason bookingReason) {
+                onTimeSlotAndBookingReasonSelected(selectedTimeslot, bookingReason);
+            }
+        });
+
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @NonNull
             @Override
@@ -78,11 +85,12 @@ public class BookingRoomActivity extends AppCompatActivity {
         stepView.go(0, true);
     }
 
+
     public void onRoomSelected(RoomBooking room) {
         selectedRoom = room;
-        // Navigate to the next fragment (Step 2)
+        /* Navigate to the next fragment (Step 2)
         Fragment2Booking fragment2= new Fragment2Booking();
-        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment2).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment2).addToBackStack(null).commit(); */
         viewPager.setCurrentItem(1);
 
     }
@@ -90,11 +98,19 @@ public class BookingRoomActivity extends AppCompatActivity {
     public void onTimeSlotAndBookingReasonSelected(TimeslotBooking timeSlot, BookingReason bookingReason) {
         selectedTimeSlot = timeSlot;
         selectedBookingReason = bookingReason;
-        // Navigate to the next fragment (Step 3)
-        Fragment3Booking fragment3= new Fragment3Booking();
-        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment3).addToBackStack(null).commit();
+
+        Fragment3Booking fragment3 = new Fragment3Booking();
+
+        Bundle args = new Bundle();
+        args.putSerializable("selectedTimeslot", selectedTimeSlot);
+        args.putSerializable("bookingReason", selectedBookingReason);
+        fragment3.setArguments(args);
+
+        /* Navigate to the next fragment (Step 3)
+        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment3).addToBackStack(null).commit(); */
         viewPager.setCurrentItem(2);
     }
+
     public RoomBooking getSelectedRoom() {
         return selectedRoom;
     }

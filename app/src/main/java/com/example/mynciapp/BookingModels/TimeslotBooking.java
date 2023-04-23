@@ -1,11 +1,14 @@
 package com.example.mynciapp.BookingModels;
 
-public class TimeslotBooking {
+import java.io.Serializable;
+
+public class TimeslotBooking implements Serializable {
 
     private String bookingDate;
     private String bookingTime;
     private int slotNumber;
     private boolean isBooked;
+    private BookingReason bookingReason;
 
     public TimeslotBooking() {
     }
@@ -15,6 +18,14 @@ public class TimeslotBooking {
         this.bookingTime = bookingTime;
         this.slotNumber = slotNumber;
         this.isBooked = isBooked;
+    }
+
+    public TimeslotBooking(String bookingDate, String bookingTime, int slotNumber, boolean isBooked, BookingReason bookingReason) {
+        this.bookingDate = bookingDate;
+        this.bookingTime = bookingTime;
+        this.slotNumber = slotNumber;
+        this.isBooked = isBooked;
+        this.bookingReason = bookingReason;
     }
 
     public String getBookingDate() {
@@ -47,5 +58,13 @@ public class TimeslotBooking {
 
     public void setBooked(boolean booked) {
         isBooked = booked;
+    }
+
+    public BookingReason getBookingReason() {
+        return bookingReason;
+    }
+
+    public void setBookingReason(BookingReason bookingReason) {
+        this.bookingReason = bookingReason;
     }
 }

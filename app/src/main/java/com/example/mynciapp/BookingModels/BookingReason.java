@@ -1,5 +1,7 @@
 package com.example.mynciapp.BookingModels;
 
-public enum BookingReason {
+import java.io.Serializable;
+
+public enum BookingReason implements Serializable {
     MEETING, STUDY
 }
