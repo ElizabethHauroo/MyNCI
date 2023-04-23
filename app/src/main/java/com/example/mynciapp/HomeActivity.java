@@ -209,10 +209,10 @@ public class HomeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean isFull = dataSnapshot.getValue(Boolean.class);
                 if (isFull != null && isFull) {
-                    parkingStatus.setText("Parking is FULL");
+                    parkingStatus.setText("Parking is currently FULL");
                     parkingStatus.setTextColor(getResources().getColor(R.color.imperial_red));
                 } else {
-                    parkingStatus.setText("Parking Spaces Available");
+                    parkingStatus.setText("Parking Spaces are Available");
                     parkingStatus.setTextColor(getResources().getColor(R.color.lime_green));
                 }
             }
@@ -282,9 +282,6 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.nav_home:
                 startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                 overridePendingTransition(0, 0);
-                break;
-            case R.id.nav_parking:
-
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(HomeActivity.this, SettingActivity.class));
