@@ -1,105 +1,28 @@
 //remove transition animation
 overridePendingTransition(0, 0);
 ----------------------------OVERALL TO DO LIST------------------------------------------
--Admin app?
-admin credentials:
 
+admin credentials:
 mynci-admin@ncirl.ie
 password: I8kNCIzbHbf?$hN
 
     - admin view all bookings
-    - admin parking notification
 -secure password
     -confirm password?
     -ncirl credentials only
     -reset password (admin important!)
--add profile photo on setup
 - add the maps
 -edit account details (setup)
 - fix booking issues
     -duplicates
     -deletes
----------------------------------------------------
--admin logout functionality
+----------------------REDOING BOOKING ACTIVITY-----------------------------
+
+
+---------------------------------------------------------------------------
+
 - all bookings recycler view (today only)
 
-<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:paddingLeft="20dp">
-
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/user" />
-
-        <TextView
-            android:id="@+id/frag3_user_name_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jane Doe"
-            android:layout_marginLeft="15dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            />
-
-    </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="20dp">
-
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/calendar" />
-
-        <TextView
-            android:id="@+id/frag3_booking_time_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10:00 on 14/04/23"
-            android:layout_marginLeft="15dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            />
-
-    </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:paddingLeft="20dp">
-
-        <ImageView
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/meeting" />
-
-        <TextView
-            android:id="@+id/frag3_booking_reason_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Study"
-            android:layout_marginLeft="15dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
-
-    </LinearLayout>
 
 ----------------------COME BACK TO FIX------------------------------------
 

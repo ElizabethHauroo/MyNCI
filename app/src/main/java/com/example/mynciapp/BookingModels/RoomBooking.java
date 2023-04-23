@@ -5,14 +5,16 @@ public class RoomBooking {
         private String size;
         private int roomNumber;
         private String description;
+        private String roomID;
 
         public RoomBooking() {
         }
 
-        public RoomBooking(String size, int roomNumber, String description) {
+        public RoomBooking(String size, int roomNumber, String description, String roomID) {
                 this.size = size;
                 this.roomNumber = roomNumber;
                 this.description = description;
+                this.roomID = roomID;
         }
 
         public String getSize() {
@@ -37,5 +39,13 @@ public class RoomBooking {
 
         public void setDescription(String description) {
                 this.description = description;
+        }
+
+        public String getRoomID() {
+                return roomID;
+        }
+
+        public void setRoomID(String roomID) {
+                this.roomID = roomID;
         }
 }
