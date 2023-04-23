@@ -8,12 +8,14 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mynciapp.BookingAdapters.RoomAdapter;
 import com.example.mynciapp.BookingModels.RoomBooking;
 import com.example.mynciapp.BookingRoomActivity;
+import com.example.mynciapp.Common.SpacesItemDecoration;
 import com.example.mynciapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,8 +42,10 @@ public class Fragment1Booking extends Fragment {
         nextButton = view.findViewById(R.id.nextBTN_frag1);
         firestore = FirebaseFirestore.getInstance();
 
+        initView();
         fetchRooms();
 
+        nextButton.setEnabled(false);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +57,13 @@ public class Fragment1Booking extends Fragment {
 
         return view;
     }//onCreate
+
+    private void initView() {
+
+        roomsRecyclerView.setHasFixedSize(true);
+        roomsRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        roomsRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
+    }
 
     private void fetchRooms() {
         firestore.collection("BookableRooms").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -76,12 +87,13 @@ public class Fragment1Booking extends Fragment {
         RoomAdapter.OnRoomClickListener roomClickListener = new RoomAdapter.OnRoomClickListener() {
             @Override
             public void onRoomClick(int position) {
+
                 selectedRoom = rooms.get(position);
+                nextButton.setEnabled(true);
             }
         };
 
         roomAdapter = new RoomAdapter(rooms, roomClickListener);
-        roomsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         roomsRecyclerView.setAdapter(roomAdapter);
     }
 

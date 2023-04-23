@@ -3,14 +3,14 @@ package com.example.mynciapp.BookingModels;
 public class RoomBooking {
 
         private String size;
-        private int roomNumber;
+        private String roomNumber;
         private String description;
         private String roomID;
 
         public RoomBooking() {
         }
 
-        public RoomBooking(String size, int roomNumber, String description, String roomID) {
+        public RoomBooking(String size, String roomNumber, String description, String roomID) {
                 this.size = size;
                 this.roomNumber = roomNumber;
                 this.description = description;
@@ -25,11 +25,11 @@ public class RoomBooking {
                 this.size = size;
         }
 
-        public int getRoomNumber() {
+        public String getRoomNumber() {
                 return roomNumber;
         }
 
-        public void setRoomNumber(int roomNumber) {
+        public void setRoomNumber(String roomNumber) {
                 this.roomNumber = roomNumber;
         }
 

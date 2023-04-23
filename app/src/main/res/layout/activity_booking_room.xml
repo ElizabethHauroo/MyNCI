@@ -10,7 +10,9 @@
         android:id="@+id/rel_stepview_booking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentTop="true"
+        >
 
         <com.shuhart.stepview.StepView
             android:id="@+id/step_view_booking"
@@ -38,15 +40,16 @@
         android:id="@+id/for_booking_frags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:layout_below="@+id/rel_stepview_booking"
         android:layout_above="@+id/bottom_navigation_booking">
 
-        <!--
+
         <com.example.mynciapp.Common.NonSwipeViewPager
             android:id="@+id/view_pager_booking"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />-->
+            />
 
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
