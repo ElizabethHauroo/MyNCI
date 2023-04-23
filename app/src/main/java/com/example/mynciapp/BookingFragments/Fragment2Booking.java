@@ -3,6 +3,7 @@ package com.example.mynciapp.BookingFragments;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,10 +168,10 @@ public class Fragment2Booking extends Fragment {
             nextButton.setBackgroundColor(getResources().getColor(R.color.platinum_grey));
             nextButton.setTextColor(ContextCompat.getColor(context, R.color.battleship_grey));
         }
+        Log.d("Fragment2Booking", "onNextButtonClicked called");
     }
 
-
-            private List<TimeslotBooking> generateDailyTimeslots() {
+    private List<TimeslotBooking> generateDailyTimeslots() {
                 List<TimeslotBooking> timeslots = new ArrayList<>();
                 String[] timeList = {"09:00 - 10:00", "11:00 - 12:00", "12:00 - 13:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00"};
 

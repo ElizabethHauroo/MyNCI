@@ -126,7 +126,7 @@ public class ProfileActivity extends AppCompatActivity {
                 final String course = snapshot.child("course").getValue(String.class);
                 mCourseTextView.setText(course);
                 final String usernameRaw = snapshot.child("username").getValue(String.class);
-                String username = "@"+usernameRaw;
+                String username = ""+usernameRaw;
                 mUsernameTextView.setText(username);
 
                 if (snapshot.hasChild("profileimage")) {

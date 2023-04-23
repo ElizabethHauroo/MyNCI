@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.mynciapp.BookingFragments.Fragment1Booking;
 import com.example.mynciapp.BookingFragments.Fragment2Booking;
@@ -104,8 +105,10 @@ public class BookingRoomActivity extends AppCompatActivity {
         Bundle args = new Bundle();
         args.putSerializable("selectedTimeslot", selectedTimeSlot);
         args.putSerializable("bookingReason", selectedBookingReason);
+        args.putSerializable("selectedRoom", selectedRoom);
         fragment3.setArguments(args);
 
+        Log.d("BookingRoomActivity", "onTimeSlotAndBookingReasonSelected called");
         /* Navigate to the next fragment (Step 3)
         getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment3).addToBackStack(null).commit(); */
         viewPager.setCurrentItem(2);

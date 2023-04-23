@@ -1,6 +1,8 @@
 package com.example.mynciapp.BookingModels;
 
-public class RoomBooking {
+import java.io.Serializable;
+
+public class RoomBooking implements Serializable {
 
         private String size;
         private String roomNumber;
