@@ -66,6 +66,7 @@
                 </RelativeLayout>
 
                 <GridLayout
+                    android:id="@+id/home_gridlayout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="6"
@@ -290,6 +291,21 @@
 
 
                 </GridLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/parking_status_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parking Status"
+                        android:textSize="28sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
 
 
             </LinearLayout>

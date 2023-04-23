@@ -1,5 +1,7 @@
 package com.example.mynciapp;
 
+import static androidx.constraintlayout.widget.StateSet.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -54,6 +57,9 @@ public class HomeActivity extends AppCompatActivity {
     private String currentUserID;
     private DatabaseReference UsersRef;
 
+    private TextView parkingStatus;
+    private DatabaseReference parkingRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +85,11 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        parkingStatus = findViewById(R.id.parking_status_home);
+        parkingRef = FirebaseDatabase.getInstance().getReference("parking");
+
+
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View navView =navigationView.inflateHeaderView(R.layout.navigation_header); //adding the header to the sidebar
@@ -144,6 +155,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        ParkingToggle();
+
+
+
+
         // Navigation Side + Bottom
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -162,7 +178,7 @@ public class HomeActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.add_bottomnav:
-                        startActivity(new Intent(HomeActivity.this, AddActivity.class));
+                        startActivity(new Intent(HomeActivity.this, AdminActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:
@@ -184,6 +200,30 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }//onCreate
+
+    private void ParkingToggle() {
+
+        // Read parking state from the database and set the UI accordingly
+        parkingRef.child("isFull").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean isFull = dataSnapshot.getValue(Boolean.class);
+                if (isFull != null && isFull) {
+                    parkingStatus.setText("Parking is FULL");
+                    parkingStatus.setTextColor(getResources().getColor(R.color.imperial_red));
+                } else {
+                    parkingStatus.setText("Parking Spaces Available");
+                    parkingStatus.setTextColor(getResources().getColor(R.color.lime_green));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Log any errors or handle them as needed
+                Log.w(TAG, "Failed to read parking status:", databaseError.toException());
+            }
+        });
+    }
 
     /*
     @Override
@@ -242,6 +282,9 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.nav_home:
                 startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                 overridePendingTransition(0, 0);
+                break;
+            case R.id.nav_parking:
+
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(HomeActivity.this, SettingActivity.class));
