@@ -7,6 +7,11 @@
         android:icon="@drawable/home"/>
 
     <item
+        android:id="@+id/nav_parking"
+        android:title="Parking Status"
+        android:icon="@drawable/car"/>
+
+    <item
         android:id="@+id/nav_settings"
         android:title="Settings"
         android:icon="@drawable/setting"/>

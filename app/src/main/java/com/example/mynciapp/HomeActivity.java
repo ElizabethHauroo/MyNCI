@@ -155,27 +155,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        ParkingToggle();
 
-        // Read parking state from the database and set the UI accordingly
-        parkingRef.child("isFull").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean isFull = dataSnapshot.getValue(Boolean.class);
-                if (isFull != null && isFull) {
-                    parkingStatus.setText("Parking is FULL");
-                    parkingStatus.setTextColor(getResources().getColor(R.color.imperial_red));
-                } else {
-                    parkingStatus.setText("Parking Spaces Available");
-                    parkingStatus.setTextColor(getResources().getColor(R.color.lime_green));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Log any errors or handle them as needed
-                Log.w(TAG, "Failed to read parking status:", databaseError.toException());
-            }
-        });
 
 
 
@@ -219,6 +200,30 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }//onCreate
+
+    private void ParkingToggle() {
+
+        // Read parking state from the database and set the UI accordingly
+        parkingRef.child("isFull").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean isFull = dataSnapshot.getValue(Boolean.class);
+                if (isFull != null && isFull) {
+                    parkingStatus.setText("Parking is FULL");
+                    parkingStatus.setTextColor(getResources().getColor(R.color.imperial_red));
+                } else {
+                    parkingStatus.setText("Parking Spaces Available");
+                    parkingStatus.setTextColor(getResources().getColor(R.color.lime_green));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Log any errors or handle them as needed
+                Log.w(TAG, "Failed to read parking status:", databaseError.toException());
+            }
+        });
+    }
 
     /*
     @Override
@@ -277,6 +282,9 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.nav_home:
                 startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                 overridePendingTransition(0, 0);
+                break;
+            case R.id.nav_parking:
+
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(HomeActivity.this, SettingActivity.class));
