@@ -41,14 +41,17 @@ public class Fragment2Booking extends Fragment {
     private RadioGroup bookingReasonRadioGroup;
     private RadioButton meetingRadioButton;
     private RadioButton studyRadioButton;
+    private boolean radioButtonSelected = false;
+    private boolean timeslotSelected = false;
     private MaterialCalendarView calendarView;
     private RecyclerView timeslotRecyclerView;
     private Button previousButton;
     private Button nextButton;
+    private String selectedDateString;
     private TimeslotBooking selectedTimeslot;
     private OnTimeslotSelectedListener onTimeslotSelectedListener;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd_MM_yyyy");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
 
     @Nullable
@@ -64,13 +67,13 @@ public class Fragment2Booking extends Fragment {
         timeslotRecyclerView = view.findViewById(R.id.frag2_rv_timeslots);
         previousButton = view.findViewById(R.id.frag2_previousBTN);
         nextButton = view.findViewById(R.id.frag2_nextBTN);
+        nextButton.setEnabled(false);
 
         bookingReasonRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (selectedTimeslot != null) {
-                    updateNextButtonState(bookingReasonRadioGroup.getCheckedRadioButtonId() != -1);
-                }
+                radioButtonSelected = true;
+                updateNextButtonState();
             }
         });
 
@@ -97,6 +100,7 @@ public class Fragment2Booking extends Fragment {
                     Fragment3Booking fragment3Booking = new Fragment3Booking();
 
                     Bundle args = new Bundle();
+                    args.putString("selectedDateString", selectedDateString);
                     args.putSerializable("selectedTimeslot", selectedTimeslot);
                     args.putSerializable("bookingReason", bookingReason);
                     args.putSerializable("selectedRoom", ((BookingRoomActivity) getActivity()).getSelectedRoom());
@@ -111,7 +115,7 @@ public class Fragment2Booking extends Fragment {
         });
 
 
-        updateNextButtonState(false);
+        updateNextButtonState();
         initCalendarView();
 
 
@@ -130,7 +134,7 @@ public class Fragment2Booking extends Fragment {
             @Override
             public void onTimeslotClick(int position) {
                 selectedTimeslot = dailyTimeslots.get(position);
-                updateNextButtonState(bookingReasonRadioGroup.getCheckedRadioButtonId() != -1);
+                updateNextButtonState();
             }
         });
         timeslotRecyclerView.setAdapter(timeslotAdapter);
@@ -139,9 +143,11 @@ public class Fragment2Booking extends Fragment {
         int calendarDayHeight = (int) getResources().getDimension(R.dimen.calendar_day_height);
         int calendarHeight = calendarDayHeight * 7; // Show one week only
 
-        // Set the calendar view to today's date
+        /* Set the calendar view to today's date
         Calendar calendar = Calendar.getInstance();
-        calendarView.setSelectedDate(calendar);
+        calendarView.setSelectedDate(calendar);*/
+        Calendar today = Calendar.getInstance();
+        calendarView.setSelectedDate(today);
 
         calendarView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, calendarHeight));
 
@@ -157,17 +163,20 @@ public class Fragment2Booking extends Fragment {
 
                 if (Common.bookingDate.getTimeInMillis() != selectedCalendar.getTimeInMillis()) {
                     Common.bookingDate = selectedCalendar;
+                    selectedDateString = simpleDateFormat.format(selectedCalendar.getTime());
                     String selectedDate = simpleDateFormat.format(selectedCalendar.getTime());
                     updateTimeslotsForSelectedDate(selectedDate);
+                    timeslotSelected = false;
+                    updateNextButtonState();
                 }
 
             }
         });
     }
 
-    private void updateNextButtonState(boolean timeslotSelected) {
+    private void updateNextButtonState() {
         Context context = getContext();
-        if (timeslotSelected) {
+        if (radioButtonSelected && timeslotSelected) {
             nextButton.setEnabled(true);
             nextButton.setBackgroundColor(getResources().getColor(R.color.royal_purple));
             nextButton.setTextColor(Color.WHITE);
@@ -200,8 +209,9 @@ public class Fragment2Booking extends Fragment {
         BookingTimeslotAdapter timeslotAdapter = new BookingTimeslotAdapter(dailyTimeslots, new BookingTimeslotAdapter.OnTimeslotClickListener() {
             @Override
             public void onTimeslotClick(int position) {
-                // Update the state of the next button when a time slot is clicked
-                updateNextButtonState(true);
+                selectedTimeslot = dailyTimeslots.get(position);
+                timeslotSelected = true;
+                updateNextButtonState();
             }
         });
         timeslotRecyclerView.setAdapter(timeslotAdapter);

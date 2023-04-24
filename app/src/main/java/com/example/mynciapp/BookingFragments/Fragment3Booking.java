@@ -24,7 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Fragment3Booking extends Fragment {
 
@@ -35,6 +40,14 @@ public class Fragment3Booking extends Fragment {
     private TextView frag3RoomNumber;
     private Button frag3BtnConfirm;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firestore;
+
+    private TimeslotBooking selectedTimeslot;
+    private BookingReason bookingReason;
+    private RoomBooking selectedRoom;
+    private String selectedDateString;
+    private String selectedTimeslotString;
+
 
     public Fragment3Booking() {
     }
@@ -44,8 +57,9 @@ public class Fragment3Booking extends Fragment {
         View view = inflater.inflate(R.layout.booking_frag_3, container, false);
 
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
         String currentUserID = mAuth.getCurrentUser().getUid();
-        getCurrentUserInfo();
+
 
         frag3UserNameTxt = view.findViewById(R.id.frag3_user_name_txt);
         frag3BookingTimeTxt = view.findViewById(R.id.frag3_booking_time_txt);
@@ -64,16 +78,40 @@ public class Fragment3Booking extends Fragment {
                 Log.d("Fragment3Booking", "Retrieved full name: " + fullName);
 
                 if (getArguments() != null && getArguments().containsKey("selectedTimeslot")) {
+                    initializeData();
+
+                    //String timeSlotFormatted = String.format("%s on %s", selectedTimeslot.getBookingTime(), selectedTimeslot.getBookingDate());
+                    String timeSlotFormatted = String.format("%s \n%s", selectedTimeslot.getBookingTime(), selectedDateString);
+                    String bookingReasonText = bookingReason.name();
+
+                    // Display the gathered information
+                    frag3UserNameTxt.setText(fullName);
+                    frag3BookingTimeTxt.setText(timeSlotFormatted);
+                    frag3BookingReasonTxt.setText(bookingReasonText);
+                    frag3RoomSize.setText(selectedRoom.getSize());
+                    frag3RoomNumber.setText(selectedRoom.getRoomNumber());
+                }
+
+                /*
+                if (getArguments() != null && getArguments().containsKey("selectedTimeslot")) {
+
+                    initializeData();
+                    String timeSlotFormatted = String.format("%s on %s", selectedTimeslot.getBookingTime(), selectedTimeslot.getBookingDate());
+                    String bookingReasonText = bookingReason.name();
+
+                    // Display the gathered information
+                    frag3UserNameTxt.setText(fullName);
+                    frag3BookingTimeTxt.setText(timeSlotFormatted);
+                    frag3BookingReasonTxt.setText(bookingReasonText);
+                    frag3RoomSize.setText(selectedRoom.getSize());
+                    frag3RoomNumber.setText(selectedRoom.getRoomNumber());
+
+                    /*
                     TimeslotBooking selectedTimeslot = (TimeslotBooking) getArguments().getSerializable("selectedTimeslot");
                     BookingReason bookingReason = (BookingReason) getArguments().getSerializable("bookingReason");
                     RoomBooking selectedRoom = (RoomBooking) getArguments().getSerializable("selectedRoom");
                     String timeSlotFormatted = String.format("%s on %s", selectedTimeslot.getBookingTime(), selectedTimeslot.getBookingDate());
                     String bookingReasonText = bookingReason.name();
-
-                    Log.d("Fragment3Booking", "Selected timeslot: " + selectedTimeslot);
-                    Log.d("Fragment3Booking", "Selected booking reason: " + bookingReason);
-                    Log.d("Fragment3Booking", "Selected room: " + selectedRoom);
-
 
 
                     // Display the gathered information
@@ -83,6 +121,7 @@ public class Fragment3Booking extends Fragment {
                     frag3RoomSize.setText(selectedRoom.getSize());
                     frag3RoomNumber.setText(selectedRoom.getRoomNumber());
                 }
+                */
             }
 
 
@@ -92,15 +131,58 @@ public class Fragment3Booking extends Fragment {
             }
         });
 
+        frag3BtnConfirm.setOnClickListener(v -> {
+            if (selectedTimeslot != null && bookingReason != null && selectedRoom != null) {
+                String bookingID = UUID.randomUUID().toString();
+
+                Map<String, Object> bookingData = new HashMap<>();
+                bookingData.put("bookingID", bookingID);
+                bookingData.put("currentUserName", frag3UserNameTxt.getText().toString());
+                bookingData.put("room_number", frag3RoomNumber.getText().toString());
+                bookingData.put("roomID", selectedRoom.getRoomID());
+                bookingData.put("timeslot", selectedTimeslot.getBookingTime());
+                bookingData.put("BookingReason", bookingReason.name());
+                bookingData.put("roomSize", frag3RoomSize.getText().toString());
+                bookingData.put("bookingDate", selectedDateString);
+                //bookingData.put("bookingTime", selectedTimeslotString);
+                //bookingData.put("bookingdate", selectedTimeslot.getBookingDate());
+                bookingData.put("bookingTime", selectedTimeslot.getBookingTime());
+
+                firestore.collection("RoomBookings").add(bookingData)
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(getActivity(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
+
+                            // Set timeslot to isBooked (true)
+                            selectedTimeslot.setBooked(true);
+                            firestore.collection("Rooms").document(selectedRoom.getRoomID()).collection("Timeslots").document(String.valueOf(selectedTimeslot.getSlotNumber()))
+                                    .update("isBooked", true)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Successfully updated timeslot to booked
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        // Failed to update timeslot to booked
+                                    });
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getActivity(), "Failed to confirm booking. Please try again.", Toast.LENGTH_SHORT).show();
+                        });
+            }
+        });
+
 
         return view;
 
 
     } // onCreate
 
-
-    private void getCurrentUserInfo() {
-
+    private void initializeData() {
+        selectedDateString = getArguments().getString("selectedDateString");
+        selectedTimeslotString = getArguments().getString("selectedTimeslotString");
+        selectedTimeslot = (TimeslotBooking) getArguments().getSerializable("selectedTimeslot");
+        bookingReason = (BookingReason) getArguments().getSerializable("bookingReason");
+        selectedRoom = (RoomBooking) getArguments().getSerializable("selectedRoom");
     }
+
+
 
 }
