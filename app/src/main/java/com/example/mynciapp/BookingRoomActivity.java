@@ -26,7 +26,7 @@ public class BookingRoomActivity extends AppCompatActivity {
     private RoomBooking selectedRoom;
     private TimeslotBooking selectedTimeSlot;
     private BookingReason selectedBookingReason;
-    private NonSwipeViewPager viewPager;
+   // private NonSwipeViewPager viewPager;
     private StepView stepView;
 
     @Override
@@ -34,15 +34,19 @@ public class BookingRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_room);
 
-        viewPager = findViewById(R.id.view_pager_booking);
+        //viewPager = findViewById(R.id.view_pager_booking);
         stepView = findViewById(R.id.step_view_booking);
-        setupViewPager();
+        stepView.setStepsNumber(3);
+        stepView.go(0, true);
+        //setupViewPager();
 
+        showFragment1();
 
 
 
     } // onCreate
 
+    /*
     private void setupViewPager() {
         Fragment1Booking fragment1 = new Fragment1Booking();
         Fragment2Booking fragment2 = new Fragment2Booking();
@@ -87,21 +91,39 @@ public class BookingRoomActivity extends AppCompatActivity {
         stepView.setStepsNumber(3);
         stepView.go(0, true);
     }
-
+*/
+    private void showFragment1() {
+        Fragment1Booking fragment1 = new Fragment1Booking();
+        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment1).commit();
+    }
 
     public void onRoomSelected(RoomBooking room) {
         selectedRoom = room;
+        showFragment2();
         /* Navigate to the next fragment (Step 2)
         Fragment2Booking fragment2= new Fragment2Booking();
         getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment2).addToBackStack(null).commit(); */
-        viewPager.setCurrentItem(1);
+        //viewPager.setCurrentItem(1);
+    }
 
+    private void showFragment2() {
+        Fragment2Booking fragment2 = new Fragment2Booking();
+        fragment2.setOnTimeslotSelectedListener(new Fragment2Booking.OnTimeslotSelectedListener() {
+            @Override
+            public void onTimeslotSelected(TimeslotBooking selectedTimeslot, BookingReason bookingReason) {
+                onTimeSlotAndBookingReasonSelected(selectedTimeslot, bookingReason);
+            }
+        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment2).addToBackStack(null).commit();
+        stepView.go(1, true);
     }
 
     public void onTimeSlotAndBookingReasonSelected(TimeslotBooking timeSlot, BookingReason bookingReason) {
         selectedTimeSlot = timeSlot;
         selectedBookingReason = bookingReason;
-
+        showFragment3();
+    }
+    private void showFragment3() {
         Fragment3Booking fragment3 = new Fragment3Booking();
 
         Bundle args = new Bundle();
@@ -110,11 +132,8 @@ public class BookingRoomActivity extends AppCompatActivity {
         args.putSerializable("selectedRoom", selectedRoom);
         fragment3.setArguments(args);
 
-        Log.d("BookingRoomActivity", "onTimeSlotAndBookingReasonSelected called");
-        /* Navigate to the next fragment (Step 3)
-        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment3).addToBackStack(null).commit(); */
-        viewPager.setCurrentItem(2);
-        //viewPager.getAdapter().notifyDataSetChanged();
+        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment3).addToBackStack(null).commit();
+        stepView.go(2, true);
     }
 
     public RoomBooking getSelectedRoom() {

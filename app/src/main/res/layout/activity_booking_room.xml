@@ -36,22 +36,17 @@
             app:sv_typeface="@font/biryani_extralight" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/for_booking_frags"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_above="@+id/bottom_navigation_booking"
         android:layout_below="@+id/rel_stepview_booking"
-        android:layout_above="@+id/bottom_navigation_booking">
+        android:layout_marginLeft="8dp">
 
 
-        <com.example.mynciapp.Common.NonSwipeViewPager
-            android:id="@+id/view_pager_booking"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
-    </RelativeLayout>
+    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_booking"
         android:layout_width="match_parent"
