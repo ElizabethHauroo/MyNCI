@@ -147,6 +147,7 @@ public class Fragment3Booking extends Fragment {
                 //bookingData.put("bookingTime", selectedTimeslotString);
                 //bookingData.put("bookingdate", selectedTimeslot.getBookingDate());
                 bookingData.put("bookingTime", selectedTimeslot.getBookingTime());
+                bookingData.put("userID", currentUserID);
 
                 firestore.collection("RoomBookings").add(bookingData)
                         .addOnSuccessListener(documentReference -> {
