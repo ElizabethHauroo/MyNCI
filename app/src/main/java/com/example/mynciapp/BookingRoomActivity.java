@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStateManagerControl;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -53,7 +55,7 @@ public class BookingRoomActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @NonNull
             @Override
             public Fragment getItem(int position) {
@@ -112,6 +114,7 @@ public class BookingRoomActivity extends AppCompatActivity {
         /* Navigate to the next fragment (Step 3)
         getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment3).addToBackStack(null).commit(); */
         viewPager.setCurrentItem(2);
+        //viewPager.getAdapter().notifyDataSetChanged();
     }
 
     public RoomBooking getSelectedRoom() {

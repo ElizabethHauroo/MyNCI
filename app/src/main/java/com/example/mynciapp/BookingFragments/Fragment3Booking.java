@@ -1,6 +1,7 @@
 package com.example.mynciapp.BookingFragments;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mynciapp.BookingModels.BookingReason;
 import com.example.mynciapp.BookingModels.RoomBooking;
@@ -38,13 +40,8 @@ public class Fragment3Booking extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.booking_frag_3, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.booking_frag_3, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         String currentUserID = mAuth.getCurrentUser().getUid();
@@ -66,7 +63,7 @@ public class Fragment3Booking extends Fragment {
                 String fullName = firstName + " "+lastName;
                 Log.d("Fragment3Booking", "Retrieved full name: " + fullName);
 
-                if (getArguments() != null) {
+                if (getArguments() != null && getArguments().containsKey("selectedTimeslot")) {
                     TimeslotBooking selectedTimeslot = (TimeslotBooking) getArguments().getSerializable("selectedTimeslot");
                     BookingReason bookingReason = (BookingReason) getArguments().getSerializable("bookingReason");
                     RoomBooking selectedRoom = (RoomBooking) getArguments().getSerializable("selectedRoom");
@@ -77,6 +74,8 @@ public class Fragment3Booking extends Fragment {
                     Log.d("Fragment3Booking", "Selected booking reason: " + bookingReason);
                     Log.d("Fragment3Booking", "Selected room: " + selectedRoom);
 
+
+
                     // Display the gathered information
                     frag3UserNameTxt.setText(fullName);
                     frag3BookingTimeTxt.setText(timeSlotFormatted);
@@ -86,6 +85,7 @@ public class Fragment3Booking extends Fragment {
                 }
             }
 
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -93,9 +93,11 @@ public class Fragment3Booking extends Fragment {
         });
 
 
+        return view;
 
 
-    }
+    } // onCreate
+
 
     private void getCurrentUserInfo() {
 

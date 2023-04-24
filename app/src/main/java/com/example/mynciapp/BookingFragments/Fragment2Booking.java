@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mynciapp.BookingAdapters.BookingTimeslotAdapter;
 import com.example.mynciapp.BookingModels.BookingReason;
 import com.example.mynciapp.BookingModels.TimeslotBooking;
+import com.example.mynciapp.BookingRoomActivity;
 import com.example.mynciapp.Common.Common;
 import com.example.mynciapp.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -94,6 +95,13 @@ public class Fragment2Booking extends Fragment {
                     onTimeslotSelectedListener.onTimeslotSelected(selectedTimeslot, bookingReason);
 
                     Fragment3Booking fragment3Booking = new Fragment3Booking();
+
+                    Bundle args = new Bundle();
+                    args.putSerializable("selectedTimeslot", selectedTimeslot);
+                    args.putSerializable("bookingReason", bookingReason);
+                    args.putSerializable("selectedRoom", ((BookingRoomActivity) getActivity()).getSelectedRoom());
+                    fragment3Booking.setArguments(args);
+
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.for_booking_frags, fragment3Booking)
                             .addToBackStack(null)
