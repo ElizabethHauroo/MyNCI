@@ -135,38 +135,50 @@ public class Fragment3Booking extends Fragment {
             if (selectedTimeslot != null && bookingReason != null && selectedRoom != null) {
                 String bookingID = UUID.randomUUID().toString();
 
-                Map<String, Object> bookingData = new HashMap<>();
-                bookingData.put("bookingID", bookingID);
-                bookingData.put("currentUserName", frag3UserNameTxt.getText().toString());
-                bookingData.put("room_number", frag3RoomNumber.getText().toString());
-                bookingData.put("roomID", selectedRoom.getRoomID());
-                bookingData.put("timeslot", selectedTimeslot.getBookingTime());
-                bookingData.put("BookingReason", bookingReason.name());
-                bookingData.put("roomSize", frag3RoomSize.getText().toString());
-                bookingData.put("bookingDate", selectedDateString);
-                //bookingData.put("bookingTime", selectedTimeslotString);
-                //bookingData.put("bookingdate", selectedTimeslot.getBookingDate());
-                bookingData.put("bookingTime", selectedTimeslot.getBookingTime());
-                bookingData.put("userID", currentUserID);
+                String roomID = UUID.randomUUID().toString();
+                Integer slotNumber = selectedTimeslot.getSlotNumber();
 
-                firestore.collection("RoomBookings").add(bookingData)
-                        .addOnSuccessListener(documentReference -> {
-                            Toast.makeText(getActivity(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
+                if (roomID != null ) {
+                    if (firestore != null) {
+                        Map<String, Object> bookingData = new HashMap<>();
+                        bookingData.put("bookingID", bookingID);
+                        bookingData.put("currentUserName", frag3UserNameTxt.getText().toString());
+                        bookingData.put("room_number", frag3RoomNumber.getText().toString());
+                        //bookingData.put("timeslot", selectedTimeslot.getBookingTime());
+                        bookingData.put("BookingReason", bookingReason.name());
+                        bookingData.put("roomSize", frag3RoomSize.getText().toString());
+                        bookingData.put("bookingDate", selectedDateString);
+                        //bookingData.put("bookingTime", selectedTimeslotString);
+                        //bookingData.put("bookingdate", selectedTimeslot.getBookingDate());
+                        bookingData.put("bookingTime", selectedTimeslot.getBookingTime());
+                        bookingData.put("userID", currentUserID);
 
-                            // Set timeslot to isBooked (true)
-                            selectedTimeslot.setBooked(true);
-                            firestore.collection("Rooms").document(selectedRoom.getRoomID()).collection("Timeslots").document(String.valueOf(selectedTimeslot.getSlotNumber()))
-                                    .update("isBooked", true)
-                                    .addOnSuccessListener(aVoid -> {
-                                        // Successfully updated timeslot to booked
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        // Failed to update timeslot to booked
-                                    });
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(getActivity(), "Failed to confirm booking. Please try again.", Toast.LENGTH_SHORT).show();
-                        });
+                        firestore.collection("RoomBookings").add(bookingData)
+                                .addOnSuccessListener(documentReference -> {
+                                    Toast.makeText(getActivity(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
+
+                                    // Set timeslot to isBooked (true)
+                                    selectedTimeslot.setBooked(true);
+                                    firestore.collection("Rooms").document(selectedRoom.getRoomID()).collection("Timeslots").document(String.valueOf(selectedTimeslot.getSlotNumber()))
+                                            .update("isBooked", true)
+                                            .addOnSuccessListener(aVoid -> {
+                                                // Successfully updated timeslot to booked
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                // Failed to update timeslot to booked
+                                            });
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(getActivity(), "Failed to confirm booking. Please try again.", Toast.LENGTH_SHORT).show();
+                                });
+                    } else {
+                        Toast.makeText(getActivity(), "Error: Firestore is not initialized. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Error: Room ID or Slot Number is missing. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

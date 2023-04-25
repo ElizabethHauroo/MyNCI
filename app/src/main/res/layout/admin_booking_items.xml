@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="10dp"
+    android:layout_margin="1dp">
+
+    <LinearLayout
+        android:id="@+id/main_linear_admin_booking"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/linear_room_admin_booking"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/room_admin_booking_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3.09"
+                android:rotation="-90"
+                android:textSize="30dp"
+                android:layout_gravity="center_vertical"/>
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_below="@+id/room_divider_admin"
+            android:id="@+id/dateroom_divider"
+            android:layout_width="2px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@color/battleship_grey"/>
+        <LinearLayout
+            android:id="@+id/linear_second_third_admin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/linear_header_admin_booking"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/timeslot_admin_booking_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="12:00 - 13:00"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_below="@+id/room_divider_admin"
+                    android:id="@+id/time_reason_divider"
+                    android:layout_width="2px"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/battleship_grey"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/reason_admin_booking_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Meeting"
+                        android:textSize="20dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/header_divider_admin"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/battleship_grey"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/name_user_admin_booking_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Johnathan Grey"
+                    android:textSize="30dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
