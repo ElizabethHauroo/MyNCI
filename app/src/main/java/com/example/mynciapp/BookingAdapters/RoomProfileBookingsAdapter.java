@@ -3,6 +3,7 @@ package com.example.mynciapp.BookingAdapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mynciapp.BookingModels.RoomBookingInformation;
 import com.example.mynciapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -82,6 +87,7 @@ public class RoomProfileBookingsAdapter extends RecyclerView.Adapter<RoomProfile
         dialog.show();
     }
 
+    /*
     private void cancelBooking(RoomBookingInformation booking) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("RoomBookings")
@@ -103,6 +109,42 @@ public class RoomProfileBookingsAdapter extends RecyclerView.Adapter<RoomProfile
                     }
                 });
     }
+    */
+
+    private void cancelBooking(RoomBookingInformation booking) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("RoomBookings")
+                .whereEqualTo("bookingID", booking.getBookingID())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                document.getReference().delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(context, "Booking canceled successfully.", Toast.LENGTH_SHORT).show();
+                                                // Remove the canceled booking from the list and notify the adapter
+                                                profileBookingList.remove(booking);
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(context, "Failed to cancel booking: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        } else {
+                            Log.d("cancelBooking", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public int getItemCount() {
