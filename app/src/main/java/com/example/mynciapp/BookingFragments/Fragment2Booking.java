@@ -25,6 +25,8 @@ import com.example.mynciapp.BookingModels.TimeslotBooking;
 import com.example.mynciapp.BookingRoomActivity;
 import com.example.mynciapp.Common.Common;
 import com.example.mynciapp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -34,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 
 public class Fragment2Booking extends Fragment {
@@ -48,9 +51,10 @@ public class Fragment2Booking extends Fragment {
     private Button previousButton;
     private Button nextButton;
     private String selectedDateString;
+    private List<TimeslotBooking> bookedTimeslots = new ArrayList<>();
     private TimeslotBooking selectedTimeslot;
     private OnTimeslotSelectedListener onTimeslotSelectedListener;
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
 
@@ -97,6 +101,9 @@ public class Fragment2Booking extends Fragment {
                     BookingReason bookingReason = meetingRadioButton.isChecked() ? BookingReason.MEETING : BookingReason.STUDY;
                     onTimeslotSelectedListener.onTimeslotSelected(selectedTimeslot, bookingReason);
 
+                    String timeslotId = UUID.randomUUID().toString();
+                    selectedTimeslot.setTimeslotID(timeslotId);
+
                     Fragment3Booking fragment3Booking = new Fragment3Booking();
 
                     Bundle args = new Bundle();
@@ -129,7 +136,9 @@ public class Fragment2Booking extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         timeslotRecyclerView.setLayoutManager(gridLayoutManager);
 
-        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots();
+        //List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots(selectedDateString);
+        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots(selectedDateString, new ArrayList<>());
+
         BookingTimeslotAdapter timeslotAdapter = new BookingTimeslotAdapter(dailyTimeslots, new BookingTimeslotAdapter.OnTimeslotClickListener() {
             @Override
             public void onTimeslotClick(int position) {
@@ -155,6 +164,7 @@ public class Fragment2Booking extends Fragment {
                 .setCalendarDisplayMode(CalendarMode.WEEKS)
                 .commit();
 
+
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -165,18 +175,42 @@ public class Fragment2Booking extends Fragment {
                     Common.bookingDate = selectedCalendar;
                     selectedDateString = simpleDateFormat.format(selectedCalendar.getTime());
                     String selectedDate = simpleDateFormat.format(selectedCalendar.getTime());
-                    updateTimeslotsForSelectedDate(selectedDate);
+                    fetchBookingsAndUpdateTimeslots(selectedDateString);
                     timeslotSelected = false;
                     updateNextButtonState();
                 }
+                String selectedDate = simpleDateFormat.format(selectedCalendar.getTime());
+                fetchBookingsAndUpdateTimeslots(selectedDate);
 
             }
         });
     }
 
+
+    private void fetchBookingsAndUpdateTimeslots(String selectedDate) {
+        String selectedRoomNumber = ((BookingRoomActivity) getActivity()).getSelectedRoom().getRoomNumber();
+
+        db.collection("RoomBookings")
+                .whereEqualTo("room_number", selectedRoomNumber)
+                .whereEqualTo("bookingDate", selectedDate)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<TimeslotBooking> bookedTimeslots = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            TimeslotBooking timeslotBooking = document.toObject(TimeslotBooking.class);
+                            bookedTimeslots.add(timeslotBooking);
+                        }
+                        updateTimeslotsForSelectedDate(selectedDate, bookedTimeslots);
+                    } else {
+                        Log.d("Fragment2Booking", "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
     private void updateNextButtonState() {
         Context context = getContext();
-        if (radioButtonSelected && timeslotSelected) {
+        if (radioButtonSelected && timeslotSelected && !selectedTimeslot.isBooked()) {
             nextButton.setEnabled(true);
             nextButton.setBackgroundColor(getResources().getColor(R.color.royal_purple));
             nextButton.setTextColor(Color.WHITE);
@@ -188,7 +222,7 @@ public class Fragment2Booking extends Fragment {
         Log.d("Fragment2Booking", "onNextButtonClicked called");
     }
 
-    private List<TimeslotBooking> generateDailyTimeslots() {
+    private List<TimeslotBooking> generateDailyTimeslots(String selectedDate, List<TimeslotBooking> bookedTimeslots) {
                 List<TimeslotBooking> timeslots = new ArrayList<>();
                 String[] timeList = {"09:00 - 10:00", "11:00 - 12:00", "12:00 - 13:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00"};
 
@@ -196,15 +230,28 @@ public class Fragment2Booking extends Fragment {
                     TimeslotBooking timeslot = new TimeslotBooking();
                     timeslot.setBookingTime(timeList[i]);
                     timeslot.setSlotNumber(i);
-                    timeslot.setBooked(false); // You can set this value based on your booking data
+                    timeslot.setBookingDate(selectedDate);
+                    //timeslot.setBooked(false); // You can set this value based on your booking data
+                    boolean isBooked = isTimeslotBooked(bookedTimeslots, timeslot);
+                    timeslot.setBooked(isBooked);
                     timeslots.add(timeslot);
                 }
 
                 return timeslots;
             }
 
-    private void updateTimeslotsForSelectedDate(String selectedDate) {
-        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots();
+    private boolean isTimeslotBooked(List<TimeslotBooking> bookedTimeslots, TimeslotBooking timeslot) {
+        for (TimeslotBooking bookedTimeslot : bookedTimeslots) {
+            if (bookedTimeslot.getBookingTime().equals(timeslot.getBookingTime())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private void updateTimeslotsForSelectedDate(String selectedDate, List<TimeslotBooking> bookedTimeslots) {
+        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots(selectedDate, bookedTimeslots);
 
         BookingTimeslotAdapter timeslotAdapter = new BookingTimeslotAdapter(dailyTimeslots, new BookingTimeslotAdapter.OnTimeslotClickListener() {
             @Override

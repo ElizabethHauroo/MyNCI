@@ -38,14 +38,20 @@ public class BookingTimeslotAdapter extends RecyclerView.Adapter<BookingTimeslot
     public void onBindViewHolder(@NonNull BookingTimeslotAdapter.BookingTimeslotViewHolder holder, int position) {
         TimeslotBooking timeslot = timeslots.get(holder.getAbsoluteAdapterPosition());
         holder.timeslotTimeText.setText(timeslot.getBookingTime());
-        holder.timeslotStatusText.setText(timeslot.isBooked() ? "Booked" : "Available");
+        holder.timeslotStatusText.setText(timeslot.isBooked() ? "Already Booked" : "Available");
 
-        if (selectedPosition == holder.getAbsoluteAdapterPosition()) {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.soft_green));
-        } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
+        if(timeslot.isBooked()){
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.platinum_grey));
+           // holder.timeslotStatusText.setTextColor(R.color.black_olive);
+            holder.itemView.setOnClickListener(null);
         }
-
+        else {
+            if (selectedPosition == holder.getAbsoluteAdapterPosition()) {
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.soft_green));
+            } else {
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
+            }
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

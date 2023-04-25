@@ -46,52 +46,7 @@ public class BookingRoomActivity extends AppCompatActivity {
 
     } // onCreate
 
-    /*
-    private void setupViewPager() {
-        Fragment1Booking fragment1 = new Fragment1Booking();
-        Fragment2Booking fragment2 = new Fragment2Booking();
-        Fragment3Booking fragment3 = new Fragment3Booking();
 
-        fragment2.setOnTimeslotSelectedListener(new Fragment2Booking.OnTimeslotSelectedListener() {
-            @Override
-            public void onTimeslotSelected(TimeslotBooking selectedTimeslot, BookingReason bookingReason) {
-                onTimeSlotAndBookingReasonSelected(selectedTimeslot, bookingReason);
-            }
-        });
-
-        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-                switch (position) {
-                    case 0:
-                        return fragment1;
-                    case 1:
-                        return fragment2;
-                    case 2:
-                        return fragment3;
-                    default:
-                        return null;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 3;
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                stepView.go(position, true);
-            }
-        });
-
-        stepView.setStepsNumber(3);
-        stepView.go(0, true);
-    }
-*/
     private void showFragment1() {
         Fragment1Booking fragment1 = new Fragment1Booking();
         getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment1).commit();

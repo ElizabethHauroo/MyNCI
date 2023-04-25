@@ -9,6 +9,7 @@ public class TimeslotBooking implements Serializable {
     private int slotNumber;
     private boolean isBooked;
     private BookingReason bookingReason;
+    private String timeslotID;
 
     public TimeslotBooking() {
     }
@@ -18,6 +19,15 @@ public class TimeslotBooking implements Serializable {
         this.bookingTime = bookingTime;
         this.slotNumber = slotNumber;
         this.isBooked = isBooked;
+    }
+
+    public TimeslotBooking(String bookingDate, String bookingTime, int slotNumber, boolean isBooked, BookingReason bookingReason, String timeslotID) {
+        this.bookingDate = bookingDate;
+        this.bookingTime = bookingTime;
+        this.slotNumber = slotNumber;
+        this.isBooked = isBooked;
+        this.bookingReason = bookingReason;
+        this.timeslotID = timeslotID;
     }
 
     public TimeslotBooking(String bookingDate, String bookingTime, int slotNumber, boolean isBooked, BookingReason bookingReason) {
@@ -66,5 +76,13 @@ public class TimeslotBooking implements Serializable {
 
     public void setBookingReason(BookingReason bookingReason) {
         this.bookingReason = bookingReason;
+    }
+
+    public String getTimeslotID() {
+        return timeslotID;
+    }
+
+    public void setTimeslotID(String timeslotID) {
+        this.timeslotID = timeslotID;
     }
 }
