@@ -133,7 +133,7 @@ public class Fragment2Booking extends Fragment {
     private void initCalendarView() {
         // RecyclerView configuration
         timeslotRecyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         timeslotRecyclerView.setLayoutManager(gridLayoutManager);
 
         //List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots(selectedDateString);

@@ -16,28 +16,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reason for Booking: "
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="16dp"
-            android:textSize="18dp"/>
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="14dp"
+            android:textSize="16dp"
+            />
 
         <RadioButton
             android:id="@+id/meetingRadioButton_frag1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meeting"/>
+            android:text="Meeting"
+            android:textSize="16dp"
+            />
 
         <RadioButton
             android:id="@+id/studyRadioButton_frag1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Study"/>
+            android:text="Study"
+            android:textSize="16dp"
+            />
 
     </RadioGroup>
 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/frag2_calendarView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:background="@color/white"
         app:mcv_selectionColor="@color/royal_purple"
         />
@@ -47,7 +52,6 @@
         android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/azure"
         android:layout_margin="16dp"/>
 
     <LinearLayout

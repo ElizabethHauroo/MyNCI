@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, ScheduleActivity.class));
+                startActivity(new Intent(HomeActivity.this, BookingRoomActivity.class));
             }
         });
         nci.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +178,7 @@ public class HomeActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.add_bottomnav:
-                        startActivity(new Intent(HomeActivity.this, BookingRoomActivity.class));
+                        startActivity(new Intent(HomeActivity.this, AdminActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:

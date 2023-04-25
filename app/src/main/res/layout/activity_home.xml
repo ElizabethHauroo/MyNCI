@@ -294,16 +294,27 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="55dp"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="3dp"
+                        android:src="@drawable/parking" />
 
                     <TextView
                         android:id="@+id/parking_status_home"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:layout_marginLeft="15dp"
                         android:text="Parking Status"
                         android:textSize="18sp"
-                        android:textAlignment="center"/>
+                        />
 
                 </LinearLayout>
 

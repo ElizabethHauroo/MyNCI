@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="50dp">
+    android:layout_marginLeft="10dp">
 
     <!-- Add RecyclerView to show the list of rooms -->
     <androidx.recyclerview.widget.RecyclerView
