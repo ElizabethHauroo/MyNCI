@@ -3,6 +3,9 @@ package com.example.mynciapp.BookingFragments;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.example.mynciapp.BookingModels.BookingReason;
 import com.example.mynciapp.BookingModels.RoomBooking;
 import com.example.mynciapp.BookingModels.TimeslotBooking;
+import com.example.mynciapp.HomeActivity;
 import com.example.mynciapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -92,36 +96,7 @@ public class Fragment3Booking extends Fragment {
                     frag3RoomNumber.setText(selectedRoom.getRoomNumber());
                 }
 
-                /*
-                if (getArguments() != null && getArguments().containsKey("selectedTimeslot")) {
 
-                    initializeData();
-                    String timeSlotFormatted = String.format("%s on %s", selectedTimeslot.getBookingTime(), selectedTimeslot.getBookingDate());
-                    String bookingReasonText = bookingReason.name();
-
-                    // Display the gathered information
-                    frag3UserNameTxt.setText(fullName);
-                    frag3BookingTimeTxt.setText(timeSlotFormatted);
-                    frag3BookingReasonTxt.setText(bookingReasonText);
-                    frag3RoomSize.setText(selectedRoom.getSize());
-                    frag3RoomNumber.setText(selectedRoom.getRoomNumber());
-
-                    /*
-                    TimeslotBooking selectedTimeslot = (TimeslotBooking) getArguments().getSerializable("selectedTimeslot");
-                    BookingReason bookingReason = (BookingReason) getArguments().getSerializable("bookingReason");
-                    RoomBooking selectedRoom = (RoomBooking) getArguments().getSerializable("selectedRoom");
-                    String timeSlotFormatted = String.format("%s on %s", selectedTimeslot.getBookingTime(), selectedTimeslot.getBookingDate());
-                    String bookingReasonText = bookingReason.name();
-
-
-                    // Display the gathered information
-                    frag3UserNameTxt.setText(fullName);
-                    frag3BookingTimeTxt.setText(timeSlotFormatted);
-                    frag3BookingReasonTxt.setText(bookingReasonText);
-                    frag3RoomSize.setText(selectedRoom.getSize());
-                    frag3RoomNumber.setText(selectedRoom.getRoomNumber());
-                }
-                */
             }
 
 
@@ -156,17 +131,9 @@ public class Fragment3Booking extends Fragment {
                         firestore.collection("RoomBookings").add(bookingData)
                                 .addOnSuccessListener(documentReference -> {
                                     Toast.makeText(getActivity(), "Booking Confirmed!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                    startActivity(intent);
 
-                                    // Set timeslot to isBooked (true)
-                                    selectedTimeslot.setBooked(true);
-                                    firestore.collection("Rooms").document(selectedRoom.getRoomID()).collection("Timeslots").document(String.valueOf(selectedTimeslot.getSlotNumber()))
-                                            .update("isBooked", true)
-                                            .addOnSuccessListener(aVoid -> {
-                                                // Successfully updated timeslot to booked
-                                            })
-                                            .addOnFailureListener(e -> {
-                                                // Failed to update timeslot to booked
-                                            });
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(getActivity(), "Failed to confirm booking. Please try again.", Toast.LENGTH_SHORT).show();
