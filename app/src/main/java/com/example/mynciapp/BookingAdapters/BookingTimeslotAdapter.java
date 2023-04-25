@@ -38,7 +38,7 @@ public class BookingTimeslotAdapter extends RecyclerView.Adapter<BookingTimeslot
     public void onBindViewHolder(@NonNull BookingTimeslotAdapter.BookingTimeslotViewHolder holder, int position) {
         TimeslotBooking timeslot = timeslots.get(holder.getAbsoluteAdapterPosition());
         holder.timeslotTimeText.setText(timeslot.getBookingTime());
-        holder.timeslotStatusText.setText(timeslot.isBooked() ? "Already Booked" : "Available");
+        holder.timeslotStatusText.setText(timeslot.isBooked() ? "Already Booked" : " ");
 
         if(timeslot.isBooked()){
             holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.platinum_grey));

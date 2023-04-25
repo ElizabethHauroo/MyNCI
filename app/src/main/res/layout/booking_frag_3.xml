@@ -119,7 +119,8 @@
                             android:layout_width="38dp"
                             android:layout_height="38dp"
                             android:layout_gravity="bottom"
-                            android:src="@drawable/meeting" />
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/booking" />
 
                         <TextView
                             android:id="@+id/frag3_booking_reason_txt"

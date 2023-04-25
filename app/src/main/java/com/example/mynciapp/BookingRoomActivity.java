@@ -8,8 +8,10 @@ import androidx.fragment.app.FragmentStateManagerControl;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.example.mynciapp.BookingFragments.Fragment1Booking;
 import com.example.mynciapp.BookingFragments.Fragment2Booking;
@@ -18,7 +20,12 @@ import com.example.mynciapp.BookingModels.BookingReason;
 import com.example.mynciapp.BookingModels.RoomBooking;
 import com.example.mynciapp.BookingModels.TimeslotBooking;
 import com.example.mynciapp.Common.NonSwipeViewPager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.shuhart.stepview.StepView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BookingRoomActivity extends AppCompatActivity {
@@ -26,22 +33,48 @@ public class BookingRoomActivity extends AppCompatActivity {
     private RoomBooking selectedRoom;
     private TimeslotBooking selectedTimeSlot;
     private BookingReason selectedBookingReason;
-   // private NonSwipeViewPager viewPager;
     private StepView stepView;
+    BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_room);
 
-        //viewPager = findViewById(R.id.view_pager_booking);
         stepView = findViewById(R.id.step_view_booking);
         stepView.setStepsNumber(3);
         stepView.go(0, true);
-        //setupViewPager();
 
-        showFragment1();
+        //--------------------------------
 
+
+        setupStepView(); //headings for stepview steps
+        showFragment1(); // when first loaded, start on frag1
+
+        nav=findViewById(R.id.bottom_navigation_booking);
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.home_bottomnav:
+                        startActivity(new Intent(BookingRoomActivity.this, HomeActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.add_bottomnav:
+                        startActivity(new Intent(BookingRoomActivity.this, AdminActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.profile_bottomnav:
+                        startActivity(new Intent(BookingRoomActivity.this, ProfileActivity.class));
+                        overridePendingTransition(0, 0);
+                        break;
+
+                    default:
+                }
+                return true;
+            }
+        });
 
 
     } // onCreate
@@ -55,10 +88,6 @@ public class BookingRoomActivity extends AppCompatActivity {
     public void onRoomSelected(RoomBooking room) {
         selectedRoom = room;
         showFragment2();
-        /* Navigate to the next fragment (Step 2)
-        Fragment2Booking fragment2= new Fragment2Booking();
-        getSupportFragmentManager().beginTransaction().replace(R.id.for_booking_frags, fragment2).addToBackStack(null).commit(); */
-        //viewPager.setCurrentItem(1);
     }
 
     private void showFragment2() {
@@ -101,6 +130,14 @@ public class BookingRoomActivity extends AppCompatActivity {
 
     public BookingReason getSelectedBookingReason() {
         return selectedBookingReason;
+    }
+
+    private void setupStepView() {
+        List<String> stepList = new ArrayList<>();
+        stepList.add("Room");
+        stepList.add("Time");
+        stepList.add("Confirm");
+        stepView.setSteps(stepList);
     }
 
 }
