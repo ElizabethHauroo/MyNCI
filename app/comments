@@ -15,6 +15,12 @@ password: I8kNCIzbHbf?$hN
 - edit account details (setup)  - reset password (admin important!)
 - fix booking issues - duplicates
 - remove the likes
+- delete is not deleting from firebase.
+
+- duplicate:
+    if(in Booked Timeslots: bookingDate AND slotNumber match selectedTimeslot AND selectedDate){
+        timeslot is unavailable
+    }
 
 
 
@@ -99,6 +105,49 @@ If(slot==8){
 String time: 17:00
 }
 - FIXED: On profile, last name doesn't appear? : font was too big
+
+------------------------------------------------------------
+
+I am doing an android studio application using java. The main functionality is to be able to book a room in the college.
+The booking system is done in 3 steps (3 fragments)
+Fragment1Booking: There are 6 rooms to chose from,
+Fragment2Booking: Now that user has chose a room, they must pick a TimeslotBooking (model) .
+    1. here, they have to chose one of the two radio buttons as a reason for booking (meeting / study )
+    2. They must pick a date from the calendar view
+    3. on the date they picked, there are 6 timeslots to chose from (time of booking)
+    4. once they have done all of the above, they click next to go to the last fragment.
+Fragment3Booking: is the confirmation step. Here all the previously selected details are disaplayed;
+    - roomNumber, time selected, date selected, reason selected, and name of current user making the booking.
+    - below the booking information displayed is a "Confirm Booking" button.
+    - once the button is clicked, all the booking details are saved onto firebase under the "RoomBookings" collection
+
+I have code all of this and it works well.
+Now what I want to do is add a check to see if a timeslot is already booked for the selected room, on the selected date.
+- this means that when a booking is confirmed, the timeslot with the selected date and selected roomNumber of that booking should not be available to book by other people.
+- I have a boolean in my TimeSlot model isBooked() but I'm not sure how to implement it for this requirement.
+- can you think of a way to make booked timeslots unavailable?
+
+I will send you 7 files so that you can see what I have so far:
+1. BookingRoomActivity.java
+2. Fragment1Booking.java
+3. Fragment1Booking.java
+4. Fragment1Booking.java
+5. RoomBooking.java
+6. TimeslotBooking.java
+7. RoomBookingInformation.java
+
+Wait until I have sent all 7 files before we begin.
+
+ok, this part is working now. Lets go back to the initial requirement.
+
+Now what I want to do is add a check to see if a timeslot is already booked when showing them in frag2
+- if it is already booked, I want the item to have a grey background, and not be clickable.
+- so in order to check if a timeslot is booked I need to search firestore  "bookedTimeslots" collection and check every bookedTimeslotID for :
+booked: true
+bookingDate (onFirestore) same as selectedDate (on frag2)
+bookingTime (onFirestore) same as selectedTime (on frag2)
+
+This is what frag2 looks like right now:
 
 
 

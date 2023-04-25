@@ -22,6 +22,8 @@ import com.example.mynciapp.BookingModels.RoomBooking;
 import com.example.mynciapp.BookingModels.TimeslotBooking;
 import com.example.mynciapp.HomeActivity;
 import com.example.mynciapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -138,6 +140,7 @@ public class Fragment3Booking extends Fragment {
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(getActivity(), "Failed to confirm booking. Please try again.", Toast.LENGTH_SHORT).show();
                                 });
+                        saveTimeslotToFirebase();
                     } else {
                         Toast.makeText(getActivity(), "Error: Firestore is not initialized. Please try again.", Toast.LENGTH_SHORT).show();
                     }
@@ -162,6 +165,30 @@ public class Fragment3Booking extends Fragment {
         bookingReason = (BookingReason) getArguments().getSerializable("bookingReason");
         selectedRoom = (RoomBooking) getArguments().getSerializable("selectedRoom");
     }
+
+    private void saveTimeslotToFirebase() {
+        TimeslotBooking selectedTimeslot = (TimeslotBooking) getArguments().getSerializable("selectedTimeslot");
+        selectedTimeslot.setBooked(true);
+        selectedTimeslot.setBookingReason(bookingReason);
+
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection("BookedTimeslots").document(selectedTimeslot.getTimeslotID())
+                .set(selectedTimeslot)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Fragment3Booking", "Timeslot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Fragment3Booking", "Error writing timeslot", e);
+                    }
+                });
+    }
+
 
 
 

@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 
 public class Fragment2Booking extends Fragment {
@@ -97,6 +98,9 @@ public class Fragment2Booking extends Fragment {
                     BookingReason bookingReason = meetingRadioButton.isChecked() ? BookingReason.MEETING : BookingReason.STUDY;
                     onTimeslotSelectedListener.onTimeslotSelected(selectedTimeslot, bookingReason);
 
+                    String timeslotId = UUID.randomUUID().toString();
+                    selectedTimeslot.setTimeslotID(timeslotId);
+
                     Fragment3Booking fragment3Booking = new Fragment3Booking();
 
                     Bundle args = new Bundle();
@@ -129,7 +133,7 @@ public class Fragment2Booking extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         timeslotRecyclerView.setLayoutManager(gridLayoutManager);
 
-        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots();
+        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots(selectedDateString);
         BookingTimeslotAdapter timeslotAdapter = new BookingTimeslotAdapter(dailyTimeslots, new BookingTimeslotAdapter.OnTimeslotClickListener() {
             @Override
             public void onTimeslotClick(int position) {
@@ -155,6 +159,7 @@ public class Fragment2Booking extends Fragment {
                 .setCalendarDisplayMode(CalendarMode.WEEKS)
                 .commit();
 
+
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -169,6 +174,8 @@ public class Fragment2Booking extends Fragment {
                     timeslotSelected = false;
                     updateNextButtonState();
                 }
+                String selectedDate = simpleDateFormat.format(selectedCalendar.getTime());
+                updateTimeslotsForSelectedDate(selectedDate);
 
             }
         });
@@ -188,7 +195,7 @@ public class Fragment2Booking extends Fragment {
         Log.d("Fragment2Booking", "onNextButtonClicked called");
     }
 
-    private List<TimeslotBooking> generateDailyTimeslots() {
+    private List<TimeslotBooking> generateDailyTimeslots(String selectedDate) {
                 List<TimeslotBooking> timeslots = new ArrayList<>();
                 String[] timeList = {"09:00 - 10:00", "11:00 - 12:00", "12:00 - 13:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00"};
 
@@ -196,6 +203,7 @@ public class Fragment2Booking extends Fragment {
                     TimeslotBooking timeslot = new TimeslotBooking();
                     timeslot.setBookingTime(timeList[i]);
                     timeslot.setSlotNumber(i);
+                    timeslot.setBookingDate(selectedDate);
                     timeslot.setBooked(false); // You can set this value based on your booking data
                     timeslots.add(timeslot);
                 }
@@ -204,7 +212,8 @@ public class Fragment2Booking extends Fragment {
             }
 
     private void updateTimeslotsForSelectedDate(String selectedDate) {
-        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots();
+       // List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots();
+        List<TimeslotBooking> dailyTimeslots = generateDailyTimeslots(selectedDate);
 
         BookingTimeslotAdapter timeslotAdapter = new BookingTimeslotAdapter(dailyTimeslots, new BookingTimeslotAdapter.OnTimeslotClickListener() {
             @Override
