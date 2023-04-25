@@ -25,7 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
     TextView alreadyHaveAccount;
     EditText emailTF, pswdTF, confirmPswdTF;
     Button registerBTN;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+\\.[a-z]+";
+    String emailDomain = ".ncirl.ie";
     ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
@@ -77,6 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(!email.matches(emailPattern)){
             emailTF.setError("Enter valid email");
+        }else if (!email.endsWith(emailDomain)) {
+            emailTF.setError("Email must end with " + emailDomain);
         }else if(password.isEmpty()){
             pswdTF.setError("Please Enter a Password");
         }else if(password.length()<6){
