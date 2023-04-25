@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.mynciapp.Adapter.MyProfileBookingsAdapter;
+
+
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +16,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.mynciapp.BookingAdapters.RoomProfileBookingsAdapter;
+import com.example.mynciapp.BookingModels.RoomBookingInformation;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -55,6 +61,10 @@ public class ProfileActivity extends AppCompatActivity {
     private MyProfileBookingsAdapter bookingAdapter;
     private List<BookingInformation> userBookings;
 
+    private RoomProfileBookingsAdapter profile_bookingAdapter;
+    private List<RoomBookingInformation> profile_userBookings;
+
+
     BottomNavigationView nav;
 
 
@@ -84,9 +94,13 @@ public class ProfileActivity extends AppCompatActivity {
         rvBookings.addItemDecoration(new SpacesItemDecoration(3));
 
 
-        userBookings = new ArrayList<>();
-        bookingAdapter = new MyProfileBookingsAdapter(userBookings, this);
-        rvBookings.setAdapter(bookingAdapter);
+        //userBookings = new ArrayList<>();
+        //bookingAdapter = new MyProfileBookingsAdapter(userBookings, this);
+        profile_userBookings = new ArrayList<>();
+        profile_bookingAdapter = new RoomProfileBookingsAdapter(profile_userBookings, this);
+
+
+        rvBookings.setAdapter(profile_bookingAdapter);
 
         nav = findViewById(R.id.bottom_navigation_profile);
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -126,7 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
                 final String course = snapshot.child("course").getValue(String.class);
                 mCourseTextView.setText(course);
                 final String usernameRaw = snapshot.child("username").getValue(String.class);
-                String username = "@"+usernameRaw;
+                String username = ""+usernameRaw;
                 mUsernameTextView.setText(username);
 
                 if (snapshot.hasChild("profileimage")) {
@@ -153,28 +167,30 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             String currentUserId = currentUser.getUid();
-            CollectionReference userBookingRef = FirebaseFirestore.getInstance()
-                    .collection("Users")
-                    .document(currentUserId)
-                    .collection("MyBookings");
 
-            userBookingRef
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("RoomBookings")
+                    .whereEqualTo("userID", currentUser.getUid())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    BookingInformation booking = document.toObject(BookingInformation.class);
-                                    userBookings.add(booking);
-                                    Log.d("ProfileActivity", "Booking added: " + booking.getTime()); // Add this line
+                                    RoomBookingInformation booking = document.toObject(RoomBookingInformation.class);
+                                    profile_userBookings.add(booking);
+                                    Log.d("ProfilePage", "Booking added: " + booking.toString());
+
                                 }
-                                bookingAdapter.notifyDataSetChanged();
+                                profile_bookingAdapter.notifyDataSetChanged();
+                                Log.d("ProfilePage", "Adapter notified for dataset change");
                             } else {
                                 Log.d("ProfilePage", "Error getting documents: ", task.getException());
                             }
                         }
                     });
+
+
         }
     }
 

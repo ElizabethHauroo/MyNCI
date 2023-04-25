@@ -1,27 +1,38 @@
 //remove transition animation
 overridePendingTransition(0, 0);
 ----------------------------OVERALL TO DO LIST------------------------------------------
--Admin app?
-admin credentials:
 
+admin credentials:
 mynci-admin@ncirl.ie
 password: I8kNCIzbHbf?$hN
 
-    - admin view all bookings
-    - admin parking notification
+
 -secure password
-    -confirm password?
-    -ncirl credentials only
-    -reset password (admin important!)
--add profile photo on setup
+    -confirm password? //not possible for testing
+    -ncirl credentials // only should be added
+
 - add the maps
--edit account details (setup)
-- fix booking issues
-    -duplicates
-    -deletes
----------------------------------------------------
--admin logout functionality
-- all bookings recycler view (today only)
+- edit account details (setup)  - reset password (admin important!)
+- fix booking issues - duplicates
+- remove the likes
+
+
+
+    DONE Bookings:
+     - Booking WAD, needs to replace old booking system.
+     - admin view all bookings - all bookings recycler view (today only)
+     - deletes bookings
+----------------------REDOING BOOKING ACTIVITY-----------------------------
+
+frag2 most times, the next button won't work.
+the booking should be allowed to happen more than once.
+so after frag3, all information should be cleared.q
+
+BUG: can't do more than 2 bookings at a time, crashes because of null value in roomID, need to remove it from the model class and all other usages.
+firestore.collection("Rooms").document(selectedRoom.getRoomID()).collection("Timeslots").document(String.valueOf(selectedTimeslot.getSlotNumber()))
+
+---------------------------------------------------------------------------
+
 
 
 

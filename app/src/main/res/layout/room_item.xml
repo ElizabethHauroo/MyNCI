@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_booking_room_item"
+    app:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/roomNumber_room_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="1.04"
+            android:textSize="24dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/platinum_grey"/>
+        <TextView
+            android:id="@+id/roomSize_room_item"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="Small"
+            android:textStyle="italic"
+            android:textColor="@color/battleship_grey"
+            />
+        <TextView
+            android:id="@+id/roomDescription_room_item"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="Located on the first floor. Ideal for study sessions."/>
+
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
