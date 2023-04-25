@@ -16,6 +16,7 @@ password: I8kNCIzbHbf?$hN
 - fix booking issues - duplicates
 - remove the likes
 - delete is not deleting from firebase.
+- booked timeslots are showing as booked, but are still clickable.
 
 - duplicate:
     if(in Booked Timeslots: bookingDate AND slotNumber match selectedTimeslot AND selectedDate){
