@@ -69,6 +69,7 @@ public class Fragment2Booking extends Fragment {
         studyRadioButton = view.findViewById(R.id.studyRadioButton_frag1);
         calendarView = view.findViewById(R.id.frag2_calendarView);
         timeslotRecyclerView = view.findViewById(R.id.frag2_rv_timeslots);
+        timeslotRecyclerView.setVisibility(View.GONE); // only show when date is selected - to fix bug
         previousButton = view.findViewById(R.id.frag2_previousBTN);
         nextButton = view.findViewById(R.id.frag2_nextBTN);
         nextButton.setEnabled(false);
@@ -170,6 +171,7 @@ public class Fragment2Booking extends Fragment {
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Calendar selectedCalendar = Calendar.getInstance();
                 selectedCalendar.set(date.getYear(), date.getMonth(), date.getDay());
+                timeslotRecyclerView.setVisibility(View.VISIBLE); // once a date is clicked, show the recycler view
 
                 if (Common.bookingDate.getTimeInMillis() != selectedCalendar.getTimeInMillis()) {
                     Common.bookingDate = selectedCalendar;
