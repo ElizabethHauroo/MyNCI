@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -56,6 +58,7 @@ public class Fragment2Booking extends Fragment {
     private OnTimeslotSelectedListener onTimeslotSelectedListener;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+    private TextView instructionTxt;
 
 
     @Nullable
@@ -68,7 +71,10 @@ public class Fragment2Booking extends Fragment {
         meetingRadioButton = view.findViewById(R.id.meetingRadioButton_frag1);
         studyRadioButton = view.findViewById(R.id.studyRadioButton_frag1);
         calendarView = view.findViewById(R.id.frag2_calendarView);
+        instructionTxt = view.findViewById(R.id.frag2_instructionTxt);
+        instructionTxt.setVisibility(View.VISIBLE);
         timeslotRecyclerView = view.findViewById(R.id.frag2_rv_timeslots);
+        timeslotRecyclerView.setVisibility(View.GONE); // only show when date is selected - to fix bug
         previousButton = view.findViewById(R.id.frag2_previousBTN);
         nextButton = view.findViewById(R.id.frag2_nextBTN);
         nextButton.setEnabled(false);
@@ -170,6 +176,8 @@ public class Fragment2Booking extends Fragment {
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Calendar selectedCalendar = Calendar.getInstance();
                 selectedCalendar.set(date.getYear(), date.getMonth(), date.getDay());
+                instructionTxt.setVisibility(View.GONE);
+                timeslotRecyclerView.setVisibility(View.VISIBLE); // once a date is clicked, show the recycler view
 
                 if (Common.bookingDate.getTimeInMillis() != selectedCalendar.getTimeInMillis()) {
                     Common.bookingDate = selectedCalendar;

@@ -6,13 +6,15 @@ admin credentials:
 mynci-admin@ncirl.ie
 password: I8kNCIzbHbf?$hN
 
-
+- add app image
+- update room descriptions on firebase
+- add toast message on frag 2 (select Reason, timeslot)  change color?
 - secure password
-
+- nav Add button should be popup, create button
 - add the maps
 - edit account details (setup)  - reset password (admin important!)
 - skinnier star (smaller size)
--post popup gui
+- post popup gui
 
 
 
