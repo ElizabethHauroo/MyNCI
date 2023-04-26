@@ -66,7 +66,9 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
         floatingCreatePostButton = findViewById(R.id.floating_create_post_button);
         rvMyCoursePosts.setLayoutManager(new LinearLayoutManager(this));
         postList = new ArrayList<>();
-        postAdapter = new PostAdapter(this, postList, this);
+        //postAdapter = new PostAdapter(this, postList, this);
+        postAdapter = new PostAdapter(this, postList, this, userId);
+
         rvMyCoursePosts.setAdapter(postAdapter);
 
         loadFilteredPosts();
@@ -155,7 +157,9 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
                         DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
                         String postId = postsRef.push().getKey();
 
-                        Post createdPost = new Post(postId, userId, fullName, course, content, currentDateandTime, isCourse, isGeneral, 0, 0);
+                        //Post createdPost = new Post(postId, userId, fullName, course, content, currentDateandTime, isCourse, isGeneral, 0);
+                        Post createdPost = new Post(postId, userId, fullName, course, content, currentDateandTime, isCourse, isGeneral, 0, new ArrayList<String>());
+
 
 
                         postsRef.child(postId).setValue(createdPost).addOnCompleteListener(new OnCompleteListener<Void>() {
