@@ -7,6 +7,7 @@ mynci-admin@ncirl.ie
 password: I8kNCIzbHbf?$hN
 
 - update room descriptions on firebase
+- add toast message on frag 2 (select Reason, timeslot)
 - secure password
 - nav Add button should be popup, create button
 - add the maps
