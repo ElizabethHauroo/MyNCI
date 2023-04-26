@@ -64,7 +64,8 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
         rvNciPosts = findViewById(R.id.rv_nci_posts);
         rvNciPosts.setLayoutManager(new LinearLayoutManager(this));
         postList = new ArrayList<>();
-        postAdapter = new PostAdapter(this, postList,this);
+        postAdapter = new PostAdapter(this, postList, this, userId);
+
         rvNciPosts.setAdapter(postAdapter);
 
         floatingCreatePostButton = findViewById(R.id.floating_nci_create_post_button);
@@ -156,8 +157,8 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
                         DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
                         String postId = postsRef.push().getKey();
 
-                        Post createdPost = new Post(postId, userId, fullName, course, content, currentDateandTime, isCourse, isGeneral, 0, 0);
 
+                        Post createdPost = new Post(postId, userId, fullName, course, content, currentDateandTime, isCourse, isGeneral, 0, new ArrayList<String>());
 
                         postsRef.child(postId).setValue(createdPost).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

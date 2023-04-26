@@ -1,5 +1,7 @@
 package com.example.mynciapp.Model;
 
+import java.util.List;
+
 public class Post {
 
     private String post_id;
@@ -9,13 +11,14 @@ public class Post {
     private String post_content;
     private String post_timestamp;
     public Boolean isCourse, isGeneral;
-    private int post_upvote_Count;
-    private int post_downvote_Count;
+    private int likes;
+    private List<String> likedBy;
+
 
     public Post() {
     }
 
-    public Post(String post_id, String post_authorId, String post_authorName, String post_courseCode, String post_content, String post_timestamp, Boolean isCourse, Boolean isGeneral, int post_upvote_Count, int post_downvote_Count) {
+    public Post(String post_id, String post_authorId, String post_authorName, String post_courseCode, String post_content, String post_timestamp, Boolean isCourse, Boolean isGeneral, int likes, List<String> likedBy) {
         this.post_id = post_id;
         this.post_authorId = post_authorId;
         this.post_authorName = post_authorName;
@@ -24,8 +27,8 @@ public class Post {
         this.post_timestamp = post_timestamp;
         this.isCourse = isCourse;
         this.isGeneral = isGeneral;
-        this.post_upvote_Count = post_upvote_Count;
-        this.post_downvote_Count = post_downvote_Count;
+        this.likes = likes;
+        this.likedBy = likedBy;
     }
 
     public String getPost_id() {
@@ -92,19 +95,19 @@ public class Post {
         isGeneral = general;
     }
 
-    public int getPost_upvote_Count() {
-        return post_upvote_Count;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setPost_upvote_Count(int post_upvote_Count) {
-        this.post_upvote_Count = post_upvote_Count;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
-    public int getPost_downvote_Count() {
-        return post_downvote_Count;
+    public List<String> getLikedBy() {
+        return likedBy;
     }
 
-    public void setPost_downvote_Count(int post_downvote_Count) {
-        this.post_downvote_Count = post_downvote_Count;
+    public void setLikedBy(List<String> likedBy) {
+        this.likedBy = likedBy;
     }
 }
