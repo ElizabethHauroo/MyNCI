@@ -210,10 +210,10 @@ public class HomeActivity extends AppCompatActivity {
                 Boolean isFull = dataSnapshot.getValue(Boolean.class);
                 if (isFull != null && isFull) {
                     parkingStatus.setText("Parking is currently FULL");
-                    parkingStatus.setTextColor(getResources().getColor(R.color.imperial_red));
+                    parkingStatus.setTextColor(getResources().getColor(R.color.orange_pumpkin));
                 } else {
                     parkingStatus.setText("Parking Spaces are Available");
-                    parkingStatus.setTextColor(getResources().getColor(R.color.lime_green));
+                    parkingStatus.setTextColor(getResources().getColor(R.color.blue_cerulean));
                 }
             }
 

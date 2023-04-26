@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/nci_white_bg"
     tools:context=".ProfileActivity">
 
 
@@ -16,14 +16,16 @@
         android:layout_height="match_parent">
 
         <include
-        android:id="@+id/profile_page_toolbar"
-        layout="@layout/app_bar_layout"/>
+            android:id="@+id/profile_page_toolbar"
+            layout="@layout/app_bar_layout"/>
 
         <LinearLayout
             android:id="@+id/profile_header"
+            android:background="#9FFFFFFF"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_below="@id/profile_page_toolbar">
+            android:layout_below="@id/profile_page_toolbar"
+            >
 
             <LinearLayout
                 android:id="@+id/rel_picture"
@@ -33,9 +35,10 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_my_profile_picture"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/defaultprofile"/>
+                    android:src="@drawable/grey_profile"/>
 
             </LinearLayout>
 
@@ -60,7 +63,9 @@
                         android:layout_height="match_parent"
                         android:text="Full Name"
                         android:textAlignment="center"
+                        android:textStyle="bold"
                         android:textSize="20sp"
+                        android:textColor="@color/blue_cerulean"
                         android:fontFamily="@font/biryani_extralight"/>
 
                 </LinearLayout>

@@ -23,11 +23,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:sv_animationType="Circle"
 
-            app:sv_doneCircleColor="@color/royal_purple"
-            app:sv_doneStepLineColor="@color/royal_purple"
+            app:sv_doneCircleColor="@color/blue_cerulean"
+            app:sv_doneStepLineColor="@color/blue_cerulean"
             app:sv_doneStepMarkColor="@color/white"
 
-            app:sv_doneTextColor="@color/royal_purple"
+            app:sv_doneTextColor="@color/blue_cerulean"
             app:sv_selectedCircleColor="@color/platinum_grey"
             app:sv_selectedStepNumberColor="@color/black"
             app:sv_selectedTextColor="@color/black"

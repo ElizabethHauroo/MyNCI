@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blurbg1"
+    android:background="@drawable/nci_white_bg"
     tools:context=".SetupActivity">
 
     <View
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:background="#8F000000" />
+         />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:layout_marginStart="105dp"
             android:layout_marginTop="41dp"
             android:layout_marginEnd="106dp"
-            android:src="@drawable/defaultprofile" />
+            android:src="@drawable/grey_profile" />
 
         <EditText
             android:id="@+id/firstnameTF_setup"
@@ -38,18 +38,19 @@
             android:layout_marginStart="-66dp"
             android:layout_marginTop="34dp"
             android:layout_marginEnd="-73dp"
-            android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/person_icon"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="First Name"
-            android:outlineAmbientShadowColor="#ffffff"
+            android:background="#FFFFFF"
+            android:outlineAmbientShadowColor="@color/black_olive"
+            android:textColor="@color/black_olive"
+            android:textColorHint="@color/battleship_grey"
             android:paddingLeft="20dp"
             android:paddingTop="13dp"
             android:paddingRight="20dp"
             android:paddingBottom="13dp"
-            android:textColor="#f2fdff"
-            android:textColorHint="#f2fdff" />
+             />
 
         <EditText
             android:id="@+id/lastnameTF_setup"
@@ -61,18 +62,18 @@
             android:layout_marginStart="-66dp"
             android:layout_marginTop="34dp"
             android:layout_marginEnd="-73dp"
-            android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Last Name"
-            android:outlineAmbientShadowColor="#ffffff"
             android:paddingLeft="20dp"
             android:paddingTop="13dp"
             android:paddingRight="20dp"
             android:paddingBottom="13dp"
-            android:textColor="#f2fdff"
-            android:textColorHint="#f2fdff" />
+            android:background="#FFFFFF"
+            android:outlineAmbientShadowColor="@color/black_olive"
+            android:textColor="@color/black_olive"
+            android:textColorHint="@color/battleship_grey"/>
 
 
         <EditText
@@ -85,18 +86,18 @@
             android:layout_marginStart="-64dp"
             android:layout_marginTop="34dp"
             android:layout_marginEnd="-73dp"
-            android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/at_sign"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Username"
-            android:outlineAmbientShadowColor="#ffffff"
+            android:hint="Student Number"
             android:paddingLeft="20dp"
             android:paddingTop="13dp"
             android:paddingRight="20dp"
             android:paddingBottom="13dp"
-            android:textColor="#f2fdff"
-            android:textColorHint="#f2fdff" />
+            android:background="#FFFFFF"
+            android:outlineAmbientShadowColor="@color/black_olive"
+            android:textColor="@color/black_olive"
+            android:textColorHint="@color/battleship_grey"/>
 
         <EditText
             android:id="@+id/coursenameTF_setup"
@@ -108,18 +109,18 @@
             android:layout_marginStart="39dp"
             android:layout_marginTop="34dp"
             android:layout_marginEnd="30dp"
-            android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/code_icon"
             android:drawablePadding="10dp"
             android:ems="10"
             android:hint="Course Code"
-            android:outlineAmbientShadowColor="#ffffff"
             android:paddingLeft="20dp"
             android:paddingTop="13dp"
             android:paddingRight="20dp"
             android:paddingBottom="13dp"
-            android:textColor="#f2fdff"
-            android:textColorHint="#f2fdff" />
+            android:background="#FFFFFF"
+            android:outlineAmbientShadowColor="@color/black_olive"
+            android:textColor="@color/black_olive"
+            android:textColorHint="@color/battleship_grey"/>
         <Button
             android:id="@+id/setup_btn"
             android:layout_width="match_parent"
@@ -130,9 +131,9 @@
             android:layout_marginStart="-1dp"
             android:layout_marginTop="34dp"
             android:layout_marginEnd="2dp"
-            android:background="#f2fdff"
+            android:background="@color/blue_cerulean"
             android:text="Save info"
-            android:textColor="#784794" />
+            android:textColor="@color/platinum_grey" />
 
 
 

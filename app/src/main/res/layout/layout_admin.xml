@@ -22,6 +22,8 @@
         android:textAlignment="center"
         android:fontFamily="@font/biryani_extralight"
         android:textColor="@color/black"
+        android:paddingTop="12dp"
+        android:paddingLeft="20dp"
         android:textSize="24sp"
         android:layout_weight="0.9"
         android:text="Admin Page"/>
@@ -30,6 +32,7 @@
         android:id="@+id/admin_logout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:text="Logout"
         />
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/nci_page_bar_toolbar"
-    android:background="@color/battleship_grey"
+    android:background="@color/blue_cerulean"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <TextView

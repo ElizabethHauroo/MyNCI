@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="10dp">
 
     <RelativeLayout
@@ -29,7 +30,7 @@
                 android:text="X"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:background="#B2928779"/>
+                android:background="@color/blue_cerulean"/>
         </FrameLayout>
 
         <LinearLayout
@@ -61,6 +62,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
                 app:cardElevation="10dp">
             <TextView
                 android:id="@+id/post_content_text_view"
@@ -91,7 +93,7 @@
                     android:text="Update"
                     app:cornerRadius="8dp"
                     android:textColor="@color/white"
-                    android:background="@color/mikado_yellow"/>
+                    android:background="@color/blue_cerulean"/>
 
                 <Button
                     android:id="@+id/mypost_delete_btn"
@@ -102,7 +104,7 @@
                     android:text="Delete"
                     app:cornerRadius="8dp"
                     android:textColor="@color/white"
-                    android:background="@color/imperial_red"/>
+                    android:background="@color/mikado_yellow"/>
             </LinearLayout>
 
     </RelativeLayout>

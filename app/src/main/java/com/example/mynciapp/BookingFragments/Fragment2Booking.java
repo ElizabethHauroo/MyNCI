@@ -88,7 +88,7 @@ public class Fragment2Booking extends Fragment {
         });
 
         previousButton.setEnabled(true);
-        previousButton.setBackgroundColor(getResources().getColor(R.color.royal_purple));
+        previousButton.setBackgroundColor(getResources().getColor(R.color.blue_cerulean));
         previousButton.setTextColor(Color.WHITE);
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,7 +220,7 @@ public class Fragment2Booking extends Fragment {
         Context context = getContext();
         if (radioButtonSelected && timeslotSelected && !selectedTimeslot.isBooked()) {
             nextButton.setEnabled(true);
-            nextButton.setBackgroundColor(getResources().getColor(R.color.royal_purple));
+            nextButton.setBackgroundColor(getResources().getColor(R.color.blue_cerulean));
             nextButton.setTextColor(Color.WHITE);
         } else {
             nextButton.setEnabled(false);

@@ -78,7 +78,7 @@
                     android:paddingRight="20dp"
                     android:text="Create Post"
                     android:textColor="@color/white"
-                    android:background="@color/royal_purple"/>
+                    android:background="@color/blue_cerulean"/>
 
             </LinearLayout>
 
