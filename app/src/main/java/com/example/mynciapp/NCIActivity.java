@@ -88,8 +88,8 @@ public class NCIActivity extends AppCompatActivity implements PostAdapter.OnPost
                         startActivity(new Intent(NCIActivity.this, HomeActivity.class));
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.add_bottomnav:
-                        startActivity(new Intent(NCIActivity.this, AddActivity.class));
+                    case R.id.book_bottomnav:
+                        startActivity(new Intent(NCIActivity.this, BookingRoomActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:

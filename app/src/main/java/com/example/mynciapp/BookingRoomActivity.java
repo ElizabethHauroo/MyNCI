@@ -2,15 +2,9 @@ package com.example.mynciapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStateManagerControl;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.mynciapp.BookingFragments.Fragment1Booking;
@@ -19,7 +13,6 @@ import com.example.mynciapp.BookingFragments.Fragment3Booking;
 import com.example.mynciapp.BookingModels.BookingReason;
 import com.example.mynciapp.BookingModels.RoomBooking;
 import com.example.mynciapp.BookingModels.TimeslotBooking;
-import com.example.mynciapp.Common.NonSwipeViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.shuhart.stepview.StepView;
@@ -61,7 +54,7 @@ public class BookingRoomActivity extends AppCompatActivity {
                         startActivity(new Intent(BookingRoomActivity.this, HomeActivity.class));
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.add_bottomnav:
+                    case R.id.book_bottomnav:
                         startActivity(new Intent(BookingRoomActivity.this, AdminActivity.class));
                         overridePendingTransition(0, 0);
                         break;

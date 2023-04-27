@@ -12,8 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -92,8 +90,8 @@ public class MapActivity extends AppCompatActivity {
                         startActivity(new Intent(MapActivity.this, HomeActivity.class));
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.add_bottomnav:
-                        startActivity(new Intent(MapActivity.this, AddActivity.class));
+                    case R.id.book_bottomnav:
+                        startActivity(new Intent(MapActivity.this, BookingRoomActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:

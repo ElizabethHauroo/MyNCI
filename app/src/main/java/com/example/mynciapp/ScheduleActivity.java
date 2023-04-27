@@ -1,7 +1,5 @@
 package com.example.mynciapp;
 
-import static com.example.mynciapp.Common.Common.currentPurpose;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +8,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -29,7 +25,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -193,7 +188,7 @@ public class ScheduleActivity extends AppCompatActivity {
                         startActivity(new Intent(ScheduleActivity.this, HomeActivity.class));
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.add_bottomnav:
+                    case R.id.book_bottomnav:
                         startActivity(new Intent(ScheduleActivity.this, AddActivity.class));
                         overridePendingTransition(0, 0);
                         break;
