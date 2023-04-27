@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,14 +43,15 @@ import com.google.firebase.database.ValueEventListener;
 public class SettingActivity extends AppCompatActivity {
 
     BottomNavigationView nav;
-    Button update_courseBTN, update_pictureBTN, change_passwordBTN;
+    Button update_courseBTN, changeImageButton, change_passwordBTN;
     TextView settings_fullname_txt, settings_studentNumber_txt, settings_course_txt;
+    private ProgressDialog loadingBar;
 
-    private CircleImageView profilePicture;
-    private StorageReference userProfileImageRef;
-
-
-
+    private CircleImageView profilePic;
+    private DatabaseReference usersRef;
+    private StorageReference UserProfileImageRef;
+    String currentUser_ID;
+    final static int Gallery_Pick = 1;
     private FirebaseAuth mAuth;
 
     @Override
@@ -83,21 +88,52 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        loadingBar = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
-        String currentUserID = mAuth.getCurrentUser().getUid();
-        profilePicture = findViewById(R.id.settings_my_profile_picture);
+        currentUser_ID = mAuth.getCurrentUser().getUid();
+        usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser_ID);
+        profilePic = findViewById(R.id.settings_my_profile_picture);
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        userProfileImageRef = storage.getReference().child("Profile Images").child(currentUserID + ".jpg");
+        UserProfileImageRef = storage.getReference().child("Profile Image").child(currentUser_ID + ".jpg");
 
         settings_fullname_txt=findViewById(R.id.settings_fullname_txt);
         settings_studentNumber_txt=findViewById(R.id.settings_studentNumber_txt);
         settings_course_txt=findViewById(R.id.settings_course_txt);
 
         update_courseBTN = findViewById(R.id.settings_update_courseBTN);
-        update_pictureBTN = findViewById(R.id.settings_update_pictureBTN);
+        changeImageButton = findViewById(R.id.settings_update_pictureBTN);
         change_passwordBTN = findViewById(R.id.settings_change_passwordBTN);
 
         getCurrentUserInfo();
+
+        changeImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, Gallery_Pick);
+            }
+        });
+
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild("profileimage")){
+                    String image = snapshot.child("profileimage").getValue().toString();
+                    Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(profilePic);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(SettingActivity.this, "Error: "+error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
 
         update_courseBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +171,7 @@ public class SettingActivity extends AppCompatActivity {
 
                 if (snapshot.hasChild("profileimage")) {
                     String profileImageUrl = snapshot.child("profileimage").getValue().toString();
-                    Picasso.get().load(profileImageUrl).placeholder(R.drawable.defaultprofile).into(profilePicture);
+                    Picasso.get().load(profileImageUrl).placeholder(R.drawable.defaultprofile).into(profilePic);
                 }
 
             }
@@ -146,6 +182,56 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Gallery_Pick && resultCode == RESULT_OK && data != null) {
+            Uri ImageUri = data.getData();
+
+            // Show a loading bar while the image is being uploaded
+            loadingBar.setTitle("Uploading Profile Image");
+            loadingBar.setMessage("Please wait, while we are uploading your profile image...");
+            loadingBar.show();
+            loadingBar.setCanceledOnTouchOutside(false);
+
+            final StorageReference filepath = UserProfileImageRef;
+
+            filepath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+
+                        filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String downloadUrl = uri.toString();
+                                usersRef.child("profileimage").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(SettingActivity.this, "Profile Image updated successfully", Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+                                        } else {
+                                            String message = task.getException().getMessage();
+                                            Toast.makeText(SettingActivity.this, "Error Occurred: " + message, Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        String message = task.getException().getMessage();
+                        Toast.makeText(SettingActivity.this, "Error Occurred: " + message, Toast.LENGTH_SHORT).show();
+                        loadingBar.dismiss();
+                    }
+                }
+            });
+        }
+    }
+
 
     /*
     private void showChangePasswordDialog() {
