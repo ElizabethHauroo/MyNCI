@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.example.mynciapp.BookingFragments.Fragment1Booking;
 import com.example.mynciapp.BookingFragments.Fragment2Booking;
@@ -33,6 +34,7 @@ public class BookingRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_room);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         stepView = findViewById(R.id.step_view_booking);
         stepView.setStepsNumber(3);
