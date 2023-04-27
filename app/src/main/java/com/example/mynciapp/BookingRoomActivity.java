@@ -57,7 +57,7 @@ public class BookingRoomActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.book_bottomnav:
-                        startActivity(new Intent(BookingRoomActivity.this, AdminActivity.class));
+                        startActivity(new Intent(BookingRoomActivity.this, BookingRoomActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:
