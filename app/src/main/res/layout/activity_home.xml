@@ -114,9 +114,9 @@
 
                             <ImageView
                                 android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:layout_height="100dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/map" />
+                                android:src="@drawable/map_icon" />
 
 
 
@@ -167,7 +167,7 @@
                                 android:layout_height="80dp"
                                 android:layout_marginLeft="0dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/schedule" />
+                                android:src="@drawable/booking_icon" />
 
 
 
@@ -218,7 +218,7 @@
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/nciflag" />
+                                android:src="@drawable/nci_flag_icon" />
 
                         </LinearLayout>
 
@@ -267,7 +267,7 @@
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/course" />
+                                android:src="@drawable/course_icon" />
 
 
                         </LinearLayout>
