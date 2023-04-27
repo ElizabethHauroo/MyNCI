@@ -70,8 +70,8 @@ public class SettingActivity extends AppCompatActivity {
                         startActivity(new Intent(SettingActivity.this, HomeActivity.class));
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.add_bottomnav:
-                        startActivity(new Intent(SettingActivity.this, AddActivity.class));
+                    case R.id.book_bottomnav:
+                        startActivity(new Intent(SettingActivity.this, BookingRoomActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:

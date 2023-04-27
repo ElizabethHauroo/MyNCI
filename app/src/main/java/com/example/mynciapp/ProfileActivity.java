@@ -3,7 +3,6 @@ package com.example.mynciapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mynciapp.Adapter.MyProfileBookingsAdapter;
 
@@ -24,7 +23,6 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-import com.example.mynciapp.Adapter.MyProfileBookingsAdapter;
 import com.example.mynciapp.Common.SpacesItemDecoration;
 import com.example.mynciapp.Model.BookingInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,11 +36,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,8 +108,8 @@ public class ProfileActivity extends AppCompatActivity {
                         startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.add_bottomnav:
-                        startActivity(new Intent(ProfileActivity.this, AddActivity.class));
+                    case R.id.book_bottomnav:
+                        startActivity(new Intent(ProfileActivity.this, BookingRoomActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:

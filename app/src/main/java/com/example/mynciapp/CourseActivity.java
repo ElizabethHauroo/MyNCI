@@ -89,8 +89,8 @@ public class CourseActivity extends AppCompatActivity implements PostAdapter.OnP
                         startActivity(new Intent(CourseActivity.this, HomeActivity.class));
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.add_bottomnav:
-                        startActivity(new Intent(CourseActivity.this, AddActivity.class));
+                    case R.id.book_bottomnav:
+                        startActivity(new Intent(CourseActivity.this, BookingRoomActivity.class));
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.profile_bottomnav:
