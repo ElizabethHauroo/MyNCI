@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="10dp"
-    android:layout_margin="1dp">
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:id="@+id/main_linear_admin_booking"
@@ -25,6 +25,7 @@
                 android:text="3.09"
                 android:rotation="-90"
                 android:textSize="30dp"
+                android:textColor="@color/blue_cerulean"
                 android:layout_gravity="center_vertical"/>
 
 
@@ -50,7 +51,7 @@
             <LinearLayout
                 android:id="@+id/linear_header_admin_booking"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
                 <LinearLayout
@@ -113,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Johnathan Grey"
-                    android:textSize="30dp"
+                    android:textSize="28dp"
                     android:gravity="center"/>
 
             </LinearLayout>

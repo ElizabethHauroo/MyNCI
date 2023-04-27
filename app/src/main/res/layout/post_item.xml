@@ -18,7 +18,7 @@
             android:layout_weight="0.7"
             android:layout_height="match_parent"
             android:textSize="18sp"
-            android:textColor="@color/royal_purple"
+            android:textColor="@color/blue_cerulean"
             android:fontFamily="@font/biryani_extralight"
             android:paddingTop="8dp"
             android:layout_marginLeft="15dp"
@@ -84,7 +84,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:gravity="bottom"
+            android:gravity="center"
             android:text="3"/>
 
 

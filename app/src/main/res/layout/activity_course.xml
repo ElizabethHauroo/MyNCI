@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CourseActivity"
-    android:background="@drawable/white_faded_bg">
+    android:background="@drawable/nci_white_bg">
 
     <!--TOP BAR -->
     <include

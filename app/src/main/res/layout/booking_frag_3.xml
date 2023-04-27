@@ -196,8 +196,9 @@
         android:layout_above="@+id/txt_skip"
         android:text="C O N F I R M   B O O K I N G"
         android:textSize="18sp"
+        android:textColor="@color/white"
         android:fontFamily="@font/biryani_extralight"
-        android:background="@color/mikado_yellow"/>
+        android:background="@color/blue_cerulean"/>
 
 
 
