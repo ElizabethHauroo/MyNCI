@@ -19,9 +19,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -74,6 +78,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 onLikeButtonClick(post, holder.post_like_btn, holder.post_like_count);
+            }
+        });
+
+        // get user data from Firebase
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(post.getPost_authorId());
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild("profileimage")) {
+                    String profileImageUrl = dataSnapshot.child("profileimage").getValue(String.class);
+                    // Use Picasso to load the image
+                    Picasso.get().load(profileImageUrl).placeholder(R.drawable.grey_profile).into(holder.post_author_image);
+                } else {
+                    // No profile image, load placeholder
+                    Picasso.get().load(R.drawable.grey_profile).into(holder.post_author_image);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle error...
             }
         });
 
@@ -151,6 +175,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ImageButton post_like_btn;
         public TextView post_like_count;
         //public ImageButton post_dislike_btn;
+        public CircleImageView post_author_image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -161,6 +186,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             post_like_btn = itemView.findViewById(R.id.post_like_btn);
             post_like_count = itemView.findViewById(R.id.post_like_count);
             //post_dislike_btn = itemView.findViewById(R.id.post_dislike_btn);
+            post_author_image = itemView.findViewById(R.id.post_profile_image);
         }
     }
 
