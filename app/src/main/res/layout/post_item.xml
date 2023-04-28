@@ -74,7 +74,7 @@
         android:id="@+id/rel_post_sub"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:layout_below="@id/cardview_post_content"
         android:orientation="horizontal">
         <ImageButton
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/star"
+            android:src="@drawable/star_btn"
             android:background="@android:color/transparent" />
 
         <TextView

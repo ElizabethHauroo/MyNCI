@@ -61,9 +61,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         List<String> likedBy = post.getLikedBy();
         if (likedBy != null && likedBy.contains(currentUserId)) {
-            holder.post_like_btn.setImageResource(R.drawable.star_selected);
+            holder.post_like_btn.setImageResource(R.drawable.star_btn_selected);
         } else {
-            holder.post_like_btn.setImageResource(R.drawable.star);
+            holder.post_like_btn.setImageResource(R.drawable.star_btn);
         }
 
 
@@ -147,9 +147,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                             post_like_count.setText(String.valueOf(updatedPost.getLikes()));
                             List<String> updatedLikedBy = updatedPost.getLikedBy();
                             if (updatedLikedBy != null && updatedLikedBy.contains(currentUserId)) {
-                                post_like_btn.setImageResource(R.drawable.star_selected);
+                                post_like_btn.setImageResource(R.drawable.star_btn_selected);
                             } else {
-                                post_like_btn.setImageResource(R.drawable.star);
+                                post_like_btn.setImageResource(R.drawable.star_btn);
                             }
                         }
                     } else {
