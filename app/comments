@@ -6,13 +6,13 @@ admin credentials:
 mynci-admin@ncirl.ie
 password: I8kNCIzbHbf?$hN
 
-- logo animation (https://www.youtube.com/watch?v=icmQOZp4p6I)
+- add the maps
 - update room descriptions on firebase
 - add toast message on frag 2 (select Reason, timeslot)  change color?
 - secure password
-- nav Add button should be popup, create button
-- add the maps
-- edit account details (setup)  - reset password (admin important!)
+- reset password (admin important!)
+
+BUG: 2.09, study, 12, 28.04
 
 
 
@@ -27,6 +27,10 @@ password: I8kNCIzbHbf?$hN
      - duplicate:
      - fix booking issues - duplicates
      - ncirl credentials // only should be added
+     - edit picture (setup)
+     - logo animation (https://www.youtube.com/watch?v=icmQOZp4p6I)
+     - nav Add button should be popup, create button
+
 - confirm password? //not possible for testing
 ----------------------REDOING BOOKING ACTIVITY-----------------------------
 

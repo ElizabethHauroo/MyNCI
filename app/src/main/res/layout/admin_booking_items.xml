@@ -66,6 +66,7 @@
                         android:layout_height="match_parent"
                         android:text="12:00 - 13:00"
                         android:textSize="20dp"
+                        android:textColor="@color/blue_cerulean"
                         android:gravity="center"/>
 
                 </LinearLayout>
@@ -90,6 +91,7 @@
                         android:layout_height="match_parent"
                         android:text="Meeting"
                         android:textSize="20dp"
+                        android:textColor="@color/blue_cerulean"
                         android:gravity="center"/>
 
                 </LinearLayout>

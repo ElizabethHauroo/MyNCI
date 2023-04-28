@@ -47,14 +47,30 @@
         android:layout_below="@id/admin_divider"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
         <TextView
             android:id="@+id/bookingTitle_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
             android:text="Today's Room Bookings"
             android:textAlignment="center"
+            android:paddingLeft="20dp"
             android:textSize="25dp"
+            android:layout_weight="0.95"
             android:layout_marginBottom="20dp"/>
+
+            <ImageView
+                android:id="@+id/admin_refresh"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/reload"/>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_admin_bookings"

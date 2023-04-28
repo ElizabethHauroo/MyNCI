@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -41,6 +44,7 @@ public class AdminActivity extends AppCompatActivity {
     private Switch parkingSwitch;
     private DatabaseReference parkingRef;
     private Button admin_logout_btn;
+    private ImageView refreshBTN;
 
     private RecyclerView rvAdminBookings;
     private AdminBookingsAdapter adminBookingsAdapter;
@@ -58,6 +62,7 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mAuth=FirebaseAuth.getInstance();
         parkingSwitch = findViewById(R.id.parking_switch);
@@ -79,6 +84,16 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminActivity.this, MainActivity.class)); //send back to login page
             }
         });
+
+        refreshBTN = (ImageView) findViewById(R.id.admin_refresh);
+        refreshBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminActivity.this, AdminActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
+
 
         parkingRef = FirebaseDatabase.getInstance().getReference("parking");
 

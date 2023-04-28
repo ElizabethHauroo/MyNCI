@@ -12,6 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/post_profile_image"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/grey_profile"/>
         <TextView
             android:id="@+id/post_author_name_textView"
             android:layout_width="0dp"
@@ -21,7 +29,7 @@
             android:textColor="@color/blue_cerulean"
             android:fontFamily="@font/biryani_extralight"
             android:paddingTop="8dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:text=" Valerie Chunnee"/>
 
@@ -66,7 +74,7 @@
         android:id="@+id/rel_post_sub"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:layout_below="@id/cardview_post_content"
         android:orientation="horizontal">
         <ImageButton
@@ -75,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/star"
+            android:src="@drawable/star_btn"
             android:background="@android:color/transparent" />
 
         <TextView
