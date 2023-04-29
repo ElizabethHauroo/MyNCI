@@ -4,21 +4,203 @@
     <string name="drawer_close">Drawer Close</string>
 
     <string-array name="map_room_names_for_search">
-        <item>1.01</item>
-        <item>1.02</item>
-        <item>1.03</item>
-        <item>1.04</item>
-        <item>1.05</item>
-        <item>1.06</item>
+        <!--All Floors-->
+
+
+
+
+
+
+        <!--Ground Floor-->
+        <item>Ground Floor</item>
+        <item>Ground: Library</item>
+        <item>GROUND: Kelly Theatre</item>
+        <item>GROUND: Fusion | Canteen</item>
+        <item>GROUND: Centre for Student Support &amp; Career development</item>
+        <item>GROUND: Reception</item>
+        <item>GROUND: Student Services</item>
+        <item>GROUND: Maths &amp; Development Support</item>
+        <!--1st Floor-->
+        <item>First Floor</item>
+        <item>1st: SCR1 | Studio Classroom 1 | 1.01</item>
+        <item>1st: 1.02</item>
+        <item>1st: 1.03</item>
+        <item>1st: 1.04</item>
+        <item>1st: Multimedia Lab | 1.05</item>
+        <item>1st: Teaching &amp; Learning Tech Centre | 1.06</item>
+        <item>1st: Lecture Theatre 1 | 1.12</item>
+        <item>1st: 1.11</item>
+        <item>1st: Dr April Hargreaves | 1.10</item>
+        <item>1st: IT Comms Equipment</item>
+        <item>1st: Comms Room 1</item>
+        <item>1st: Student Self Service</item>
+        <item>1st: Quiet Space</item>
+
+        <!--2nd Floor-->
+        <item>Second Floor</item>
+        <item>2nd: SCR2 | Studio Classroom 2 | 2.01</item>
+        <item>2nd: 2.02</item>
+        <item>2nd: 2.03</item>
+        <item>2nd: 2.04</item>
+        <item>2nd: 2.05 | 2.06</item>
+        <item>2nd: Prayer Room | First Aid | 2.07</item>
+        <item>2nd: Pierse | Lecture Theatre 2 | 2.09</item>
+        <item>2nd: Dr David Mothersill | 2.28</item>
+        <item>2nd: Dr Gaia Barone | 2.25</item><item>2nd: Dr Fearghal O\'Brien | 2.25</item>
+        <item>2nd: Dr Catriona Hughes |  2.27</item><item>2nd: Dave Cormack | 2.27</item><item>2nd: Bronwyn McFarlene | 2.27</item>
+        <item>2nd: Psychology Lab 2 | 2.26</item> <!--picture-->
+        <item>2nd: 2.08</item>
+        <item>2nd: Comms Room 2</item>
+        <item>2nd: Dr Louise Maguire | 2.11</item><item>2nd: Dr Nicole Gross | 2.11</item>
+        <item>2nd: Theresa Mulcahy | 2.12</item><item>2nd: Michael Bane | 2.12</item>
+        <item>2nd: Dr TJ McCabe | 2.13</item><item>2nd: Fabian Armendariz | 2.13</item>
+        <item>2nd: Dr Corina Sheerin | 2.14</item><item>2nd: Dr Michelle Kelly | 2.14</item>
+        <item>2nd: Desmond Gibney | 2.15</item><item>2nd: Dr Gerald Loughnane | 2.15</item>
+        <item>2nd: Dr Amanda Kracen | 2.16</item><item>2nd: Dr Conor Nolan | 2.16</item>
+        <item>2nd: Dr Caoimhe Hannigan | 2.17</item> <item>2nd: Pauline Kelly | 2.17</item>
+        <item>2nd: Ms Karen Murray BL | 2.18</item><item>2nd: Michele Kehoe | 2.18</item>
+        <item>2nd: 2.19</item>
+
+        <!--3rd Floor-->
+        <item>Third Floor</item>
+        <item>3rd: SCR3 | Studio Classroom 3 | 3.01</item>
+        <item>3rd: 3.02</item>
+        <item>3rd: Hardware Teaching Lab | 3.03</item>
+        <item>3rd: 3.04</item>
+        <item>3rd: Lecture Theatre 3 | Dennis O\'Brien | 3.09</item>
+        <item>3rd: Executive Suite | 3.25</item>
+        <item>3rd: Professor Paul Stynes | 3.24</item><item>3rd: Dean of School of Computing | 3.24</item>
+        <item>3rd: Psychology Lab 1 | 3.08</item>
+        <item>3rd: Comms Room 3</item>
+        <item>3rd: Head of Cloud Competency| 3.11</item><item>3rd: Dr Horacio Gonzalez-Velez | 3.11</item>
+        <item>3rd: Emer Thornbury | 3.12</item><item>3rd: Anshu Shahdeo | 3.12</item>
+        <item>3rd: Dr Cristina Muntean | 3.13</item><item>3rd: Vice-Dean School of Computing | 3.13</item>
+        <item>3rd: Professor Leo Casey | 3.14</item><item>3rd: Director, Centre for Education &amp; Lifelong Learning | 3.14</item>
+        <item>3rd: Dr Keith Maycock | 3.15</item> <item>3rd: Dr Anu Sahni | 3.15</item>
+        <item>3rd: Dr Adriana E. Chis | 3.16</item><item>3rd: Dr Rohit Verma | 3.16</item>
+        <item>3rd: Michael Bradford | 3.17</item><item>3rd: Dr Shivani Jaswal | 3.17</item>
+        <item>3rd: Sam Cogan | 3.18</item>
+        <item>3rd: 3.19</item>
+
+        <!--4th Floor-->
+        <item>Forth Floor</item>
+        <item>4th: Cloud Competency Centre | 4.01</item>
+        <item>4th: 4.03</item>
+        <item>4th: Boarding Room 1 | 4.04</item>
+        <item>4th: Finance Department | 4.05</item>
+        <item>4th: Common Kitchen (Staff) </item>
+        <item>4th: Liffey Suite</item>
+        <item>4th: 4.09</item>
+        <item>4th: Photocopying Room</item>
+        <item>4th: President\'s Office</item><item>4th: Vice-President\'s Office</item>
+        <item>4th: Boarding Room 2 | 4.25</item>
+        <item>4th: International Office</item>
+        <item>4th: Classroom | 4.26</item>
+        <item>4th: 4.18</item>
+        <item>4th: Jonathan Brittain | 4.10</item><item>4th: Rachel Doherty | 4.10</item>
+        <item>4th: Dr Athanasios Staikopoulos| 4.11</item><item>4th: Frances Sheridan | 4.11</item><item>4th: Lisa Murphy | 4.11</item><item>4th: Dr Vanesa Ayla-Rivera| 4.11</item><item>4th: William Clifford | 4.11</item>
+        <item>4th: NCI Office | 4.12</item>
+        <item>4th: Shauni Hegarty| 4.13</item><item>4th: Programme Lifecycle Manager | 4.13</item><item>4th: Dr Michael Cleary-Gaffney | 4.13</item><item>4th: Administrator Coordinator| 4.13</item>
+        <item>4th: Patricia Maguire | 4.15</item>
+        <item>4th: Karen Jones | 4.16</item><item>4th: College Registrar | 4.16</item>
+
+
     </string-array>
 
     <string-array name="map_images">
-        <item>map_room_101</item>
-        <item>map_room_102</item>
-        <item>map_room_103</item>
-        <item>map_room_104</item>
-        <item>map_room_105</item>
-        <item>map_room_106</item>
+        <!--Ground Floor-->
+        <item>nci_0_0_ground</item>
+        <item>nci_0_2_library</item>
+        <item>nci_0_1_kelly_theatre</item>
+        <item>nci_0_3_fusion</item>
+        <item>nci_0_4_centre</item>
+        <item>nci_0_5_reception</item>
+        <item>nci_0_6_service</item>
+        <item>nci_0_7_support</item>
+        <!--1st Floor-->
+        <item>nci_1_0_first</item>
+        <item>nci_1_01</item>
+        <item>nci_1_02</item>
+        <item>nci_1_03</item>
+        <item>nci_1_04</item>
+        <item>nci_1_05</item>
+        <item>nci_1_06</item>
+        <item>nci_1_12_theatre1</item>
+        <item>nci_1_11</item>
+        <item>nci_1_10</item>
+        <item>nci_1_it_comms</item>
+        <item>nci_1_comms1</item>
+        <item>nci_1_student_services</item>
+        <item>nci_1_quiet_space</item>
+
+
+        <!--2nd Floor-->
+        <item>nci_2_0_second</item>
+        <item>nci_2_01</item>
+        <item>nci_2_02</item>
+        <item>nci_2_03</item>
+        <item>nci_2_04</item>
+        <item>nci_2_056</item>
+        <item>nci_2_07_prayer</item>
+        <item>nci_2_09</item>
+        <item>nci_2_28</item>
+        <item>nci_2_10</item><item>nci_2_10</item>
+        <item>nci_2_26</item><item>nci_2_26</item><item>nci_2_26</item>
+        <item>nci_2_25</item> <!--picture-->
+        <item>nci_2_08</item>
+        <item>nci_2_comms_2</item>
+        <item>nci_2_11</item><item>nci_2_11</item>
+        <item>nci_2_12</item><item>nci_2_12</item>
+        <item>nci_2_13</item><item>nci_2_13</item>
+        <item>nci_2_14</item><item>nci_2_14</item>
+        <item>nci_2_15</item><item>nci_2_15</item>
+        <item>nci_2_16</item><item>nci_2_16</item>
+        <item>nci_2_17</item> <item>nci_2_17</item>
+        <item>nci_2_18</item><item>nci_2_18</item>
+        <item>nci_2_19</item>
+
+        <!--3rd Floor-->
+        <item>nci_3_0_third</item>
+        <item>nci_3_01</item>
+        <item>nci_3_02</item>
+        <item>nci_3_03</item>
+        <item>nci_3_04</item>
+        <item>nci_3_09</item>
+        <item>nci_3_25</item>
+        <item>nci_3_24</item><item>nci_3_24</item>
+        <item>nci_3_08</item>
+        <item>nci_3_comms_3</item>
+        <item>nci_3_11</item><item>nci_3_11</item>
+        <item>nci_3_12</item><item>nci_3_12</item>
+        <item>nci_3_13</item><item>nci_3_13</item>
+        <item>nci_3_14</item><item>nci_3_14</item>
+        <item>nci_3_15</item> <item>nci_3_15</item>
+        <item>nci_3_16</item><item>nci_3_16</item>
+        <item>nci_3_17</item><item>nci_3_17</item>
+        <item>nci_3_18</item>
+        <item>nci_3_19</item>
+
+        <!--4th Floor-->
+        <item>nci_4_0_forth</item>
+        <item>nci_4_01</item>
+        <item>nci_4_03</item>
+        <item>nci_4_04</item>
+        <item>nci_4_05</item>
+        <item>nci_4_kitchen</item>
+        <item>nci_4_liffey_suite</item>
+        <item>nci_4_09</item>
+        <item>nci_4_copying</item>
+        <item>nci_4_president</item><item>nci_4_president</item>
+        <item>nci_4_25</item>
+        <item>nci_4_int</item>
+        <item>nci_4_26</item>
+        <item>nci_4_18</item>
+        <item>nci_4_10</item><item>nci_4_10</item>
+        <item>nci_4_11</item><item>nci_4_11</item><item>nci_4_11</item><item>nci_4_11</item><item>nci_4_11</item>
+        <item>nci_4_12_13</item>
+        <item>nci_4_14</item><item>nci_4_14</item><item>nci_4_14</item><item>nci_4_14</item>
+        <item>nci_4_15</item>
+        <item>nci_4_16</item><item>nci_4_16</item>
     </string-array>
 
 </resources>
