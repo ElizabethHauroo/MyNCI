@@ -9,7 +9,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -278,12 +280,54 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, SettingActivity.class));
                 overridePendingTransition(0, 0);
                 break;
+            case R.id.nav_moodle:
+                goToMoodle();
+                break;
+            case R.id.nav_teams:
+                goToTeams();
+                break;
             case R.id.nav_logout:
                 mAuth.signOut();
                 SendUserToLogin();
                 break;
 
 
+        }
+    }
+
+    private void goToMoodle() {
+        String packageName = "com.moodle.moodlemobile";
+        Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
+        try {
+            if (intent != null) {
+                startActivity(intent);
+            } else {
+                String url = "https://mymoodle.ncirl.ie/";
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(webIntent);
+            }
+        } catch (ActivityNotFoundException e) {
+            String url = "https://mymoodle.ncirl.ie/";
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(webIntent);
+        }
+    }
+
+    private void goToTeams() {
+        String packageName = "com.microsoft.teams";
+        Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
+        try {
+            if (intent != null) {
+                startActivity(intent);
+            } else {
+                String url = "https://teams.microsoft.com/";
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(webIntent);
+            }
+        } catch (ActivityNotFoundException e) {
+            String url = "https://teams.microsoft.com/";
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(webIntent);
         }
     }
 

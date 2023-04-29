@@ -6,7 +6,7 @@ admin credentials:
 mynci-admin@ncirl.ie
 password: I8kNCIzbHbf?$hN
 
-- add the maps
+
 - update room descriptions on firebase
 - add toast message on frag 2 (select Reason, timeslot)  change color?
 - secure password
@@ -30,6 +30,7 @@ BUG: 2.09, study, 12, 28.04
      - edit picture (setup)
      - logo animation (https://www.youtube.com/watch?v=icmQOZp4p6I)
      - nav Add button should be popup, create button
+     - add the maps
 
 - confirm password? //not possible for testing
 ----------------------REDOING BOOKING ACTIVITY-----------------------------

@@ -11,6 +11,16 @@
         android:icon="@drawable/setting"/>
 
     <item
+        android:id="@+id/nav_moodle"
+        android:title="Go to Moodle"
+        android:icon="@drawable/moodle"/>
+
+    <item
+        android:id="@+id/nav_teams"
+        android:title="Go to Teams"
+        android:icon="@drawable/teams"/>
+
+    <item
         android:id="@+id/nav_logout"
         android:title="Logout"
         android:icon="@drawable/logout"/>
