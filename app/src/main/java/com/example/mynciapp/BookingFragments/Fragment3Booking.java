@@ -20,8 +20,10 @@ import android.widget.Toast;
 import com.example.mynciapp.BookingModels.BookingReason;
 import com.example.mynciapp.BookingModels.RoomBooking;
 import com.example.mynciapp.BookingModels.TimeslotBooking;
+import com.example.mynciapp.BookingRoomActivity;
 import com.example.mynciapp.HomeActivity;
 import com.example.mynciapp.R;
+import com.example.mynciapp.SettingActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,7 +46,7 @@ public class Fragment3Booking extends Fragment {
     private TextView frag3BookingReasonTxt;
     private TextView frag3RoomSize;
     private TextView frag3RoomNumber;
-    private Button frag3BtnConfirm;
+    private Button frag3BtnConfirm, frag3BtnCancel;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
 
@@ -73,6 +75,7 @@ public class Fragment3Booking extends Fragment {
         frag3RoomSize = view.findViewById(R.id.frag3_roomSize);
         frag3RoomNumber = view.findViewById(R.id.frag3_roomNumber);
         frag3BtnConfirm = view.findViewById(R.id.frag3_btn_confirm);
+        frag3BtnCancel = view.findViewById(R.id.frag3_cancel_btn);
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUserID);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -152,6 +155,13 @@ public class Fragment3Booking extends Fragment {
             }
         });
 
+        frag3BtnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BookingRoomActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
 
