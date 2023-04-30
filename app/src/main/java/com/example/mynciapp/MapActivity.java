@@ -14,6 +14,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -21,7 +23,8 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 public class MapActivity extends AppCompatActivity {
 
     private Button first, second, third, forth;
-    private ImageView imageBox;
+    //private ImageView imageBox;
+    private SubsamplingScaleImageView imageBox;
     BottomNavigationView nav;
 
     private AutoCompleteTextView autoCompleteTextView;
@@ -53,33 +56,39 @@ public class MapActivity extends AppCompatActivity {
         second=(Button) findViewById(R.id.second_floor_map);
         third=(Button) findViewById(R.id.third_floor_map);
         forth=(Button) findViewById(R.id.forth_floor_map);
-        imageBox = (ImageView) findViewById(R.id.map_mainview);
+        //imageBox = (ImageView) findViewById(R.id.map_mainview);
+        imageBox = (SubsamplingScaleImageView) findViewById(R.id.map_mainview);
+        imageBox.setImage(ImageSource.resource(R.drawable.nci_0_0_ground));
 
         nav=findViewById(R.id.bottom_navigation_map);
 
         first.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.nci_1_0_first);
+                //imageBox.setImageResource(R.drawable.nci_1_0_first);
+                imageBox.setImage(ImageSource.resource(R.drawable.nci_1_0_first));
             }
         });
 
         second.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.nci_2_0_second);
+                //imageBox.setImageResource(R.drawable.nci_2_0_second);
+                imageBox.setImage(ImageSource.resource(R.drawable.nci_2_0_second));
             }
         });
         third.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.nci_3_0_third);
+                //imageBox.setImageResource(R.drawable.nci_3_0_third);
+                imageBox.setImage(ImageSource.resource(R.drawable.nci_3_0_third));
             }
         });
         forth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imageBox.setImageResource(R.drawable.nci_4_0_forth);
+                //imageBox.setImageResource(R.drawable.nci_4_0_forth);
+                imageBox.setImage(ImageSource.resource(R.drawable.nci_4_0_forth));
             }
         });
         //BOTTOM NAVIGATION
@@ -134,7 +143,8 @@ public class MapActivity extends AppCompatActivity {
         }
 
         if (index >= 0) {
-            imageBox.setImageResource(map_images[index]);
+            //imageBox.setImageResource(map_images[index]);
+            imageBox.setImage(ImageSource.resource(map_images[index]));
         }
     }
 
