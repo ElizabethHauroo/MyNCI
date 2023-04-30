@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     EditText emailTF, pswdTF;
     Button loginBTN;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String nciPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+\\.[a-z]+";
     ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         String password=pswdTF.getText().toString();
 
 
-        if(!email.matches(emailPattern)){
+        if(!email.matches(nciPattern)){
             emailTF.setError("Enter valid email");
         }else if(password.isEmpty()){
             pswdTF.setError("Please Enter a Password");

@@ -286,6 +286,9 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.nav_teams:
                 goToTeams();
                 break;
+            case R.id.nav_timetable:
+                goToTimetable();
+                break;
             case R.id.nav_logout:
                 mAuth.signOut();
                 SendUserToLogin();
@@ -294,6 +297,8 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
+
+
 
     private void goToMoodle() {
         String packageName = "com.moodle.moodlemobile";
@@ -329,6 +334,12 @@ public class HomeActivity extends AppCompatActivity {
             Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(webIntent);
         }
+    }
+
+    private void goToTimetable() {
+        String url = "https://scientia-opentt-ncirl.azurewebsites.net/";
+        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(webIntent);
     }
 
     private void SendUserToLogin() {
