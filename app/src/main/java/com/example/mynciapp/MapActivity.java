@@ -58,6 +58,7 @@ public class MapActivity extends AppCompatActivity {
         forth=(Button) findViewById(R.id.forth_floor_map);
         //imageBox = (ImageView) findViewById(R.id.map_mainview);
         imageBox = (SubsamplingScaleImageView) findViewById(R.id.map_mainview);
+        imageBox.setImage(ImageSource.resource(R.drawable.nci_0_0_ground));
 
         nav=findViewById(R.id.bottom_navigation_map);
 
