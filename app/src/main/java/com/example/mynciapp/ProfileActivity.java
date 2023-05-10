@@ -64,8 +64,8 @@ public class ProfileActivity extends AppCompatActivity {
     private MyProfileBookingsAdapter bookingAdapter;
     private List<BookingInformation> userBookings;
 
-    private RoomProfileBookingsAdapter profile_bookingAdapter;
-    private List<RoomBookingInformation> profile_userBookings;
+    protected RoomProfileBookingsAdapter profile_bookingAdapter;
+    protected List<RoomBookingInformation> profile_userBookings;
 
 
     BottomNavigationView nav;
@@ -166,7 +166,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void loadUserBookings() {
+    protected void loadUserBookings() {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {

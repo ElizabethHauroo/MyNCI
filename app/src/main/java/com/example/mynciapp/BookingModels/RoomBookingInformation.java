@@ -19,6 +19,9 @@ public class RoomBookingInformation {
         this.userID = userID;
     }
 
+    public RoomBookingInformation(String testUser, String room1, String s, String s1) {
+    }
+
     public String getBookingReason() {
         return BookingReason;
     }

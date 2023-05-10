@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Collection;
 import java.util.List;
 
 public class RoomProfileBookingsAdapter extends RecyclerView.Adapter<RoomProfileBookingsAdapter.ViewHolder> {
@@ -149,6 +150,10 @@ public class RoomProfileBookingsAdapter extends RecyclerView.Adapter<RoomProfile
     @Override
     public int getItemCount() {
         return profileBookingList.size();
+    }
+
+    public List<RoomBookingInformation> getBookings() {
+        return profileBookingList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

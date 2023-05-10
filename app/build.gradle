@@ -64,6 +64,14 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     //implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:3.11.2'
+    androidTestImplementation 'org.mockito:mockito-core:3.12.4'
+    //androidTestImplementation 'com.github.xtendo-org.mockito-extensions:mockito-reflection:0.2.0'
+
+
+
+
 
 
 

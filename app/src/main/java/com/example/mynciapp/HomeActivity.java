@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private String currentUserID;
-    private DatabaseReference UsersRef;
+
 
     private TextView parkingStatus;
     private DatabaseReference parkingRef;
@@ -62,8 +63,44 @@ public class HomeActivity extends AppCompatActivity {
 
 
         mAuth=FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
         currentUserID = mAuth.getCurrentUser().getUid();
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users"); // creating the users node, where we will be sotring all the user's information - unique uid
+        } else {
+            // Handle the case where the user is null
+        }
+        //UsersRef = FirebaseDatabase.getInstance().getReference().child("Users"); // creating the users node, where we will be sotring all the user's information - unique uid
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        if (database != null) {
+            DatabaseReference UsersRef = database.getReference().child("Users");
+            UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.hasChild("firstname")&&snapshot.hasChild("lastname")){
+                        String firstname = snapshot.child("firstname").getValue().toString();
+                        String lastname = snapshot.child("lastname").getValue().toString();
+                        String fullname = firstname + " "+ lastname;
+                        NavProfileUserName.setText(fullname);
+                    }
+
+                    if(snapshot.hasChild("profileimage")){
+                        String image = snapshot.child("profileimage").getValue().toString();
+                        //let's display them on the navigation view
+                        Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(NavProfileImage);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        } else {
+
+        }
 
 
         mToolbar = (Toolbar)findViewById(R.id.main_page_toolbar);
@@ -89,29 +126,7 @@ public class HomeActivity extends AppCompatActivity {
         NavProfileImage=(CircleImageView)navView.findViewById(R.id.nav_profileImage); //we have to parse Nav View here
         NavProfileUserName = (TextView)navView.findViewById(R.id.nav_profilename);
 
-        UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.hasChild("firstname")&&snapshot.hasChild("lastname")){
-                    String firstname = snapshot.child("firstname").getValue().toString();
-                    String lastname = snapshot.child("lastname").getValue().toString();
-                    String fullname = firstname + " "+ lastname;
-                    NavProfileUserName.setText(fullname);
-                }
 
-                if(snapshot.hasChild("profileimage")){
-                    String image = snapshot.child("profileimage").getValue().toString();
-                    //let's display them on the navigation view
-                    Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(NavProfileImage);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         nav=findViewById(R.id.bottom_navigation);
 
@@ -218,47 +233,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if(currentUser ==null){
-            SendUserToLogin();
-        }else{
-            CheckUSerExistence();
-        }
-    }
-
-
-    private void CheckUSerExistence() {
-        final String current_user_id = mAuth.getCurrentUser().getUid();
-
-        UsersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!snapshot.hasChild(current_user_id)){
-                    //if this does not exist, then we need to add it to database. So we have to send them to setup
-                    SendUserToSetup();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void SendUserToSetup() {
-        Intent intent=new Intent(HomeActivity.this,SetupActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-    
-     */
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
