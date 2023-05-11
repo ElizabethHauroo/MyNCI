@@ -87,29 +87,6 @@ public class RoomProfileBookingsAdapter extends RecyclerView.Adapter<RoomProfile
         dialog.show();
     }
 
-    /*
-    private void cancelBooking(RoomBookingInformation booking) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("RoomBookings")
-                .document(booking.getBookingID())
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Booking canceled successfully.", Toast.LENGTH_SHORT).show();
-                        // Remove the canceled booking from the list and notify the adapter
-                        profileBookingList.remove(booking);
-                        notifyDataSetChanged();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Failed to cancel booking: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-    */
 
     private void cancelBooking(RoomBookingInformation booking) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -161,15 +138,7 @@ public class RoomProfileBookingsAdapter extends RecyclerView.Adapter<RoomProfile
             my_bookings_roomNum = itemView.findViewById(R.id.my_bookings_roomNum);
             my_bookings_date = itemView.findViewById(R.id.my_bookings_date);
             my_bookings_time = itemView.findViewById(R.id.my_bookings_time);
-        /*
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showPopup(getAbsoluteAdapterPosition());
-                }
-            });
 
-         */
         }
     }
 }

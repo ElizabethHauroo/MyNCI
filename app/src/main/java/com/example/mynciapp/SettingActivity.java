@@ -235,33 +235,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-    /*
-    private void showChangePasswordDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.settings_dialog_change_password, null);
 
-        EditText currentPasswordEditText = view.findViewById(R.id.current_password_edit_text);
-        EditText newPasswordEditText = view.findViewById(R.id.new_password_edit_text);
-        EditText confirmNewPasswordEditText = view.findViewById(R.id.confirm_new_password_edit_text);
-
-        builder.setView(view)
-                .setTitle("Change Password")
-                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        validatePasswordChange(currentPasswordEditText, newPasswordEditText, confirmNewPasswordEditText);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
-        builder.create().show();
-    }
-    */
 
     private void showChangePasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

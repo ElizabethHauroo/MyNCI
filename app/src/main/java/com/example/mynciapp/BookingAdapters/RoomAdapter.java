@@ -33,37 +33,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         return new RoomViewHolder(view, onRoomClickListener);
     }
 
-    /*
-    @Override
-    public void onBindViewHolder(@NonNull RoomAdapter.RoomViewHolder holder, int position) {
-        RoomBooking room = rooms.get(position);
-        holder.roomDescription.setText(room.getDescription());
-        holder.roomSize.setText(room.getSize());
-        holder.roomNumber.setText(room.getRoomNumber());
 
-        if(selectedPosition == position){
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.soft_green));
-        }
-        else{
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
-        }
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RoomAdapter.this.onRoomClickListener.onRoomClick(position);
-
-                // Update the selected position and notify the adapter
-                int previousSelectedPosition = selectedPosition;
-                selectedPosition = position;
-                notifyItemChanged(previousSelectedPosition);
-                notifyItemChanged(selectedPosition);
-            }
-        });
-
-    }
-
-     */
 
     @Override
     public void onBindViewHolder(@NonNull RoomAdapter.RoomViewHolder holder, int position) {
