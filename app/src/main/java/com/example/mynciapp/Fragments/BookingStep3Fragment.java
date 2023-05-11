@@ -220,19 +220,7 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
             }
         });
 
-/*
-        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                if(selected_date.getTimeInMillis() != date.getTimeInMillis()){
-                    selected_date = date;
-                    loadAvailableTimeSlotofPurpose((Common.currentPurpose.getPurposeId(),
-                            simpleDateFormat.format(date.getTime)));
-                }
-            }
-        });
 
- */
 
         // Redundant?
         Calendar startDate = Calendar.getInstance();

@@ -218,47 +218,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if(currentUser ==null){
-            SendUserToLogin();
-        }else{
-            CheckUSerExistence();
-        }
-    }
-
-
-    private void CheckUSerExistence() {
-        final String current_user_id = mAuth.getCurrentUser().getUid();
-
-        UsersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!snapshot.hasChild(current_user_id)){
-                    //if this does not exist, then we need to add it to database. So we have to send them to setup
-                    SendUserToSetup();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void SendUserToSetup() {
-        Intent intent=new Intent(HomeActivity.this,SetupActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-    
-     */
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

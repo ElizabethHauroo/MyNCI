@@ -103,27 +103,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                 }
             });
 
-        /*holder.setiRecyclerItemSelectedListener(((view, pos) -> {
 
-            }));
-        holder.setiRecyclerItemSelectedListener(new IRecyclerItemSelectedListener() {
-            @Override
-            public void onItemSelectedListener(View view, int pos) {
-                for(CardView cardView:cardViewList){
-                    if(cardView.getTag() == null){
-                        cardView.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
-
-                    }
-                }
-                // Selected Card (touched)
-                holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(R.color.mikado_yellow));
-                //now that a card is selected, send broadcast to enable "next" button
-                Intent intent = new Intent(Common.KEY_ENABLE_BUTTON_NEXT);
-                intent.putExtra(Common.KEY_TIME_SLOT, pos); // i or position? final?
-                intent.putExtra(Common.KEY_STEP,3); //go to step 4 (index 3)
-                localBroadcastManager.sendBroadcast(intent);
-            }
-        });  */
     }
 
     @Override

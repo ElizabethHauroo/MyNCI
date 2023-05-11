@@ -146,17 +146,7 @@ public class MyProfileBookingsAdapter extends RecyclerView.Adapter<MyProfileBook
         popupDialog.show();
 
     }
-/*
-    private void deleteBooking(int position) {
-        // Get the selected booking and its document reference
-        BookingInformation selectedBooking = profileBookingList.get(position);
 
-        profileBookingList.remove(position);
-        notifyDataSetChanged();
-
-    }
-
- */
 
     private void deleteBooking(final BookingInformation selectedBooking){
 
@@ -195,34 +185,7 @@ public class MyProfileBookingsAdapter extends RecyclerView.Adapter<MyProfileBook
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        /*
-                        // now that MyBookings entry was deleted, delete from AllRooms Collection
-                        FirebaseFirestore.getInstance()
-                                .collection("AllRooms")
-                                .document(selectedBooking.getSize())
-                                .collection("Rooms")
-                                .document(selectedBooking.getRoom_num())
-                                .collection("Purpose")
-                                .document(selectedBooking.getPurposeId())
-                                .collection(Common.simpleDateFormat.format(selectedBooking.getTimestamp().toDate()))
-                                .document(String.valueOf(selectedBooking.getSlot()))
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(context, "Booking cancelled successfully!", Toast.LENGTH_SHORT).show();
-                                        // Remove the booking from the list and update the RecyclerView
-                                        profileBookingList.remove(selectedBooking);
-                                        MyProfileBookingsAdapter.this.notifyDataSetChanged();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(context, "Error cancelling booking: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                        */
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
